@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  educational_institution: {
+  education_institution: {
     type: String
   }
 });

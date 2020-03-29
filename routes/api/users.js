@@ -9,10 +9,12 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
+
     // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
@@ -29,6 +31,7 @@ router.post("/register", (req, res) => {
           password: req.body.password,
           education_institution: req.body.education_institution
         });
+        console.log(newUser);
   // Hash password before saving in database
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {

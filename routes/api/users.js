@@ -1,5 +1,6 @@
 const express = require("express");
-const userRouter = express.Router();
+const userRouter = express.Router({mergeParams: true});
+const folderRouter = require("./folders");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -43,6 +44,10 @@ userRouter.post("/register", (req, res) => {
       }
     });
   });
+
+  userRouter.get("/", (req,res)=> {
+    return res.status(403).json({message: "Forbidden"})
+  })
 
   // @route POST api/users/login
 // @desc Login user and return JWT token
@@ -93,5 +98,7 @@ const email = req.body.email;
     });
   });
 });
+
+userRouter.use("/folder/", folderRouter);
 
 module.exports = userRouter;

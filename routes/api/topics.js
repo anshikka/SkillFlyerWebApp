@@ -28,10 +28,6 @@ topicRouter.post("/addTopic", (req, res) => {
     }
   });
 });
-
-
-
-
 // @route GET api/topics
 // @desc return all topics
 // @access Public
@@ -45,6 +41,7 @@ topicRouter.get("/", (req, res) => {
     }
   });
 });
+
 
 topicRouter.use("/:topic_name/", subtopicRouter);
 module.exports = topicRouter;

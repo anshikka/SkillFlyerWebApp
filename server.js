@@ -5,6 +5,7 @@ const app = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
 const videos = require ("./routes/api/videos");
+const topics_tree = require("./routes/api/topics_tree");
 // Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
@@ -30,7 +31,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/videos", videos);
-app.use("/api/")
+app.use("/api/", topics_tree)
 
 const port = process.env.PORT || 5000; // process.env.port is Heroku's port if you choose to deploy the app there
 app.listen(port, () => console.log(`Skillflyer Server up and running on port ${port} !`));

@@ -56,11 +56,11 @@ function validateVideoID(video_id) {
 // @route POST api/videos/newVideo
 // @desc add video
 // @access Public
-router.post("/:topic_name/:subtopic_name/", (req, res) => {
+router.post("/:topic_name/:subtopic_name/addVideo", (req, res) => {
   Video.findOne({
     youtube_url: req.body.youtube_url,
-    subtopic_name: req.params.subtopic_name,
-    topic_name: req.params.topic_name
+    subtopic_id: getSubtopicId(req.params.subtopic_name),
+    topic_id: getTopicId(req.params.topic_name)
   }).then(video => {
     if (video) {
       return res
@@ -74,7 +74,7 @@ router.post("/:topic_name/:subtopic_name/", (req, res) => {
         youtube_url: req.body.youtube_url,
         youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
         topic_id: getTopicId(req.params.topic_name),
-        subtopic_id: req.params.subtopic_id,
+        subtopic_id: getSubtopicId(req.params.subtopic_name),
         votes: 0,
         title: req.body.title,
         added_by: req.body.user_id
@@ -84,10 +84,10 @@ router.post("/:topic_name/:subtopic_name/", (req, res) => {
   });
 });
 
-// @route POST api/videos
+// @route GET api/videos
 // @desc post video to subtopic and return video object
 // @access Public
-router.get("/:topic_id/:subtopic_id/:_id", (req, res) => {
+router.get("/:topic_name/:subtopic_name/:_id", (req, res) => {
   const video_id = req.params._id;
   if (!validateVideoID(video_id)) {
     return res.status(400).json({ message: "Invalid Video Link" });
@@ -104,10 +104,11 @@ router.get("/:topic_id/:subtopic_id/:_id", (req, res) => {
   }
 });
 
-router.get("/:topic_id/:subtopic_id/", (req, res) => {
-  const subtopic = req.params.subtopic_id;
+router.get("/:topic_name/:subtopic_name/", (req, res) => {
+  const subtopic = getSubtopicId(req.params.subtopic_name);
+  const topic = getTopicId(req.params.topic_name);
   // Find Videos by subtopic id
-  Video.find({ subtopic_id: subtopic }).then(videos => {
+  Video.find({ topic_id: topic, subtopic_id: subtopic }).then(videos => {
     // Check if videos exists
     if (videos.length == 0) {
       return res

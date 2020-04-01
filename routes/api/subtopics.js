@@ -13,7 +13,6 @@ function getTopicId(name){
         return topic._id;
       } else {
           console.log("No topic found with name: " + name);
-        //return res.status(404).json({message: "There is no such topic with this name!"});
       }
     });
   
@@ -51,9 +50,7 @@ subtopicRouter.post("/addSubtopic",  async (req, res) => {
 // @desc return all subtopics under topic
 // @access Public
 subtopicRouter.get("/", async (req, res) => {
-  console.log(req.params);
   t_id = await getTopicId(req.params.topic_name);
-  console.log(t_id);
   Subtopic.find({ topic_id: t_id }).then(subtopics => {
     // Check if topic exists
     if (subtopics.length == 0) {

@@ -45,7 +45,6 @@ function getSubtopicId(name){
       return subtopic._id;
     } else {
       console.log("No such subtopic with name!");
-      //return res.status(404).json({message: "There is no such subtopic with this name!"});
     }
   })
 
@@ -60,7 +59,6 @@ function validateVideoID(video_id) {
 videoRouter.post("/addVideo", async (req, res) => {
   s_id = await getSubtopicId(req.params.subtopic_name);
   t_id = await getTopicId(req.params.topic_name);
-  console.log(s_id, t_id);
   Video.findOne({
     youtube_url: req.body.youtube_url,
     subtopic_id: s_id,

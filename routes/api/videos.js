@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const videoRouter = express.Router( {mergeParams: true} );
 const mongoose = require("mongoose");
 
 // Load Video model
@@ -7,7 +7,7 @@ const Video = require("../../models/Video");
 // Load Topic Model
 const Topic = require("../../models/Topic");
 // Load Subtopic Model
-const Subtopic = require("../models/Subtopic");
+const Subtopic = require("../../models/Subtopic");
 
 function extractIdFromYouTubeVideo(youtube_url) {
   return youtube_url.match(
@@ -29,22 +29,23 @@ function validateYouTubeLink(youtube_url) {
 }
 
 function getTopicId(name){
-  Topic.findOne({topic_name: name}).then(topic=> {
+  return Topic.findOne({topic_name: name}).then(topic=> {
     if (topic){
       return topic._id;
     } else {
-      return res.status(404).json({message: "There is no such topic with this name!"});
+      //return res.status(404).json({message: "There is no such topic with this name!"});
     }
   });
 
 }
 
 function getSubtopicId(name){
-  Subtopic.findOne({subtopic_name: name}).then(subtopic=> {
+  return Subtopic.findOne({subtopic_name: name}).then(subtopic=> {
     if (subtopic){
       return subtopic._id;
     } else {
-      return res.status(404).json({message: "There is no such subtopic with this name!"});
+      console.log("No such subtopic with name!");
+      //return res.status(404).json({message: "There is no such subtopic with this name!"});
     }
   })
 
@@ -56,11 +57,14 @@ function validateVideoID(video_id) {
 // @route POST api/videos/newVideo
 // @desc add video
 // @access Public
-router.post("/:topic_name/:subtopic_name/addVideo", (req, res) => {
+videoRouter.post("/addVideo", async (req, res) => {
+  s_id = await getSubtopicId(req.params.subtopic_name);
+  t_id = await getTopicId(req.params.topic_name);
+  console.log(s_id, t_id);
   Video.findOne({
     youtube_url: req.body.youtube_url,
-    subtopic_id: getSubtopicId(req.params.subtopic_name),
-    topic_id: getTopicId(req.params.topic_name)
+    subtopic_id: s_id,
+    topic_id: t_id
   }).then(video => {
     if (video) {
       return res
@@ -73,8 +77,8 @@ router.post("/:topic_name/:subtopic_name/addVideo", (req, res) => {
       const newVideo = new Video({
         youtube_url: req.body.youtube_url,
         youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
-        topic_id: getTopicId(req.params.topic_name),
-        subtopic_id: getSubtopicId(req.params.subtopic_name),
+        topic_id: t_id,
+        subtopic_id: s_id,
         votes: 0,
         title: req.body.title,
         added_by: req.body.user_id
@@ -85,9 +89,9 @@ router.post("/:topic_name/:subtopic_name/addVideo", (req, res) => {
 });
 
 // @route GET api/videos
-// @desc post video to subtopic and return video object
+// @desc get video from subtopic and return video object
 // @access Public
-router.get("/:topic_name/:subtopic_name/:_id", (req, res) => {
+videoRouter.get("/:_id", (req, res) => {
   const video_id = req.params._id;
   if (!validateVideoID(video_id)) {
     return res.status(400).json({ message: "Invalid Video Link" });
@@ -104,9 +108,9 @@ router.get("/:topic_name/:subtopic_name/:_id", (req, res) => {
   }
 });
 
-router.get("/:topic_name/:subtopic_name/", (req, res) => {
-  const subtopic = getSubtopicId(req.params.subtopic_name);
-  const topic = getTopicId(req.params.topic_name);
+videoRouter.get("/", async (req, res) => {
+  const subtopic = await getSubtopicId(req.params.subtopic_name);
+  const topic = await getTopicId(req.params.topic_name);
   // Find Videos by subtopic id
   Video.find({ topic_id: topic, subtopic_id: subtopic }).then(videos => {
     // Check if videos exists
@@ -120,4 +124,4 @@ router.get("/:topic_name/:subtopic_name/", (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = videoRouter;

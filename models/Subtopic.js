@@ -7,7 +7,7 @@ const SubtopicSchema = new Schema({
     type: String,
     required: true
   },
-  topic_id:{
+  topic_id: {
     type: mongoose.Schema.Types.ObjectId, ref: "topics",
     required: true
   },

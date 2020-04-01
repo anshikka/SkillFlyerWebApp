@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 
 // Load Video model
 const Video = require("../../models/Video");
+// Load Topic Model
+const Topic = require("../../models/Topic");
+// Load Subtopic Model
+const Subtopic = require("../models/Subtopic");
 
 function extractIdFromYouTubeVideo(youtube_url) {
   return youtube_url.match(
@@ -24,16 +28,39 @@ function validateYouTubeLink(youtube_url) {
   }
 }
 
+function getTopicId(name){
+  Topic.findOne({topic_name: name}).then(topic=> {
+    if (topic){
+      return topic._id;
+    } else {
+      return res.status(404).json({message: "There is no such topic with this name!"});
+    }
+  });
+
+}
+
+function getSubtopicId(name){
+  Subtopic.findOne({subtopic_name: name}).then(subtopic=> {
+    if (subtopic){
+      return subtopic._id;
+    } else {
+      return res.status(404).json({message: "There is no such subtopic with this name!"});
+    }
+  })
+
+}
+
 function validateVideoID(video_id) {
   return mongoose.Types.ObjectId.isValid(video_id);
 }
 // @route POST api/videos/newVideo
 // @desc add video
 // @access Public
-router.post("/:topic_id/:subtopic_id/newVideo", (req, res) => {
+router.post("/:topic_name/:subtopic_name/", (req, res) => {
   Video.findOne({
     youtube_url: req.body.youtube_url,
-    subtopic_id: req.params.subtopic_id
+    subtopic_name: req.params.subtopic_name,
+    topic_name: req.params.topic_name
   }).then(video => {
     if (video) {
       return res
@@ -46,7 +73,7 @@ router.post("/:topic_id/:subtopic_id/newVideo", (req, res) => {
       const newVideo = new Video({
         youtube_url: req.body.youtube_url,
         youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
-        topic_id: req.params.topic_id,
+        topic_id: getTopicId(req.params.topic_name),
         subtopic_id: req.params.subtopic_id,
         votes: 0,
         title: req.body.title,

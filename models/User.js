@@ -20,6 +20,14 @@ const UserSchema = new Schema({
   },
   education_institution: {
     type: String
-  }
+  },
+  liked_videos: [{
+    type: mongoose.Schema.Types.ObjectId, ref: "videos",
+    required: false
+  }],
+  disliked_videos: [{
+    type: mongoose.Schema.Types.ObjectId, ref: "videos",
+    required: false
+  }]
 });
 module.exports = User = mongoose.model("users", UserSchema);

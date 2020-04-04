@@ -28,12 +28,12 @@ folderRouter.post("/addFolder", (req, res) => {
   });
 });
 
-// @route GET api/topics
-// @desc return all topics
+// @route GET api/folders/
+// @desc return all folders
 // @access Public
 folderRouter.get("/", (req, res) => {
   Folder.find({}).then(folders => {
-    // Check if topics exists
+    // Check if folders exists
     if (folders.length == 0) {
       return res
         .status(404)
@@ -47,9 +47,9 @@ folderRouter.get("/", (req, res) => {
 folderRouter.get("/:folder_name", (req, res) => {
   const f_name = req.params.folder_name;
   const u_id = req.body.user_id;
-  // Find video by id
+  // Find folder by name and user id -> returns all videos in folder
   Folder.findOne({ folder_name: f_name, added_by: u_id }).then(folder => {
-    // Check if video exists
+    // Check if folder exists
     if (folder) {
       return res.status(200).json(folder);
     } else {

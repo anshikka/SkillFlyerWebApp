@@ -47,7 +47,7 @@ userRouter.post("/register", (req, res) => {
 
   userRouter.get("/", (req,res)=> {
     return res.status(403).json({message: "Forbidden"})
-  })
+  });
 
   // @route POST api/users/login
 // @desc Login user and return JWT token

@@ -1,5 +1,5 @@
 const express = require("express");
-const videoRouter = express.Router( {mergeParams: true} );
+const videoRouter = express.Router({ mergeParams: true });
 const mongoose = require("mongoose");
 
 // Load Video model
@@ -8,6 +8,7 @@ const Video = require("../../models/Video");
 const Topic = require("../../models/Topic");
 // Load Subtopic Model
 const Subtopic = require("../../models/Subtopic");
+const User = require("../../models/User");
 
 function extractIdFromYouTubeVideo(youtube_url) {
   return youtube_url.match(
@@ -28,26 +29,24 @@ function validateYouTubeLink(youtube_url) {
   }
 }
 
-function getTopicId(name){
-  return Topic.findOne({topic_name: name}).then(topic=> {
-    if (topic){
+function getTopicId(name) {
+  return Topic.findOne({ topic_name: name }).then(topic => {
+    if (topic) {
       return topic._id;
     } else {
       //return res.status(404).json({message: "There is no such topic with this name!"});
     }
   });
-
 }
 
-function getSubtopicId(name){
-  return Subtopic.findOne({subtopic_name: name}).then(subtopic=> {
-    if (subtopic){
+function getSubtopicId(name) {
+  return Subtopic.findOne({ subtopic_name: name }).then(subtopic => {
+    if (subtopic) {
       return subtopic._id;
     } else {
       console.log("No such subtopic with name!");
     }
-  })
-
+  });
 }
 
 function validateVideoID(video_id) {
@@ -120,6 +119,68 @@ videoRouter.get("/", async (req, res) => {
       return res.status(200).json(videos);
     }
   });
+});
+
+videoRouter.put("/:_id/upvote", (req, res) => {
+  const v_id = req.params._id;
+  const u_id = req.body.user_id;
+  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: 1 } }).then(
+    User.updateOne(
+      { _id: u_id },
+      {
+        $push: {
+          liked_videos: v_id
+        }
+      }
+    ).then(res.json({ message: "Video Added to User's Upvoted Videos!" }))
+  );
+});
+
+videoRouter.put("/:_id/undoUpvote", (req, res) => {
+  const v_id = req.params._id;
+  const u_id = req.body.user_id;
+  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: -1 } }).then(
+    User.updateOne(
+      { _id: u_id },
+      {
+        $pull: {
+          liked_videos: v_id
+        }
+      }
+    ).then(res.json({ message: "Video Removed From User's Upvoted Videos!" }))
+  );
+});
+
+videoRouter.put("/:_id/downvote", (req, res) => {
+  const v_id = req.params._id;
+  const u_id = req.body.user_id;
+  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: -1 } }).then(
+    User.updateOne(
+      { _id: u_id },
+      {
+        $push: {
+          disliked_videos: v_id
+        }
+      }
+    ).then(res.json({ message: "Video Added to User's Downvoted Videos!" }))
+  );
+  
+});
+
+videoRouter.put("/:_id/undoDownvote", (req, res) => {
+  const v_id = req.params._id;
+  const u_id = req.body.user_id;
+  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: 1 } }).then(
+    User.updateOne(
+      { _id: u_id },
+      {
+        $pull: {
+          disliked_videos: v_id
+        }
+      }
+    ).then(res.json({ message: "Video Removed to User's Downvoted Videos!" }))
+  );
+  
 });
 
 module.exports = videoRouter;

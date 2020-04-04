@@ -82,4 +82,10 @@ folderRouter.post("/:folder_name/addVideo", (req, res) => {
     }
   });
 });
+
+folderRouter.delete("/deleteFolder", (req, res) => {
+  const f_id = req.body.folder_id;
+  const u_id = req.body.user_id;
+  Folder.deleteOne({_id: f_id, added_by: u_id}).then(res.json({message: "Folder deleted!"}));
+});
 module.exports = folderRouter;

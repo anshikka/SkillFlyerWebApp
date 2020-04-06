@@ -1,24 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {AppBar, Toolbar} from '@material-ui/core';
+import './Navbar.css'
 class Navbar extends Component {
   render() {
     return (
-      <div className="navbar-fixed">
-        <nav className="z-depth-0">
-          <div className="nav-wrapper white">
-            <Link
-              to="/"
-              style={{
-                fontFamily: "monospace"
-              }}
-              className="col s5 brand-logo center black-text"
-            >
-              <i className="material-icons">code</i>
-              SkillFlyer
-            </Link>
-          </div>
-        </nav>
-      </div>
+      <AppBar id = "appbar" position="static">
+        <Toolbar id = "toolbar">
+          <img id = "navbar-logo" src = {require ("./assets/SkillFlyer_logo_WHITE.png")}/>
+        </Toolbar>
+      </AppBar>
     );
   }
 }

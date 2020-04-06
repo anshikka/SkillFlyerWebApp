@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import './Landing.css';
-import Navbar from "./Navbar";
-
+import './Landing.css'
+import Navbar from './Navbar'
 
 class Landing extends Component {
   render() {
     return (
-      <div id = "landing-body" style={{ height: "75vh" }} className="container valign-wrapper">
+      <div className="background">
+      <Navbar color={'white'}/>
+      <div style={{ height: "75vh" }} className="container valign-wrapper">
+
         <div className="row">
           <div className="col s12 center-align">
-            <h4>
+            <h2>
               <b>Enhance</b> your STEM skills with{" "}
-              <span style={{ fontFamily: "monospace" }}>SkillFlyer</span> from SolveStream
-            </h4>
+              <span style={{ fontFamily: "monospace", color: "white" }}>SkillFlyer</span> from SolveStream
+            </h2>
             <br />
             <div className="col s6">
               <Link
@@ -44,7 +47,11 @@ class Landing extends Component {
           </div>
         </div>
       </div>
+      </div>
+
     );
   }
 }
+
+
 export default Landing;

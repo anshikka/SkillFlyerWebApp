@@ -1,0 +1,20 @@
+html, body {
+    height: 100% !important;
+}
+
+.background {
+    height: 100%;
+    background: url('./assets/bookshelf-background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+h2 {
+    color: white;
+}

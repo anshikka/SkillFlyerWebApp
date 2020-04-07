@@ -15,7 +15,7 @@ class Landing extends Component {
           <div className="col s12 center-align">
             <h2>
               <b>Enhance</b> your STEM skills with{" "}
-              <span style={{ fontFamily: "monospace", color: "white" }}>SkillFlyer</span> from SolveStream
+              <img alt = "logo" align = "bottom" id = "logo-intext" src = {require("./assets/logo-white.svg")}/> from SolveStream
             </h2>
             <br />
             <div className="col s6">
@@ -26,7 +26,8 @@ class Landing extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px"
                 }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light hoverable accent-3"
+                id = "register-button"
               >
                 Register
               </Link>
@@ -39,7 +40,8 @@ class Landing extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px"
                 }}
-                className="btn btn-large btn-flat waves-effect white black-text"
+                className="btn btn-large btn-flat waves-effect white "
+                id = "login-button"
               >
                 Log In
               </Link>

@@ -18,3 +18,16 @@ html, body {
 h2 {
     color: white;
 }
+#register-button{
+    background-color: #00416a;
+}
+#login-button{
+    color: #00416a;
+}
+#logo-intext{
+    height: 12%;
+    width: 24%;
+    box-align : bottom;
+    position: relative;
+    top: 8px;
+}

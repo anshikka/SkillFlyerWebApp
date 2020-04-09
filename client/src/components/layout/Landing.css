@@ -25,9 +25,9 @@ h2 {
     color: #00416a;
 }
 #logo-intext{
-    height: 12%;
-    width: 24%;
+    height: 20%;
+    width: 40%;
     box-align : bottom;
-    position: relative;
-    top: 8px;
+    position: inline;
+    margin-top: 3%;
 }

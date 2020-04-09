@@ -15,7 +15,7 @@ class Landing extends Component {
           <div className="col s12 center-align">
             <h2>
               <b>Enhance</b> your STEM skills with{" "}
-              <img alt = "logo" align = "bottom" id = "logo-intext" src = {require("./assets/logo-white.svg")}/> from SolveStream
+              <div id = "intextdiv"><img alt = "logo" align = "bottom" id = "logo-intext" src = {require("./assets/logo-white.svg")}/></div>
             </h2>
             <br />
             <div className="col s6">

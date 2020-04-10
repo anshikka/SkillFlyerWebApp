@@ -13,7 +13,7 @@ class Navbar extends Component {
       logo= darkLogo;
     }
     return (
-      <AppBar id = "appbar" position="static">
+      <AppBar id = "appbar-unauth" position="static">
         <Toolbar id = "toolbar">
           <a href='/'>
             <img alt= {'logo'} id="navbar-logo" src={logo} />

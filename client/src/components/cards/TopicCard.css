@@ -1,0 +1,17 @@
+#card-root {
+  max-width: 345px;
+}
+#card-media {
+  height: 140px;
+}
+
+#card h2{
+    color: black !important;
+   
+}
+#card {
+    margin: 0 auto;
+}
+#card button{
+    background-color: white !important;
+}

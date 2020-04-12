@@ -14,6 +14,10 @@ const SubtopicSchema = new Schema({
   added_by: {
     type: mongoose.Schema.Types.ObjectId, ref: "users",
     required: true
+  },
+  photo_url: {
+    type: String,
+    required: true
   }
 });
 module.exports = Subtopic = mongoose.model("subtopics", SubtopicSchema);

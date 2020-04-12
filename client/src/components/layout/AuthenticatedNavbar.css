@@ -1,6 +1,6 @@
 #navbar-logo{
-    height: 100%;
-    width: 100%;
+    height: 40% !important;
+    width: 40% !important;
     margin-top: 5%;
     margin-bottom: 3%;
     float: left;
@@ -16,9 +16,8 @@
     display: inline-block;
 }
 #navbar-logo-link {
-    width: 10%;
     float: left;
-    margin-right: 22%;
+    margin-right: 0;
 }
 
 #navbar-user-link {
@@ -35,9 +34,10 @@
     border-style: hidden;
     background-color: #1c6fa3;
     border-radius: 100px;
-    line-height: normal;
+    line-height: 1px;
     padding-right: 3%;
     padding-left: 3%;
+    margin-top: 1%;
 }
 
 #search-input:focus{

@@ -10,6 +10,10 @@ const TopicSchema = new Schema({
   added_by: {
     type: mongoose.Schema.Types.ObjectId, ref: "users",
     required: true
+  },
+  photo_url: {
+    type: String,
+    required: true
   }
 });
 module.exports = Topic = mongoose.model("topics", TopicSchema);

@@ -22,7 +22,8 @@ topicRouter.post("/addTopic", (req, res) => {
       }
       const newTopic = new Topic({
         topic_name: req.body.topic_name,
-        added_by: req.body.user_id
+        added_by: req.body.user_id,
+        photo_url: req.body.photo_url
       });
       newTopic.save().then(topic => res.json(topic));
     }

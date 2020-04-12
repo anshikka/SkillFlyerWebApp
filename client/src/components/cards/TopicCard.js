@@ -26,7 +26,7 @@ class TopicCard extends Component {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Computer Sciecne
+              Computer Science
             </Typography>
           </CardContent>
         </CardActionArea>

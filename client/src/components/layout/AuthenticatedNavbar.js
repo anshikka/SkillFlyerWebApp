@@ -10,6 +10,10 @@ import { logoutUser } from "../../actions/authActions";
 import PropTypes from "prop-types";
 
 class AuthenticatedNavbar extends Component {
+  onLogoutClick = (e) => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
   render() {
     var logo;
     if (this.props.color === 'white') {
@@ -29,7 +33,7 @@ class AuthenticatedNavbar extends Component {
           <div id="navbar-search">
             <InputBase id = "search-input" placeholder="&#xF002; Search for topics, subtopics, or videos..." inputProps={{ 'aria-label': 'search' }}></InputBase>
           </div>
-          <a href = "/api/users/" id="navbar-user-link">
+          <a onClick={this.onLogoutClick} id="navbar-user-link">
             <PersonRoundedIcon className="navbar-icon" />
             <figcaption>{user.name.split(" ")[0]}</figcaption>
           </a>

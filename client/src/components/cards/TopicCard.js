@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -21,12 +22,12 @@ class TopicCard extends Component {
         <CardActionArea>
           <CardMedia
             id = "card-media"
-            image="https://online.jwu.edu/sites/default/files/styles/article_feature_page/public/field/image/BS%20Computer%20Science%20Degree%20A%20Closer%20Look.jpg?itok=ljcfRgAe"
-            title="Computer Science"
+            image={this.props.photoUrl}
+            title={this.props.name}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Computer Science
+            <Typography id = "topic-name" gutterBottom variant="h5" component="h2">
+              {this.props.name}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -44,5 +45,9 @@ class TopicCard extends Component {
   }
 }
 
-
+TopicCard.propTypes = {
+ name: PropTypes.string,
+ photoUrl: PropTypes.string,
+ topicId: PropTypes.string
+};
 export default TopicCard;

@@ -1,17 +1,25 @@
 #card-root {
-  max-width: 345px;
+  border-radius: 10px;
 }
 #card-media {
   height: 140px;
+  border-radius: 10px;
+  z-index: 1;
+  box-shadow: 0 8px 6px -6px black;
 }
 
-#card h2{
-    color: black !important;
-   
+#card h2 {
+  color: #00416a !important;
 }
 #card {
-    margin: 0 auto;
+  max-width: 21.6em;
+  margin: 0 auto;
+  height: 19em;
 }
-#card button{
-    background-color: white !important;
+#card button {
+  background-color: white !important;
+}
+#topic-name {
+  height: 3em;
+  overflow-y: auto;
 }

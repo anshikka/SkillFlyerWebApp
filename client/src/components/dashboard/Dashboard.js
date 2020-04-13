@@ -5,9 +5,8 @@ import { logoutUser } from "../../actions/authActions";
 import { getAllTopics } from "../../actions/topicActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicCard from "../cards/TopicCard";
-import Grid from '@material-ui/core/Grid';
-import './Dashboard.css'
-
+import Grid from "@material-ui/core/Grid";
+import "./Dashboard.css";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -20,20 +19,18 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { topics } = this.props.topics;
-    console.log(topics)
+    console.log(topics);
     return (
       <div>
         <AuthenticatedNavbar color={"white"} />
-        <Grid container className="topic-grid-root" spacing={1}>
-          <Grid item xs={6}>
-            <Grid container justify="center" spacing={1}>
-              {topics.map((topic) => (
-                <TopicCard />
-              ))}
-            </Grid>
-          </Grid>
+        <Grid id = "topic-grid-container"container spacing={10}>
+          {topics.map((topic) => (
+          <Grid className = "topic-card-grid-item" item xs>
+            <TopicCard name={topic.topic_name} topicId={topic._id} photoUrl={topic.photo_url}/>
+          </Grid> 
+          ))}
+          
         </Grid>
-        
       </div>
     );
   }

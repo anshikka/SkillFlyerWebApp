@@ -2,35 +2,30 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { getAllTopics } from "../../actions/topicActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
-import TopicCard from "../cards/TopicCard";
-import Grid from "@material-ui/core/Grid";
+import TopicGrid from "../grids/TopicGrid";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
+import PrivateRoute from "../private-route/PrivateRoute";
+import Navbar from "../layout/Navbar";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
-  componentDidMount() {
-    this.props.getAllTopics();
-  }
   render() {
     const { user } = this.props.auth;
-    const { topics } = this.props.topics;
-    console.log(topics);
     return (
       <div>
-        <AuthenticatedNavbar color={"white"} />
-        <Grid id = "topic-grid-container"container spacing={10}>
-          {topics.map((topic) => (
-          <Grid className = "topic-card-grid-item" item xs>
-            <TopicCard name={topic.topic_name} topicId={topic._id} photoUrl={topic.photo_url}/>
-          </Grid> 
-          ))}
-          
-        </Grid>
+        <AuthenticatedNavbar color={"white"}/>
+        <div>
+        <Switch>
+          <PrivateRoute path="/dashboard/" component={TopicGrid} />
+          <PrivateRoute exact path={this.props.match.url + "/test"} component={TopicGrid}/>
+        </Switch>
+        </div>
       </div>
     );
   }
@@ -38,13 +33,8 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  getAllTopics: PropTypes.func.isRequired,
-  topics: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  topics: state.topics,
 });
-export default connect(mapStateToProps, { logoutUser, getAllTopics })(
-  Dashboard
-);
+export default connect(mapStateToProps, { logoutUser })(Dashboard);

@@ -9,6 +9,7 @@ import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
 import PrivateRoute from "../private-route/PrivateRoute";
 import Navbar from "../layout/Navbar";
+import TopicCard from "../cards/TopicCard";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -21,10 +22,10 @@ class Dashboard extends Component {
       <div>
         <AuthenticatedNavbar color={"white"}/>
         <div>
-        <Switch>
-          <PrivateRoute path="/dashboard/" component={TopicGrid} />
-          <PrivateRoute exact path={this.props.match.url + "/test"} component={TopicGrid}/>
-        </Switch>
+          <Switch>
+            <Route exact path="/dashboard" component={TopicGrid} />
+            <Route exact path="/dashboard/:topicName" component={SubtopicGrid} />
+          </Switch>
         </div>
       </div>
     );

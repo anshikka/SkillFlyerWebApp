@@ -17,7 +17,7 @@ class TopicGrid extends Component {
     return (
       <Grid id="topic-grid-container" container spacing={10}>
         {topics.map((topic) => (
-          <Grid className="topic-card-grid-item" item xs>
+          <Grid className="topic-card-grid-item" item xs key={topic._id}>
             <Link to= {`/dashboard/${topic.topic_name}`}>
             <TopicCard
               name={topic.topic_name}

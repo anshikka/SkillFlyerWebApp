@@ -9,6 +9,7 @@ import "./TopicGrid.css";
 
 class SubtopicGrid extends Component {
   componentDidMount() {
+    console.log(this.props);
     const topicName = this.props.match.params.topicName
     this.props.getAllSubtopics(topicName);
     console.log(topicName)
@@ -18,7 +19,7 @@ class SubtopicGrid extends Component {
     return (
       <Grid id="topic-grid-container" container spacing={10}>
         {subtopics.map((subtopic) => (
-          <Grid className="topic-card-grid-item" item xs>
+          <Grid className="topic-card-grid-item" key={subtopic._id} item xs>
             <Link to= {`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}>
             <SubtopicCard/>
             </Link>

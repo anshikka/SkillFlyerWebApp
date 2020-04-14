@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-const PrivateRoute = ({ component: Component, auth, topics, ...rest }) => (
+const PrivateRoute = ({ component: Component, auth, topics, subtopics, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -19,6 +19,7 @@ PrivateRoute.propTypes = {
 };
 const mapStateToProps = state => ({
   auth: state.auth,
-  topics: state.topics
+  topics: state.topics,
+  subtopics: state.subtopics
 });
 export default connect(mapStateToProps)(PrivateRoute);

@@ -32,10 +32,10 @@ class TopicCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button href = "iamgay"size="small" color="primary">
             Share
           </Button>
-          <Button size="small" color="primary">
+          <Button href = "iammoregay"size="small" color="primary">
             Learn More
           </Button>
         </CardActions>

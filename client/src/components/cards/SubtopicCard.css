@@ -1,3 +1,6 @@
+.subtopic {
+  width: 20em;
+}
 .card {
   border-radius: 4px;
   background: #fff;
@@ -5,9 +8,10 @@
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-  padding: 14px 80px 18px 36px;
+  padding: 10px 10px 10px 10px;
   cursor: pointer;
-  max-width: 450px;
+  width: 100%;
+  text-align: center;
 }
 
 .card:hover {
@@ -15,26 +19,21 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
-.card h3 {
+.subtopic-card-name {
+  margin: 1rem 0 1rem 0;
   font-weight: 600;
+  font-size: 2vw;
+  overflow-x: auto;
+  line-height: 140%
+}
+.subtopic-card-description {
+  height: 45px;
+  overflow: auto;
+}
+.title-and-desc{
+  width: 100%;
 }
 
-.card img {
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  max-height: 120px;
-}
-
-.card-1 {
-  background-image: url("https://mk0linkedinsigh78tks.kinstacdn.com/wp-content/uploads/2019/09/Screen-Shot-2019-09-05-at-11.00.46-AM-1024x766.png");
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: 80px;
-}
-
-@media (max-width: 300px) {
-  .card {
-    margin: 20px;
-  }
+.subtopic{
+  width: 100%;
 }

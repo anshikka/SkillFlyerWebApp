@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import SubtopicCard from "../cards/SubtopicCard";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
-import "./TopicGrid.css";
+import "./SubtopicGrid.css";
 
 class SubtopicGrid extends Component {
   componentDidMount() {
@@ -17,15 +17,21 @@ class SubtopicGrid extends Component {
   render() {
     const { subtopics } = this.props.subtopics;
     return (
-      <Grid id="topic-grid-container" container spacing={10}>
+      <div id="subtopic-grid-body">
+      <Grid id="subtopic-grid-container" container spacing={10}>
         {subtopics.map((subtopic) => (
-          <Grid className="topic-card-grid-item" key={subtopic._id} item xs>
+          <Grid className="subtopic-card-grid-item" key={subtopic._id} item xs>
             <Link to= {`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}>
-            <SubtopicCard/>
+            <SubtopicCard
+            name = {subtopic.subtopic_name}
+            photoUrl = {subtopic.photo_url}
+            description = {subtopic.description}
+            />
             </Link>
           </Grid>
         ))}
       </Grid>
+      </div>
     );
   }
 }

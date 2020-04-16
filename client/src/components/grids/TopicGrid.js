@@ -4,8 +4,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import TopicCard from "../cards/TopicCard";
 import Grid from "@material-ui/core/Grid";
-import { Route, Link, Switch } from "react-router-dom";
-import SubtopicGrid from "./SubtopicGrid"
 import "./TopicGrid.css";
 
 class TopicGrid extends Component {
@@ -18,13 +16,12 @@ class TopicGrid extends Component {
       <Grid id="topic-grid-container" container spacing={10}>
         {topics.map((topic) => (
           <Grid className="topic-card-grid-item" item xs key={topic._id}>
-            <Link to= {`/dashboard/${topic.topic_name}`}>
             <TopicCard
               name={topic.topic_name}
               topicId={topic._id}
               photoUrl={topic.photo_url}
+              description={topic.description}
             />
-            </Link>
           </Grid>
         ))}
       </Grid>

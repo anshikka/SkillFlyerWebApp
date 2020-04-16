@@ -7,9 +7,8 @@ import TopicGrid from "../grids/TopicGrid";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
-import PrivateRoute from "../private-route/PrivateRoute";
-import Navbar from "../layout/Navbar";
-import TopicCard from "../cards/TopicCard";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -27,6 +26,7 @@ class Dashboard extends Component {
             <Route exact path="/dashboard/:topicName" component={SubtopicGrid} />
           </Switch>
         </div>
+        <ToastContainer style={{textAlign: "center"}}autoClose={4000} position="bottom-center" hideProgressBar={true} newestOnTop={true} closeOnClick draggable={false} pauseOnHover = {false}/>
       </div>
     );
   }

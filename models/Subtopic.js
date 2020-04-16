@@ -15,7 +15,7 @@ const SubtopicSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId, ref: "users",
     required: true
   },
-  photo_url: {
+  description: {
     type: String,
     required: true
   }

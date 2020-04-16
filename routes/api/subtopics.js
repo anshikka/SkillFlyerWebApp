@@ -38,7 +38,7 @@ subtopicRouter.post("/addSubtopic",  async (req, res) => {
         subtopic_name: req.body.subtopic_name,
         topic_id: t_id,
         added_by: req.body.user_id,
-        photo_url: req.body.photo_url
+        description: req.body.description
       });
       newSubtopic.save().then(subtopic => res.json(subtopic));
     }

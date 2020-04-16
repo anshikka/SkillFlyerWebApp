@@ -14,6 +14,10 @@ const TopicSchema = new Schema({
   photo_url: {
     type: String,
     required: true
+  },
+  description: {
+    type: String,
+    required: true
   }
 });
 module.exports = Topic = mongoose.model("topics", TopicSchema);

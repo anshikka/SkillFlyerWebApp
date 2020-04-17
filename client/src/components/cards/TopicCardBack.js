@@ -7,6 +7,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import SwapVertIcon from '@material-ui/icons/SwapVert';
+import LinkIcon from '@material-ui/icons/Link';
 import "./TopicCard.css";
 
 class TopicCardBack extends Component {
@@ -18,7 +20,7 @@ class TopicCardBack extends Component {
       <div id="card">
         <Card id="card-root">
           <Link to={`/dashboard/${this.props.name}`}>
-            <CardActionArea>
+            <CardActionArea id = "topic-card-back-content">
               <CardContent>
                 <Typography
                   id="topic-description"
@@ -32,11 +34,11 @@ class TopicCardBack extends Component {
             </CardActionArea>
           </Link>
           <CardActions>
-            <Button onClick={()=> this.props.confirmCopied()} size="small" color="primary">
-              Share
+            <Button className = "topic-card-button-left" onClick={()=> this.props.confirmCopied()} size="small" color="primary">
+              <LinkIcon/>
             </Button>
-            <Button onClick={()=>this.props.flipFunction()} size="small" color="primary">
-              Back
+            <Button className = "topic-card-button-right" onClick={()=>this.props.flipFunction()} size="small" color="primary">
+              <SwapVertIcon/>
             </Button>
           </CardActions>
         </Card>

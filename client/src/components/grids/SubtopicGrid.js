@@ -9,10 +9,8 @@ import "./SubtopicGrid.css";
 
 class SubtopicGrid extends Component {
   componentDidMount() {
-    console.log(this.props);
     const topicName = this.props.match.params.topicName
     this.props.getAllSubtopics(topicName);
-    console.log(topicName)
   }
   render() {
     const { subtopics } = this.props.subtopics;

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicGrid from "../grids/TopicGrid";
+import VideoList from "../lists/VideoList";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
@@ -24,6 +25,7 @@ class Dashboard extends Component {
           <Switch>
             <Route exact path="/dashboard" component={TopicGrid} />
             <Route exact path="/dashboard/:topicName" component={SubtopicGrid} />
+            <Route exact path="/dashboard/:topicName/:subtopicName" component={VideoList} />
           </Switch>
         </div>
         <ToastContainer style={{textAlign: "center"}}autoClose={4000} position="bottom-center" hideProgressBar={true} newestOnTop={true} closeOnClick draggable={false} pauseOnHover = {false}/>

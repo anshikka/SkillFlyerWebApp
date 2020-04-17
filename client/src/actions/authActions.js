@@ -41,6 +41,11 @@ export const loginUser = userData => dispatch => {
       })
     );
 };
+
+export const getUserNameById = userId => dispatch =>{
+  axios.
+    get("/api/users")
+}
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {

@@ -78,7 +78,9 @@ videoRouter.post("/addVideo", async (req, res) => {
         subtopic_id: s_id,
         votes: 0,
         title: req.body.title,
-        added_by: req.body.user_id
+        added_by: req.body.user_id,
+        thumbnail_url: req.body.thumbnail_url,
+        description: req.body.description
       });
       newVideo.save().then(video => res.json(video));
     }

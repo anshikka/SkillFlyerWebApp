@@ -28,10 +28,6 @@ class TopicCard extends Component {
     toast.info("Link copied to clipboard!");
   }
 
-
-
-
-
   render() {
     console.log(window.href);
     return (
@@ -39,8 +35,6 @@ class TopicCard extends Component {
         <TopicCardFront confirmCopied = {this.confirmCopied} flipFunction = {this.handleLearnMore} name={this.props.name} photoUrl = {this.props.photoUrl} topicId = {this.props.topicId}/>
         <TopicCardBack confirmCopied = {this.confirmCopied} flipFunction ={this.handleLearnMore} name={this.props.name} description = {this.props.description} topicId = {this.props.topicId} />
       </ReactCardFlip>
-      
-
     );
   }
 }

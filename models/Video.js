@@ -31,6 +31,14 @@ const VideoSchema = new Schema({
   youtube_url: {
       type: String,
       required: true
+  },
+  thumbnail_url: {
+      type: String,
+      required: true
+  },
+  description: {
+      type: String,
+      required: false
   }
 });
 module.exports = Video = mongoose.model("videos", VideoSchema);

@@ -3,9 +3,13 @@ import authReducer from "./authReducers";
 import errorReducer from "./errorReducers";
 import topicReducer from "./topicReducers";
 import subtopicReducer from "./subtopicReducers";
+import videoReducer from "./videoReducers";
+import videosReducer from "./videosReducers"
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
   topics: topicReducer,
-  subtopics: subtopicReducer
+  subtopics: subtopicReducer,
+  videos: videosReducer,
+  video: videoReducer
 });

@@ -18,6 +18,10 @@ const SubtopicSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  photo_url: {
+    type: String,
+    required: true
   }
 });
 module.exports = Subtopic = mongoose.model("subtopics", SubtopicSchema);

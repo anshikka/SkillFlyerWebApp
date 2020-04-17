@@ -1,15 +1,14 @@
 #card-root {
-  border-radius: 10px;
+  border-radius: 0px !important;
+  height: 100%;
 }
 #card-media {
-  height: 140px;
-  border-radius: 10px;
-  z-index: 1;
-  box-shadow: 0 8px 6px -6px black;
+  height: 8.75em;
 }
 
 #card h2 {
   color: #00416a !important;
+  text-align: center;
 }
 #card {
   max-width: 21.6em;
@@ -22,8 +21,18 @@
 #topic-name {
   height: 3em;
   overflow-y: auto;
+  line-height: 100%;
+  text-align: center;
 }
 
-#topic-description {
-  
+.topic-card-button-left{
+  margin: 0 0 !important;
+  min-width: 20px !important;
+}
+.topic-card-button-right{
+  margin-left: 12.52em!important;
+  min-width: 20px !important;
+}
+#topic-card-back-content {
+  height: 85% !important;
 }

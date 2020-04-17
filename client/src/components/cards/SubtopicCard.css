@@ -1,5 +1,6 @@
 .subtopic {
   width: 20em;
+  color: #00416a;
 }
 .card {
   border-radius: 4px;
@@ -36,4 +37,8 @@
 
 .subtopic{
   width: 100%;
+}
+.logo{
+  height: 3rem;
+  width: 3rem;
 }

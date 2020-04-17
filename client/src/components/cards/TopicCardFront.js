@@ -9,6 +9,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import LinkIcon from '@material-ui/icons/Link';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import "./TopicCard.css";
 
 class TopicCardFront extends Component {
@@ -40,12 +42,12 @@ class TopicCardFront extends Component {
           </Link>
           <CardActions>
             <CopyToClipboard text={window.location.href + "/" + this.props.name}>
-            <Button onClick={()=> this.props.confirmCopied()} size="small" color="primary">
-              Share
+            <Button className = "topic-card-button-left" onClick={()=> this.props.confirmCopied()} size="small" color="primary">
+              <LinkIcon/>
             </Button>
             </CopyToClipboard>
-            <Button onClick={()=>this.props.flipFunction()} size="small" color="primary">
-              Learn More
+            <Button className = "topic-card-button-right" onClick={()=>this.props.flipFunction()} size="small" color="primary">
+              <MoreVertIcon/>
             </Button>
           </CardActions>
         </Card>

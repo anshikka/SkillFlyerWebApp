@@ -1,0 +1,24 @@
+.video-card-root {
+  width: 100%;
+  height: 100%;
+}
+.card-video-thumbnail {
+  width: 100%;
+  height: 100%;
+  background-size: auto !important;
+
+}
+  
+.video-media {
+  display: inline-block;
+  width: 20%;
+  height: 15em;
+
+}
+
+.video-details {
+  display: inline-block;
+  width: 80%;
+  height: 100%
+}
+

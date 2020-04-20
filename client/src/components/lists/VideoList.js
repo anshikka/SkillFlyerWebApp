@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoItem from "../items/VideoItem";
-import { Item } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import "./VideoListCSS.css";
 
 class VideoList extends Component {
   componentDidMount() {
@@ -14,12 +16,13 @@ class VideoList extends Component {
   }
   render() {
     const { videos } = this.props.videos;
-    console.log(videos)
     return (
       <div id="video-list-body">
-        <Item.Group divided>
+            <List id="video-list-root">
             {videos.map((video) => (
-                <Link to= {`/dashboard/${this.props.match.params.topicName}/${this.props.match.params.subtopicName}/videos/${video._id}`} key={video._id}>
+                <ListItem>
+
+                <Link className="video-list-link" to= {`/dashboard/${this.props.match.params.topicName}/${this.props.match.params.subtopicName}/videos/${video._id}`} key={video._id}>
                     <VideoItem
                     videoId={video._id}
                     topicName={this.props.match.params.topicName}
@@ -30,8 +33,10 @@ class VideoList extends Component {
                     addedBy = {video.added_by}
                     />
                 </Link>
+                </ListItem>
+
             ))}
-        </Item.Group>
+            </List>
       </div>
     );
   }

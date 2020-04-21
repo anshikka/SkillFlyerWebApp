@@ -3,41 +3,35 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoItem from "../items/VideoItem";
-import { Link } from "react-router-dom";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import Grid from "@material-ui/core/Grid";
+
 import "./VideoListCSS.css";
 
 class VideoList extends Component {
   componentDidMount() {
-    const topicName = this.props.match.params.topicName
-    const subtopicName = this.props.match.params.subtopicName
+    const topicName = this.props.match.params.topicName;
+    const subtopicName = this.props.match.params.subtopicName;
     this.props.getAllVideos(topicName, subtopicName);
   }
   render() {
     const { videos } = this.props.videos;
     return (
-      <div id="video-list-body">
-            <List id="video-list-root">
-            {videos.map((video) => (
-                <ListItem>
-
-                <Link className="video-list-link" to= {`/dashboard/${this.props.match.params.topicName}/${this.props.match.params.subtopicName}/videos/${video._id}`} key={video._id}>
-                    <VideoItem
-                    videoId={video._id}
-                    topicName={this.props.match.params.topicName}
-                    subtopicName={this.props.match.params.subtopicName}
-                    title={video.title}
-                    description={video.description}
-                    thumbnailUrl={video.thumbnail_url}
-                    addedBy = {video.added_by}
-                    />
-                </Link>
-                </ListItem>
-
-            ))}
-            </List>
-      </div>
+      <Grid id="video-grid-container" container spacing={10}>
+        {videos.map((video, index) => (
+          <Grid className="video-card-grid-item" item xs key={video._id}>
+            <VideoItem
+              videoId={video._id}
+              topicName={this.props.match.params.topicName}
+              subtopicName={this.props.match.params.subtopicName}
+              title={video.title}
+              description={video.description}
+              thumbnailUrl={video.thumbnail_url}
+              addedBy={video.added_by}
+              rank = {index}
+            />
+          </Grid>
+        ))}
+      </Grid>
     );
   }
 }

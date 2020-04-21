@@ -29,7 +29,6 @@ class TopicCard extends Component {
   }
 
   render() {
-    console.log(window.href);
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
         <TopicCardFront confirmCopied = {this.confirmCopied} flipFunction = {this.handleLearnMore} name={this.props.name} photoUrl = {this.props.photoUrl} topicId = {this.props.topicId}/>

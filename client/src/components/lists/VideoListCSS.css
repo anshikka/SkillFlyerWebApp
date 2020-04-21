@@ -1,7 +1,33 @@
-#video-list-root {
+
+
+#video-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     width: 100%;
+    margin: 0 auto;
 }
-.video-list-link {
-    width: 100%;
-    height: 100%;
+
+
+
+#video-card-grid-item {
+    display: 'flex';
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

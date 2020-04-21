@@ -32,7 +32,7 @@
   min-width: 20px !important;
 }
 .video-card-button-right {
-  margin-left: 0% !important;
+  margin-left: 50% !important;
   min-width: 20px !important;
 }
 .video-card-back-content {
@@ -44,8 +44,7 @@
   background-color: goldenrod;
 }
 .video-rank {
-  margin: 0 auto;
   padding: 4%;
-  margin-left: 17% !important;
+  margin-left: 35% !important;
 }
 

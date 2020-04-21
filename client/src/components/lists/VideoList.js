@@ -19,8 +19,9 @@ class VideoList extends Component {
     return (
       <div id="video-list-body">
             <List id="video-list-root">
-            {videos.map((video) => (
+            {videos.map((video, index) => (
                 <ListItem>
+                <h1>#{index+1}</h1><br/>
 
                 <Link className="video-list-link" to= {`/dashboard/${this.props.match.params.topicName}/${this.props.match.params.subtopicName}/videos/${video._id}`} key={video._id}>
                     <VideoItem

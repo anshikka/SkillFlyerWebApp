@@ -9,11 +9,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import "./VideoItemCSS.css";
 
 class VideoItem extends Component {
   render() {
-    console.log(this.props.thumbnail_url);
     return (
       <Card className="video-card-root">
         <div class="video-media">
@@ -39,7 +40,13 @@ class VideoItem extends Component {
               <ShareIcon />
             </IconButton>
           </CardActions>
+          {/*<div class="video-personalization">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+    </Fab>
+    </div>*/}
         </div>
+        
       </Card>
     );
   }

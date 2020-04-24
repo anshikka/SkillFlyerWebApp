@@ -32,19 +32,11 @@
   min-width: 20px !important;
 }
 .video-card-button-right {
-  margin-left: 50% !important;
+  margin-left: 80% !important;
   min-width: 20px !important;
 }
 .video-card-back-content {
   height: 85% !important;
   overflow-y: auto;
-}
-.video-rank span {
-  transform: scale(2) translate(100%, -25%) !important;
-  background-color: goldenrod;
-}
-.video-rank {
-  padding: 4%;
-  margin-left: 35% !important;
 }
 

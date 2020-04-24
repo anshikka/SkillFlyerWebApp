@@ -42,10 +42,6 @@ class VideoItemFront extends Component {
                 <LinkIcon/>
               </Button>
               </CopyToClipboard>
-              <Badge className="video-rank"
-              badgeContent={"#" + (this.props.rank + 1)}
-              color="primary"
-            />
               <Button className = "video-card-button-right" onClick={()=>this.props.flipFunction()} size="small" color="primary">
                 <MoreVertIcon/>
               </Button>

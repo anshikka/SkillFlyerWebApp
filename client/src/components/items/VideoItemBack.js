@@ -15,10 +15,9 @@ import "./VideoItemCSS.css";
 class VideoItemBack extends Component {
   render() {
     return (
-      <div id="card">
-        <Card id="card-root">
-          <CardActionArea className="video-card-back-content">
-            <CardContent>
+      <div className="video-card">
+        <Card className="video-card-root">
+            <CardContent className="video-card-back-content">
               <Typography
                 className="video-description"
                 gutterBottom
@@ -28,13 +27,12 @@ class VideoItemBack extends Component {
                 {this.props.description}
               </Typography>
             </CardContent>
-          </CardActionArea>
           <CardActions>
             <CopyToClipboard
               text={window.location.href + "/videos/" + this.props.videoId}
             >
               <Button
-                className="topic-card-button-left"
+                className="video-card-button-left"
                 onClick={() => this.props.confirmCopied()}
                 size="small"
                 color="primary"
@@ -43,7 +41,7 @@ class VideoItemBack extends Component {
               </Button>
             </CopyToClipboard>
             <Button
-              className="topic-card-button-right"
+              className="video-card-button-right"
               onClick={() => this.props.flipFunction()}
               size="small"
               color="primary"

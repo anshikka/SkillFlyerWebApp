@@ -4,6 +4,7 @@
 }
 .video-card-media {
   height: 8.75em;
+  filter: brightness(50%);
 }
 
 .video-card h2 {
@@ -13,7 +14,7 @@
 .video-card {
   max-width: 21.6em;
   margin: 0 auto;
-  height: 20em;
+  height: 22em;
 }
 .video-card button {
   background-color: white !important;
@@ -39,4 +40,29 @@
   height: 85% !important;
   overflow-y: auto;
 }
-
+.video-card-header span{
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.video-card-header{
+  background-color: goldenrod
+}
+.video-card-thumbnail span {
+  position: absolute;
+  background: url("https://lh3.googleusercontent.com/proxy/IaYmKnHqIRO23QXyy9xjpuzFzVG9lnPz5dMf-oL7XB_ltqXhlKjrv5-VV9xB7sen849dvO_Zw4IXoJu2lyXUL6ylo0C4a-Y") no-repeat;
+  background-position: 50% 50%;
+  background-size: 30%;
+  z-index: 1;
+}
+.video-player-modal h1{
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  background-color: white !important;
+  border: 2px solid #000;
+}
+.video-player-modal {
+  width: 100%;
+}

@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardHeader from "@material-ui/core/CardHeader";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import SwapVertIcon from "@material-ui/icons/SwapVert";
 import LinkIcon from "@material-ui/icons/Link";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
 import "./VideoItemCSS.css";
 class VideoItemFront extends Component {
   state = {
@@ -24,68 +15,47 @@ class VideoItemFront extends Component {
 
   render() {
     return (
-      <div className="video-card">
-        <Card className="video-card-root">
-          <CardHeader
-            className="video-card-header"
-            title={
-              "Ranked #" +
-              (this.props.rank + 1) +
-              " in " +
-              this.props.subtopicName
-            }
-          />
-          <CardActionArea
-            onClick={this.handleToggle}
-            className="video-card-thumbnail"
-          >
-            <span></span>
-            <CardMedia
-              className="video-card-media"
-              image={this.props.thumbnailUrl}
-              title={this.props.title}
-            />
-          </CardActionArea>
-          <CardContent>
-            <Typography
-              className="video-name"
-              gutterBottom
-              variant="h5"
-              component="h2"
-            >
-              {this.props.title}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <CopyToClipboard
-              text={window.location.href + "/videos/" + this.props.videoId}
-            >
-              <Button
-                className="video-card-button-left"
-                onClick={() => this.props.confirmCopied()}
-                size="small"
-                color="primary"
-              >
-                <LinkIcon />
-              </Button>
-            </CopyToClipboard>
-            <Button
-              className="video-card-button-right"
-              onClick={() => this.props.flipFunction()}
-              size="small"
-              color="primary"
-            >
-              <MoreVertIcon />
-            </Button>
-          </CardActions>
-        </Card>
-        <Modal
-          className="video-player-modal"
-          open={this.state.open}
-          onClose={this.handleToggle}
-        > 
-        <h1>Video Placed Here!</h1>
-        </Modal>
+      <div class="row">
+        <div class="example-1 card">
+          <div class="wrapper">
+            <div className="left-content">
+              <div class="date">
+                <span class="day">{this.props.rank + 1}</span>
+              </div>
+            </div>
+            <div class="image">
+              <img class="book-image" src={this.props.thumbnailUrl} />
+            </div>
+
+            <div class="data">
+              <div class="content">
+                <h1 class="title">
+                  <a href="#" class="cardTitle">
+                    {this.props.title}
+                  </a>
+                </h1>
+                <div className="video-card-buttons">
+                  <Button
+                    className="button video-card-button-left"
+                    onClick={() => this.props.flipFunction()}
+                    size="small"
+                    color="primary"
+                  >
+                    <SwapVertIcon />
+                  </Button>
+                  <Button
+                    className="video-card-button-right"
+                    onClick={() => this.props.confirmCopied()}
+                    size="small"
+                    color="primary"
+                  >
+                    <LinkIcon />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,68 +1,131 @@
-.video-card-root {
-  border-radius: 0px !important;
-  height: 100%;
-}
-.video-card-media {
-  height: 8.75em;
-  filter: brightness(50%);
-}
-
-.video-card h2 {
-  color: #00416a !important;
-  text-align: center;
-}
-.video-card {
-  max-width: 21.6em;
-  margin: 0 auto;
-  height: 22em;
-}
-.video-card button {
-  background-color: white !important;
-}
-.video-name {
-  height: 3em;
-  overflow-y: auto;
-  line-height: 100%;
-  text-align: center;
-}
 
 
-
-.video-card-button-left {
-  margin: 0 0 !important;
-  min-width: 20px !important;
+ .cardTitle {
+   text-decoration: none;
+   font-size: x-large;
+   color:#00416a!important;
 }
-.video-card-button-right {
-  margin-left: 80% !important;
-  min-width: 20px !important;
+ .title {
+	 font-family: "Open Sans", sans-serif;
+	 font-weight: 300;
 }
-.video-card-back-content {
-  height: 85% !important;
-  overflow-y: auto;
+ .card {
+	 float: left;
+	 width: 100%;
+	 padding: 0 !important;
 }
-.video-card-header span{
-  font-size: 15px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
+ .card .menu-content {
+	 margin: 0;
+	 padding: 0;
+	 list-style-type: none;
 }
-.video-card-header{
-  background-color: goldenrod
+ .card .menu-content::before, .card .menu-content::after {
+	 content: "";
+	 display: table;
 }
-.video-card-thumbnail span {
-  position: absolute;
-  background: url("https://lh3.googleusercontent.com/proxy/IaYmKnHqIRO23QXyy9xjpuzFzVG9lnPz5dMf-oL7XB_ltqXhlKjrv5-VV9xB7sen849dvO_Zw4IXoJu2lyXUL6ylo0C4a-Y") no-repeat;
-  background-position: 50% 50%;
-  background-size: 30%;
-  z-index: 1;
+ .card .menu-content::after {
+	 clear: both;
 }
-.video-player-modal h1{
-  position: absolute;
-  width: 50%;
-  margin: 0 auto;
-  background-color: white !important;
-  border: 2px solid #000;
+ .card .menu-content li {
+	 display: inline-block;
 }
-.video-player-modal {
-  width: 100%;
+ .card .menu-content a {
+	 color: #fff;
 }
+ .card .menu-content span {
+	 position: absolute;
+	 left: 50%;
+	 top: 0;
+	 font-size: 10px;
+	 font-weight: 700;
+	 font-family: "Open Sans";
+	 transform: translate(-50%, 0);
+}
+ .card .wrapper {
+	 background-color: #fff;
+	 position: relative;
+   overflow: hidden;
+  }
+ .card .data {
+	 float: right;
+	 width: 60%;
+	 height: 100%;
+}
+ .card .data .content {
+	 position: relative;
+	 z-index: 1;
+}
+ .card .author {
+	 font-size: 12px;
+}
+ .card .title {
+	 margin-top: 10px;
+}
+ .card .text {
+	 height: 70px;
+	 margin: 0;
+}
+ .example-1 .date {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 background-color: #77d7b9;
+	 color: #fff;
+	 padding: 0.8em;
+}
+ .example-1 .date span {
+	 display: block;
+	 text-align: center;
+}
+ .example-1 .date .day {
+	 font-weight: 700;
+	 font-size: 24px;
+	 text-shadow: 2px 3px 2pxc rgba(0, 0, 0, 0.18);
+}
+ .example-1 .date .month {
+	 text-transform: uppercase;
+}
+ .example-1 .date .month, .example-1 .date .year {
+	 font-size: 12px;
+}
+ .example-1 .content {
+	 background-color: #fff;
+	 margin-top: 5%;
+}
+ .example-1 .title a {
+	 color: #808080;
+}
+ .image {
+	 float: left;
+	 width: 40%;
+}
+ .book-image {
+	 width: 100%;
+	 display: block;
+	 height: 100%;
+	 margin-top: auto;
+	 margin-bottom: auto;
+}
+ .card .left-content {
+	 margin: 0;
+ }
+ .card h1 {
+	 line-height: 100% !important;
+	 margin: 0 !important;
+	 font-size: large !important;
+ }
+ .video-card-button-left{
+	margin: 0 0 !important;
+	min-width: 20px !important;
+  }
+  .video-card-button-right{
+	margin-left: 80%!important;
+	min-width: 20px !important;
+  }
+  .video-card-buttons{
+	  margin-top: 17.5%;
+  }
+  .button {
+	  margin: 0 !important;
+	  padding: 0 !important;
+  }

@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -10,8 +15,6 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import AuthenticatedNavbar from "./components/layout/AuthenticatedNavbar"
-import SubtopicGrid from "./components/grids/SubtopicGrid"
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -22,7 +25,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -36,12 +39,15 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-        <div className="App">
+          <div className="App">
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
-              <PrivateRoute path="/dashboard" component={withRouter(Dashboard)} />
+              <PrivateRoute
+                path="/dashboard"
+                component={withRouter(Dashboard)}
+              />
             </Switch>
           </div>
         </Router>

@@ -5,23 +5,25 @@ const Schema = mongoose.Schema;
 const SubtopicSchema = new Schema({
   subtopic_name: {
     type: String,
-    required: true
+    required: true,
   },
   topic_id: {
-    type: mongoose.Schema.Types.ObjectId, ref: "topics",
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "topics",
+    required: true,
   },
   added_by: {
-    type: mongoose.Schema.Types.ObjectId, ref: "users",
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   photo_url: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 module.exports = Subtopic = mongoose.model("subtopics", SubtopicSchema);

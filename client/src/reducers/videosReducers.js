@@ -1,7 +1,4 @@
-import {
-  VIDEOS_LOADING,
-  VIDEOS_LOADED,
-} from "../actions/types";
+import { VIDEOS_LOADING, VIDEOS_LOADED } from "../actions/types";
 
 const initialState = {
   videos: [],

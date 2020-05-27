@@ -1,7 +1,4 @@
-import {
-  VIDEO_LOADING,
-  VIDEO_LOADED,
-} from "../actions/types";
+import { VIDEO_LOADING, VIDEO_LOADED } from "../actions/types";
 
 const initialState = {
   video: {},
@@ -26,7 +23,7 @@ export default function (state = initialState, action) {
       };
     default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
 }

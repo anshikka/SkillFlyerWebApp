@@ -1,65 +1,63 @@
-#navbar-logo{
-    height: 40% !important;
-    width: 40% !important;
-    margin-top: 5%;
-    margin-bottom: 3%;
-    float: left;
+#navbar-logo {
+  height: 40% !important;
+  width: 40% !important;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  float: left;
 }
 #appbar-auth {
-    background-color: #00416a;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-
+  background-color: #00416a;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 .navbar-icon {
-    color: white;
-    display: inline-block;
+  color: white;
+  display: inline-block;
 }
 #navbar-logo-link {
-    float: left;
-    margin-right: 0;
+  float: left;
+  margin-right: 0;
 }
 
 #navbar-user-link {
-    width: 5%;
-    float: right;
-    text-align: center;
-    margin-left: 25%;
+  width: 5%;
+  float: right;
+  text-align: center;
+  margin-left: 25%;
 }
 #navbar-search {
-    width: 60%;
+  width: 60%;
 }
 #search-input {
-    width: 100%;
-    border-style: hidden;
-    background-color: #1c6fa3;
-    border-radius: 100px;
-    line-height: 1px;
-    padding-right: 3%;
-    padding-left: 3%;
-    margin-top: 1%;
+  width: 100%;
+  border-style: hidden;
+  background-color: #1c6fa3;
+  border-radius: 100px;
+  line-height: 1px;
+  padding-right: 3%;
+  padding-left: 3%;
+  margin-top: 1%;
 }
 
-#search-input:focus{
-    background-color: white;
+#search-input:focus {
+  background-color: white;
 }
 #search-input::placeholder {
-    color: white;
-    font-family: FontAwesome, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    
+  color: white;
+  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
 }
 #search-input:focus::placeholder {
-    color: grey;
+  color: grey;
 }
 
 .MuiInputBase-root {
-    width: 100%;
+  width: 100%;
 }
 
 #navbar-user-link figcaption {
-    font-size: small;
-    color: white;
+  font-size: small;
+  color: white;
 }

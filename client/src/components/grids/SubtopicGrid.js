@@ -9,26 +9,33 @@ import "./SubtopicGrid.css";
 
 class SubtopicGrid extends Component {
   componentDidMount() {
-    const topicName = this.props.match.params.topicName
+    const topicName = this.props.match.params.topicName;
     this.props.getAllSubtopics(topicName);
   }
   render() {
     const { subtopics } = this.props.subtopics;
     return (
       <div id="subtopic-grid-body">
-      <Grid id="subtopic-grid-container" container spacing={10}>
-        {subtopics.map((subtopic) => (
-          <Grid className="subtopic-card-grid-item" key={subtopic._id} item xs>
-            <Link to= {`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}>
-            <SubtopicCard
-            name = {subtopic.subtopic_name}
-            photoUrl = {subtopic.photo_url}
-            description = {subtopic.description}
-            />
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+        <Grid id="subtopic-grid-container" container spacing={10}>
+          {subtopics.map((subtopic) => (
+            <Grid
+              className="subtopic-card-grid-item"
+              key={subtopic._id}
+              item
+              xs
+            >
+              <Link
+                to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
+              >
+                <SubtopicCard
+                  name={subtopic.subtopic_name}
+                  photoUrl={subtopic.photo_url}
+                  description={subtopic.description}
+                />
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     );
   }

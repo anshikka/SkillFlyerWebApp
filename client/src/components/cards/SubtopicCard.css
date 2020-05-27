@@ -25,20 +25,20 @@
   font-weight: 600;
   font-size: 2vw;
   overflow-x: auto;
-  line-height: 140%
+  line-height: 140%;
 }
 .subtopic-card-description {
   height: 45px;
   overflow: auto;
 }
-.title-and-desc{
+.title-and-desc {
   width: 100%;
 }
 
-.subtopic{
+.subtopic {
   width: 100%;
 }
-.logo{
+.logo {
   height: 3rem;
   width: 3rem;
 }

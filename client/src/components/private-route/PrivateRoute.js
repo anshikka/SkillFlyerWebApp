@@ -2,10 +2,18 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-const PrivateRoute = ({ component: Component, auth, topics, subtopics, videos, video, ...rest }) => (
+const PrivateRoute = ({
+  component: Component,
+  auth,
+  topics,
+  subtopics,
+  videos,
+  video,
+  ...rest
+}) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       auth.isAuthenticated === true ? (
         <Component {...props} />
       ) : (
@@ -15,13 +23,13 @@ const PrivateRoute = ({ component: Component, auth, topics, subtopics, videos, v
   />
 );
 PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   topics: state.topics,
   subtopics: state.subtopics,
   videos: state.videos,
-  video: state.video
+  video: state.video,
 });
 export default connect(mapStateToProps)(PrivateRoute);

@@ -4,30 +4,36 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   education_institution: {
-    type: String
+    type: String,
   },
-  liked_videos: [{
-    type: mongoose.Schema.Types.ObjectId, ref: "videos",
-    required: false
-  }],
-  disliked_videos: [{
-    type: mongoose.Schema.Types.ObjectId, ref: "videos",
-    required: false
-  }]
+  liked_videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "videos",
+      required: false,
+    },
+  ],
+  disliked_videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "videos",
+      required: false,
+    },
+  ],
 });
 module.exports = User = mongoose.model("users", UserSchema);

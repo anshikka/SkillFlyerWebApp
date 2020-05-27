@@ -5,10 +5,10 @@ import { logoutUser } from "../../actions/authActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicGrid from "../grids/TopicGrid";
 import VideoGrid from "../grids/VideoGrid";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 class Dashboard extends Component {
@@ -18,19 +18,38 @@ class Dashboard extends Component {
   };
   render() {
     const { user } = this.props.auth;
-    return (
-      <div>
-        <AuthenticatedNavbar color={"white"}/>
+    if (user) {
+      return (
         <div>
-          <Switch>
-            <Route exact path="/dashboard" component={TopicGrid} />
-            <Route exact path="/dashboard/:topicName" component={SubtopicGrid} />
-            <Route exact path="/dashboard/:topicName/:subtopicName" component={VideoGrid} />
-          </Switch>
+          <AuthenticatedNavbar color={"white"} />
+          <div>
+            <Switch>
+              <Route exact path="/dashboard" component={TopicGrid} />
+              <Route
+                exact
+                path="/dashboard/:topicName"
+                component={SubtopicGrid}
+              />
+              <Route
+                exact
+                path="/dashboard/:topicName/:subtopicName"
+                component={VideoGrid}
+              />
+            </Switch>
+          </div>
+          <ToastContainer
+            style={{ textAlign: "center" }}
+            autoClose={4000}
+            position="bottom-center"
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick
+            draggable={false}
+            pauseOnHover={false}
+          />
         </div>
-        <ToastContainer style={{textAlign: "center"}}autoClose={4000} position="bottom-center" hideProgressBar={true} newestOnTop={true} closeOnClick draggable={false} pauseOnHover = {false}/>
-      </div>
-    );
+      );
+    }
   }
 }
 Dashboard.propTypes = {

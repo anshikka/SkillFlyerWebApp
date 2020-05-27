@@ -27,7 +27,7 @@ class VideoGrid extends Component {
               description={video.description}
               thumbnailUrl={video.thumbnail_url}
               addedBy={video.added_by}
-              rank = {index}
+              rank={index}
             />
           </Grid>
         ))}

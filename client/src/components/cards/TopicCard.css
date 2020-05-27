@@ -25,12 +25,12 @@
   text-align: center;
 }
 
-.topic-card-button-left{
+.topic-card-button-left {
   margin: 0 0 !important;
   min-width: 20px !important;
 }
-.topic-card-button-right{
-  margin-left: 80%!important;
+.topic-card-button-right {
+  margin-left: 80% !important;
   min-width: 20px !important;
 }
 #topic-card-back-content {

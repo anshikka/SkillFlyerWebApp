@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoCardComponent from "./VideoCardComponent";
-import { ToastContainer, toast } from "react-toastify";
-
+import { toast } from "react-toastify";
 
 class VideoCard extends Component {
   confirmCopied = () => {
@@ -11,11 +10,12 @@ class VideoCard extends Component {
   render() {
     return (
       <VideoCardComponent
-      bgPhoto={this.props.thumbnailUrl}
-      rank= {"#" + ( this.props.rank + 1)}
-      watchButton="&#xF144; Watch Now"
-      videoUrl = {window.location.href + "/" + this.props.videoId}
-      title={this.props.title}/>
+        bgPhoto={this.props.thumbnailUrl}
+        rank={"#" + (this.props.rank + 1)}
+        watchButton="&#xF144; Watch Now"
+        videoUrl={window.location.href + "/" + this.props.videoId}
+        title={this.props.title}
+      />
     );
   }
 }

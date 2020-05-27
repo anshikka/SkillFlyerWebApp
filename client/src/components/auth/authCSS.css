@@ -1,20 +1,20 @@
 .auth-form input {
-    color: #00416a;
+  color: #00416a;
 }
 .auth-form input[type]:not(.browser-default):focus:not([readonly]) {
-    color: #00416a;
-    border-bottom: 1px solid #00416a;
-    box-shadow: 0 1px 0 0 #00416a;
+  color: #00416a;
+  border-bottom: 1px solid #00416a;
+  box-shadow: 0 1px 0 0 #00416a;
 }
 .auth-form input[type]:not(.browser-default):focus:not([readonly]) + label {
-    color: #00416a;
+  color: #00416a;
 }
-.back-home{
-    color: #00416a;
+.back-home {
+  color: #00416a;
 }
-.auth-heading{
-    color: #00416a;
+.auth-heading {
+  color: #00416a;
 }
-.auth-btn{
-    background-color: #00416a !important;
+.auth-btn {
+  background-color: #00416a !important;
 }

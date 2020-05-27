@@ -30,7 +30,7 @@ function validateYouTubeLink(youtube_url) {
 }
 
 function getTopicId(name) {
-  return Topic.findOne({ topic_name: name }).then(topic => {
+  return Topic.findOne({ topic_name: name }).then((topic) => {
     if (topic) {
       return topic._id;
     } else {
@@ -40,7 +40,7 @@ function getTopicId(name) {
 }
 
 function getSubtopicId(name) {
-  return Subtopic.findOne({ subtopic_name: name }).then(subtopic => {
+  return Subtopic.findOne({ subtopic_name: name }).then((subtopic) => {
     if (subtopic) {
       return subtopic._id;
     } else {
@@ -61,8 +61,8 @@ videoRouter.post("/addVideo", async (req, res) => {
   Video.findOne({
     youtube_url: req.body.youtube_url,
     subtopic_id: s_id,
-    topic_id: t_id
-  }).then(video => {
+    topic_id: t_id,
+  }).then((video) => {
     if (video) {
       return res
         .status(400)
@@ -80,9 +80,9 @@ videoRouter.post("/addVideo", async (req, res) => {
         title: req.body.title,
         added_by: req.body.user_id,
         thumbnail_url: req.body.thumbnail_url,
-        description: req.body.description
+        description: req.body.description,
       });
-      newVideo.save().then(video => res.json(video));
+      newVideo.save().then((video) => res.json(video));
     }
   });
 });
@@ -96,7 +96,7 @@ videoRouter.get("/:_id", (req, res) => {
     return res.status(400).json({ message: "Invalid Video Link" });
   } else {
     // Find video by id
-    Video.findOne({ _id: video_id }).then(video => {
+    Video.findOne({ _id: video_id }).then((video) => {
       // Check if video exists
       if (video) {
         return res.status(200).json(video);
@@ -111,7 +111,7 @@ videoRouter.get("/", async (req, res) => {
   const subtopic = await getSubtopicId(req.params.subtopic_name);
   const topic = await getTopicId(req.params.topic_name);
   // Find Videos by subtopic id
-  Video.find({ topic_id: topic, subtopic_id: subtopic }).then(videos => {
+  Video.find({ topic_id: topic, subtopic_id: subtopic }).then((videos) => {
     // Check if videos exists
     if (videos.length == 0) {
       return res
@@ -131,8 +131,8 @@ videoRouter.put("/:_id/upvote", (req, res) => {
       { _id: u_id },
       {
         $push: {
-          liked_videos: v_id
-        }
+          liked_videos: v_id,
+        },
       }
     ).then(res.json({ message: "Video Added to User's Upvoted Videos!" }))
   );
@@ -146,8 +146,8 @@ videoRouter.put("/:_id/undoUpvote", (req, res) => {
       { _id: u_id },
       {
         $pull: {
-          liked_videos: v_id
-        }
+          liked_videos: v_id,
+        },
       }
     ).then(res.json({ message: "Video Removed From User's Upvoted Videos!" }))
   );
@@ -161,12 +161,11 @@ videoRouter.put("/:_id/downvote", (req, res) => {
       { _id: u_id },
       {
         $push: {
-          disliked_videos: v_id
-        }
+          disliked_videos: v_id,
+        },
       }
     ).then(res.json({ message: "Video Added to User's Downvoted Videos!" }))
   );
-  
 });
 
 videoRouter.put("/:_id/undoDownvote", (req, res) => {
@@ -177,12 +176,11 @@ videoRouter.put("/:_id/undoDownvote", (req, res) => {
       { _id: u_id },
       {
         $pull: {
-          disliked_videos: v_id
-        }
+          disliked_videos: v_id,
+        },
       }
     ).then(res.json({ message: "Video Removed to User's Downvoted Videos!" }))
   );
-  
 });
 
 module.exports = videoRouter;

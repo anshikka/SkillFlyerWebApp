@@ -8,16 +8,13 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import LinkIcon from '@material-ui/icons/Link';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import LinkIcon from "@material-ui/icons/Link";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import "./TopicCard.css";
 
 class TopicCardFront extends Component {
-  
-
   render() {
-
     return (
       <div id="card">
         <Card id="card-root">
@@ -41,13 +38,25 @@ class TopicCardFront extends Component {
             </CardActionArea>
           </Link>
           <CardActions>
-            <CopyToClipboard text={window.location.href + "/" + this.props.name}>
-            <Button className = "topic-card-button-left" onClick={()=> this.props.confirmCopied()} size="small" color="primary">
-              <LinkIcon/>
-            </Button>
+            <CopyToClipboard
+              text={window.location.href + "/" + this.props.name}
+            >
+              <Button
+                className="topic-card-button-left"
+                onClick={() => this.props.confirmCopied()}
+                size="small"
+                color="primary"
+              >
+                <LinkIcon />
+              </Button>
             </CopyToClipboard>
-            <Button className = "topic-card-button-right" onClick={()=>this.props.flipFunction()} size="small" color="primary">
-              <MoreVertIcon/>
+            <Button
+              className="topic-card-button-right"
+              onClick={() => this.props.flipFunction()}
+              size="small"
+              color="primary"
+            >
+              <MoreVertIcon />
             </Button>
           </CardActions>
         </Card>
@@ -61,6 +70,6 @@ TopicCardFront.propTypes = {
   photoUrl: PropTypes.string.isRequired,
   topicId: PropTypes.string.isRequired,
   flipFunction: PropTypes.func.isRequired,
-  confirmCopied: PropTypes.func.isRequired
+  confirmCopied: PropTypes.func.isRequired,
 };
 export default TopicCardFront;

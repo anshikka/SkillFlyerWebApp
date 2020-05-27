@@ -4,15 +4,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
   border-radius: 8px;
-  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08);
-  background-color: ${props => props.bgColor};
-  background-image: ${props =>
-    `linear-gradient(${props.overlayColor}, ${props.overlayColor}), url(${
-      props.bgPhoto
-    })`};
+  background-color: ${(props) => props.bgColor};
+  background-image: ${(props) =>
+    `linear-gradient(${props.overlayColor}, ${props.overlayColor}), url(${props.bgPhoto})`};
   background-repeat: no-repeat;
   background-size: 100%;
   padding-bottom: 40px;
@@ -26,14 +24,14 @@ const Container = styled.div`
 `;
 
 const RankContainer = styled.div`
-  background-color: ${props => props.bgColor};
+  background-color: ${(props) => props.bgColor};
   font-size: 20px;
   font-weight: 500;
   text-transform: uppercase;
   width: 20%;
   border-radius: 100px;
   text-align: center;
-  color: ${props => props.tagColor};
+  color: ${(props) => props.tagColor};
 `;
 
 const RankText = styled.span`
@@ -53,8 +51,8 @@ const WatchButton = styled.span`
   border-radius: 25px;
   width: 25%;
   z-index: 9;
-  background: ${props => props.bgColor};
-  color: ${props => props.color};
+  background: ${(props) => props.bgColor};
+  color: ${(props) => props.color};
 `;
 
 const WatchButtonText = styled.span`
@@ -68,12 +66,12 @@ const Title = styled.span`
   font-weight: 700;
   margin-top: 8px;
   padding-bottom: 10px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 const PreTitle = styled.span`
   font-size: 16px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 const VideoCardComponent = ({
@@ -90,7 +88,7 @@ const VideoCardComponent = ({
   rankColor = "#1F2126",
   rankBg = "white",
   bgPhoto,
-  bgColor = "#DBE0E6"
+  bgColor = "#DBE0E6",
 }) => (
   <Container bgPhoto={bgPhoto} bgColor={bgColor} overlayColor={overlayColor}>
     {rank && (
@@ -105,13 +103,12 @@ const VideoCardComponent = ({
           {title && <Title color={titleColor}>{title}</Title>}
         </span>
         {watchButton && (
-        <a href={videoUrl}>
-          <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>
-            <WatchButtonText>{watchButton}</WatchButtonText>
-          </WatchButton>
+          <a href={videoUrl}>
+            <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>
+              <WatchButtonText>{watchButton}</WatchButtonText>
+            </WatchButton>
           </a>
         )}
-        
       </Content>
     )}
   </Container>
@@ -131,7 +128,7 @@ VideoCardComponent.propTypes = {
   tagBg: PropTypes.string,
   bgPhoto: PropTypes.string,
   bgColor: PropTypes.string,
-  videoUrl: PropTypes.string
+  videoUrl: PropTypes.string,
 };
 
 export default VideoCardComponent;

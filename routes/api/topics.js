@@ -6,14 +6,13 @@ const profanityChecker = require("leo-profanity");
 // Load Topic model
 const Topic = require("../../models/Topic");
 
-
 // @route POST api/
 // @desc add topic
 // @access Public
 topicRouter.post("/addTopic", (req, res) => {
   Topic.findOne({
-    topic_name: req.body.topic_name
-  }).then(topic => {
+    topic_name: req.body.topic_name,
+  }).then((topic) => {
     if (topic) {
       return res.status(400).json({ message: "Topic already exists!" });
     } else {
@@ -24,9 +23,9 @@ topicRouter.post("/addTopic", (req, res) => {
         topic_name: req.body.topic_name,
         added_by: req.body.user_id,
         photo_url: req.body.photo_url,
-        description: req.body.description
+        description: req.body.description,
       });
-      newTopic.save().then(topic => res.json(topic));
+      newTopic.save().then((topic) => res.json(topic));
     }
   });
 });
@@ -34,7 +33,7 @@ topicRouter.post("/addTopic", (req, res) => {
 // @desc return all topics
 // @access Public
 topicRouter.get("/", (req, res) => {
-  Topic.find({}).then(topics => {
+  Topic.find({}).then((topics) => {
     // Check if topics exists
     if (topics.length == 0) {
       return res.status(404).json({ topicsonotfound: "There are no topics!" });
@@ -43,7 +42,6 @@ topicRouter.get("/", (req, res) => {
     }
   });
 });
-
 
 topicRouter.use("/:topic_name/", subtopicRouter);
 module.exports = topicRouter;

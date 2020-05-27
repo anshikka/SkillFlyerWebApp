@@ -1,33 +1,35 @@
-html, body {
-    height: 100% !important;
+html,
+body {
+  height: 100% !important;
 }
 
 .background {
-    height: 100%;
-    background: url('./assets/bookshelf-background.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size:cover;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
+  height: 100%;
+  background: url("./assets/bookshelf-background.jpg") no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 h2 {
-    color: white;
+  color: white;
 }
-#register-button{
-    background-color: #00416a;
+#register-button {
+  background-color: #00416a;
 }
-#login-button{
-    color: #00416a;
+#login-button {
+  color: #00416a;
 }
-#logo-intext{
-    height: 20%;
-    width: 40%;
-    box-align : bottom;
-    position: inline;
-    margin-top: 3%;
+#logo-intext {
+  height: 20%;
+  width: 40%;
+  box-align: bottom;
+  position: inline;
+  margin-top: 3%;
 }

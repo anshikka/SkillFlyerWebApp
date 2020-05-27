@@ -5,40 +5,41 @@ const Schema = mongoose.Schema;
 const VideoSchema = new Schema({
   youtube_id: {
     type: String,
-    required: true
+    required: true,
   },
   topic_id: {
-      type: String,
-      required: true
+    type: String,
+    required: true,
   },
   subtopic_id: {
-      type: String, 
-      required: true
+    type: String,
+    required: true,
   },
   added_by: {
-      type: mongoose.Schema.Types.ObjectId, ref: "users",
-      required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: true,
   },
   votes: {
-      type: Number,
-      required: true,
-      default: 0
+    type: Number,
+    required: true,
+    default: 0,
   },
-  title : {
-      type: String,
-      required: true
+  title: {
+    type: String,
+    required: true,
   },
   youtube_url: {
-      type: String,
-      required: true
+    type: String,
+    required: true,
   },
   thumbnail_url: {
-      type: String,
-      required: true
+    type: String,
+    required: true,
   },
   description: {
-      type: String,
-      required: false
-  }
+    type: String,
+    required: false,
+  },
 });
 module.exports = Video = mongoose.model("videos", VideoSchema);

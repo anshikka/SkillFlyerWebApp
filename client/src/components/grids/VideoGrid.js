@@ -2,12 +2,12 @@ import { getAllVideos } from "../../actions/videoActions";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import VideoItem from "../items/VideoItem";
+import VideoCard from "../cards/VideoCard";
 import Grid from "@material-ui/core/Grid";
 
-import "./VideoListCSS.css";
+import "./VideoGrid.css";
 
-class VideoList extends Component {
+class VideoGrid extends Component {
   componentDidMount() {
     const topicName = this.props.match.params.topicName;
     const subtopicName = this.props.match.params.subtopicName;
@@ -19,7 +19,7 @@ class VideoList extends Component {
       <Grid id="video-grid-container" container spacing={10}>
         {videos.map((video, index) => (
           <Grid className="video-card-grid-item" item xs key={video._id}>
-            <VideoItem
+            <VideoCard
               videoId={video._id}
               topicName={this.props.match.params.topicName}
               subtopicName={this.props.match.params.subtopicName}
@@ -36,7 +36,7 @@ class VideoList extends Component {
   }
 }
 
-VideoList.propTypes = {
+VideoGrid.propTypes = {
   auth: PropTypes.object.isRequired,
   getAllVideos: PropTypes.func.isRequired,
   videos: PropTypes.object.isRequired,
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   videos: state.videos,
 });
-export default connect(mapStateToProps, { getAllVideos })(VideoList);
+export default connect(mapStateToProps, { getAllVideos })(VideoGrid);

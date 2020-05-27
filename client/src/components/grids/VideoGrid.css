@@ -8,6 +8,14 @@
 #video-card-grid-item {
   display: "flex";
 }
+
+.no-videos-message {
+  padding-top: 5%;
+  text-align: center;
+}
+.no-videos-message img {
+  width: 5%;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

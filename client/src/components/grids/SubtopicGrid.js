@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import SubtopicCard from "../cards/SubtopicCard";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
+import noSubtopicsPlaceholder from "./assets/no-subtopics.png";
 import "./SubtopicGrid.css";
 
 class SubtopicGrid extends Component {
@@ -14,30 +15,40 @@ class SubtopicGrid extends Component {
   }
   render() {
     const { subtopics } = this.props.subtopics;
-    return (
-      <div id="subtopic-grid-body">
-        <Grid id="subtopic-grid-container" container spacing={10}>
-          {subtopics.map((subtopic) => (
-            <Grid
-              className="subtopic-card-grid-item"
-              key={subtopic._id}
-              item
-              xs
-            >
-              <Link
-                to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
+    if (subtopics.length > 0) {
+      return (
+        <div id="subtopic-grid-body">
+          <Grid id="subtopic-grid-container" container spacing={10}>
+            {subtopics.map((subtopic) => (
+              <Grid
+                className="subtopic-card-grid-item"
+                key={subtopic._id}
+                item
+                xs
               >
-                <SubtopicCard
-                  name={subtopic.subtopic_name}
-                  photoUrl={subtopic.photo_url}
-                  description={subtopic.description}
-                />
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    );
+                <Link
+                  to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
+                >
+                  <SubtopicCard
+                    name={subtopic.subtopic_name}
+                    photoUrl={subtopic.photo_url}
+                    description={subtopic.description}
+                  />
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      );
+    } else {
+      return (
+        <div className="no-subtopics-message">
+          <img src={noSubtopicsPlaceholder} alt="no-subtopics" />
+          <h1>No Subtopics Under {this.props.match.params.topicName}</h1>
+          <p>Check back later to study this new subtopic!</p>
+        </div>
+      );
+    }
   }
 }
 

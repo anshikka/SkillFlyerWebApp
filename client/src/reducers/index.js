@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducers";
+import userReducer from "./userReducers"
 import errorReducer from "./errorReducers";
 import topicReducer from "./topicReducers";
 import subtopicReducer from "./subtopicReducers";
@@ -12,4 +13,5 @@ export default combineReducers({
   subtopics: subtopicReducer,
   videos: videosReducer,
   video: videoReducer,
+  user: userReducer
 });

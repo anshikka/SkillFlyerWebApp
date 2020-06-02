@@ -9,6 +9,7 @@ const PrivateRoute = ({
   subtopics,
   videos,
   video,
+  user,
   ...rest
 }) => (
   <Route
@@ -31,5 +32,6 @@ const mapStateToProps = (state) => ({
   subtopics: state.subtopics,
   videos: state.videos,
   video: state.video,
+  user: state.user
 });
 export default connect(mapStateToProps)(PrivateRoute);

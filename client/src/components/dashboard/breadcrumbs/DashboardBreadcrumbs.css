@@ -1,0 +1,8 @@
+.breadcrumb-link {
+  display: "flex";
+}
+.breadcrumb-icon {
+  margin-right: spacing(0.5);
+  width: 20;
+  height: 20;
+}

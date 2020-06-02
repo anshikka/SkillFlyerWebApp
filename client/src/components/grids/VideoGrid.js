@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoCard from "../cards/VideoCard";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import noVideosPlaceholder from "./assets/no-videos.png";
 import "./VideoGrid.css";
 
@@ -20,6 +21,7 @@ class VideoGrid extends Component {
         <Grid id="video-grid-container" container spacing={10}>
           {videos.map((video, index) => (
             <Grid className="video-card-grid-item" item xs key={video._id}>
+              <Container>
               <VideoCard
                 videoId={video._id}
                 topicName={this.props.match.params.topicName}
@@ -30,6 +32,7 @@ class VideoGrid extends Component {
                 addedBy={video.added_by}
                 rank={index}
               />
+              </Container>
             </Grid>
           ))}
         </Grid>

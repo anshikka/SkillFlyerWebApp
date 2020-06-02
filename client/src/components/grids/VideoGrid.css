@@ -5,8 +5,12 @@
   margin: 0 auto;
 }
 
-#video-card-grid-item {
+.video-card-grid-item {
   display: "flex";
+}
+
+.video-card {
+  height: 10px;
 }
 
 .no-videos-message {

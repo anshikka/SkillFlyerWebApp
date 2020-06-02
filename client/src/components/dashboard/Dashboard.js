@@ -10,6 +10,7 @@ import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import VideoPlayer from "../player/VideoPlayer";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -34,6 +35,11 @@ class Dashboard extends Component {
                 exact
                 path="/dashboard/:topicName/:subtopicName"
                 component={VideoGrid}
+              />
+              <Route
+                exact
+                path="/dashboard/:topicName/:subtopicName/:videoId"
+                component={VideoPlayer}
               />
             </Switch>
           </div>

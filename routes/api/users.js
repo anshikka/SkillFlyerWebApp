@@ -99,6 +99,28 @@ userRouter.post("/login", (req, res) => {
   });
 });
 
+userRouter.post("/getUser", (req, res) => {
+  console.log(req.body);
+  const userId = req.body.user_id;
+  User.findOne({ _id: userId }).then((user) => {
+    // Check if user exists
+     if (user) {
+      const payload = {
+        name: user.name,
+        education_institution: user.education_institution
+      };
+      res.status(200).json(payload);
+
+    } else {
+      const payload = {
+        name: "Deleted User"
+      };
+      res.status(200).json(payload);
+
+    }
+  });
+});
+
 userRouter.use("/folder/", folderRouter);
 
 module.exports = userRouter;

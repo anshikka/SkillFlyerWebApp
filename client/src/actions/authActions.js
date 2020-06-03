@@ -1,7 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, USER_LIKED_VIDEO_LOADED, USER_LIKED_VIDEO_LOADING } from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
@@ -61,4 +61,33 @@ export const logoutUser = () => (dispatch) => {
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+export const getUserLikedVideo = (userId, videoId) => (dispatch) => {
+  axios
+    .get("/api/users/inLikedVideos", {
+      params: { user_id: userId, video_id: videoId },
+    })
+    .then((res) => {
+      dispatch(dispatchUserLikedVideo(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const dispatchUserLikedVideo = (res) => {
+  return {
+    type: USER_LIKED_VIDEO_LOADED,
+    payload: res,
+  };
+};
+
+export const userLikedVideoLoading = () => {
+  return {
+    type: USER_LIKED_VIDEO_LOADING,
+  };
 };

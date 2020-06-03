@@ -7,10 +7,13 @@ import VideoCard from "../cards/VideoCard";
 import StarIcon from "@material-ui/icons/Star";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
+import UpvoteButton from "../buttons/vote/UpvoteButton";
+import DownvoteButton from "../buttons/vote/DownvoteButton";
+import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import "./VideoPlayer.css";
 import { Container } from "@material-ui/core";
-import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
+import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 import UserChip from "../chips/UserChip";
 
 class VideoPlayer extends Component {
@@ -27,9 +30,15 @@ class VideoPlayer extends Component {
     event.target.pauseVideo();
   }
 
+  upvoteVideo() {}
+
+  downvoteVideo() {}
+
   render() {
     const { videos } = this.props.videos;
     const { video } = this.props.video;
+    const { user } = this.props.auth;
+
     const opts = {
       playerVars: {
         autoplay: 1,
@@ -83,6 +92,16 @@ class VideoPlayer extends Component {
                   }
                   size="medium"
                 />
+                <Box className="vote-box" component="span" m={1}>
+                  <UpvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} />
+                  <Chip
+                    variant="outlined"
+                    className="votes"
+                    label={video.votes}
+                    size="medium"
+                  />
+                  <DownvoteButton />
+                </Box>
               </Container>
               {
                 <Container>
@@ -135,6 +154,7 @@ const mapStateToProps = (state) => ({
   video: state.video,
 });
 
-export default connect(mapStateToProps, { getAllVideos, getVideo })(
-  VideoPlayer
-);
+export default connect(mapStateToProps, {
+  getAllVideos,
+  getVideo,
+})(VideoPlayer);

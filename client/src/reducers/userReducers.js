@@ -1,4 +1,4 @@
-import { USER_LOADED, USER_LOADING } from "../actions/types";
+import { USER_LOADED, USER_LOADING, USER_LIKED_VIDEO_LOADED } from "../actions/types";
 const initialState = {
   user: {},
   loading: false,

@@ -2,9 +2,8 @@ import axios from "axios";
 import { GET_ERRORS, USER_LOADED, USER_LOADING } from "./types";
 export const getUser = (userId) => (dispatch) => {
   axios
-    .post("/api/users/getUser", {user_id: userId})
+    .post("/api/users/getUser", { user_id: userId })
     .then((res) => {
-      console.log(res.data)
       dispatch(dispatchUser(res.data));
     })
     .catch((err) =>
@@ -14,6 +13,8 @@ export const getUser = (userId) => (dispatch) => {
       })
     );
 };
+
+
 
 // Dispatch user name
 export const dispatchUser = (user) => {
@@ -28,3 +29,4 @@ export const userLoading = () => {
     type: USER_LOADING,
   };
 };
+

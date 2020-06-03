@@ -103,19 +103,35 @@ userRouter.post("/getUser", (req, res) => {
   const userId = req.body.user_id;
   User.findOne({ _id: userId }).then((user) => {
     // Check if user exists
-     if (user) {
+    if (user) {
       const payload = {
         name: user.name,
-        education_institution: user.education_institution
+        education_institution: user.education_institution,
       };
       res.status(200).json(payload);
-
     } else {
       const payload = {
-        name: "Deleted User"
+        name: "Deleted User",
       };
       res.status(200).json(payload);
+    }
+  });
+});
 
+userRouter.get("/inLikedVideos", (req, res) => {
+  const videoId = req.query.video_id;
+  const userId = req.query.user_id;
+  User.findOne({ _id: userId }).then((user) => {
+    // Check if user exists
+    if (user) {
+      if (user.liked_videos.includes(videoId)){
+        res.status(200).json({video_liked: "true"});
+      } else {
+        res.status(200).json({video_liked: "false"});
+      }
+      
+    } else {
+      res.status(500).json({ error: "Server Error" });
     }
   });
 });

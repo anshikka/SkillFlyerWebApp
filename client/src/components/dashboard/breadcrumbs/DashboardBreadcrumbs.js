@@ -5,70 +5,74 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import BookIcon from "@material-ui/icons/Book";
 import DnsIcon from "@material-ui/icons/Dns";
 import "./DashboardBreadcrumbs.css";
+import PropTypes from "prop-types";
+import Container from "@material-ui/core/Container"
 
 class DashboardBreadcrumbs extends Component {
-  componentDidMount() {
-    this.topicName = this.props.match.params.topicName;
-    this.subtopicName = this.props.match.params.subtopicName;
-    this.videoId = this.props.match.params.videoId;
-  }
   render() {
-    if (this.topicName !== "" && this.subtopicName !== "") {
+    if (this.props.pageType === "subtopics") {
       return (
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link className="breadcrumb-link" to={`/dashboard/`} color="inherit">
+        <Container className = "breadcrumb-container">
+        <Breadcrumbs className = "breadcrumb-root" aria-label="breadcrumb">
+          <Link className="breadcrumb-link" href={`/dashboard/`} color="inherit">
             <DashboardIcon className="breadcrumb-icon" />
-            Dashboard
+            Topics
           </Link>
           <Link
             className="breadcrumb-link"
-            to={`/dashboard/${this.topicName}`}
+            href={`/dashboard/${this.props.topicName}`}
             color="inherit"
           >
             <BookIcon className="breadcrumb-icon" />
-            {this.topicName}
+            {this.props.topicName}
           </Link>
         </Breadcrumbs>
+        </Container>
       );
-    } else if (
-      this.topicName !== "" &&
-      this.subtopicName !== "" &&
-      this.videoId !== ""
-    ) {
+    } else if (this.props.pageType === "video") {
       return (
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link className="breadcrumb-link" to={`/dashboard/`} color="inherit">
+        <Container className = "breadcrumb-container">
+        <Breadcrumbs className = "breadcrumbs-root" aria-label="breadcrumb">
+          <Link className="breadcrumb-link" href={`/dashboard/`} color="inherit">
             <DashboardIcon className="breadcrumb-icon" />
-            Dashboard
+            Topics
           </Link>
           <Link
             className="breadcrumb-link"
-            to={`/dashboard/${this.topicName}`}
+            href={`/dashboard/${this.props.topicName}`}
             color="inherit"
           >
             <BookIcon className="breadcrumb-icon" />
-            {this.topicName}
+            {this.props.topicName}
           </Link>
           <Link
             className="breadcrumb-link"
-            to={`/dashboard/${this.topicName}/${this.subtopicName}`}
+            href={`/dashboard/${this.props.topicName}/${this.props.subtopicName}`}
             color="inherit"
           >
             <DnsIcon className="breadcrumb-icon" />
-            {this.subtopicName}
+            {this.props.subtopicName}
           </Link>
         </Breadcrumbs>
+        </Container>
       );
     } else {
       return (
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link className="breadcrumb-link" to={`/dashboard/`} color="inherit">
+        <Container className = "breadcrumb-container">
+        <Breadcrumbs className = "breadcrumb-root" aria-label="breadcrumb">
+          <Link className="breadcrumb-link" href={`/dashboard/`} color="inherit">
             <DashboardIcon className="breadcrumb-icon" />
-            Dashboard
+            Topics
           </Link>
         </Breadcrumbs>
+        </Container>
       );
     }
   }
 }
+DashboardBreadcrumbs.propTypes = {
+  pageType: PropTypes.string.isRequired,
+  topicName: PropTypes.string,
+  subtopicName: PropTypes.string,
+};
 export default DashboardBreadcrumbs;

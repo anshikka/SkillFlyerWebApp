@@ -6,36 +6,44 @@ import VideoCard from "../cards/VideoCard";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import noVideosPlaceholder from "./assets/no-videos.png";
+import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
 import "./VideoGrid.css";
 
 class VideoGrid extends Component {
   componentDidMount() {
-    const topicName = this.props.match.params.topicName;
-    const subtopicName = this.props.match.params.subtopicName;
-    this.props.getAllVideos(topicName, subtopicName);
+    this.topicName = this.props.match.params.topicName;
+    this.subtopicName = this.props.match.params.subtopicName;
+    this.props.getAllVideos(this.topicName, this.subtopicName);
   }
   render() {
     const { videos } = this.props.videos;
     if (videos.length > 0) {
       return (
-        <Grid id="video-grid-container" container spacing={10}>
-          {videos.map((video, index) => (
-            <Grid className="video-card-grid-item" item xs key={video._id}>
-              <Container>
-              <VideoCard
-                videoId={video._id}
-                topicName={this.props.match.params.topicName}
-                subtopicName={this.props.match.params.subtopicName}
-                title={video.title}
-                description={video.description}
-                thumbnailUrl={video.thumbnail_url}
-                addedBy={video.added_by}
-                rank={index}
-              />
-              </Container>
-            </Grid>
-          ))}
-        </Grid>
+        <div>
+          <DashboardBreadcrumbs
+            pageType="video"
+            topicName={this.topicName}
+            subtopicName={this.subtopicName}
+          />
+          <Grid id="video-grid-container" container spacing={10}>
+            {videos.map((video, index) => (
+              <Grid className="video-card-grid-item" item xs key={video._id}>
+                <Container>
+                  <VideoCard
+                    videoId={video._id}
+                    topicName={this.props.match.params.topicName}
+                    subtopicName={this.props.match.params.subtopicName}
+                    title={video.title}
+                    description={video.description}
+                    thumbnailUrl={video.thumbnail_url}
+                    addedBy={video.added_by}
+                    rank={index}
+                  />
+                </Container>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       );
     } else {
       return (

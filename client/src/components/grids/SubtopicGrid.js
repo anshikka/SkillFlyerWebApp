@@ -7,18 +7,20 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import noSubtopicsPlaceholder from "./assets/no-subtopics.png";
 import "./SubtopicGrid.css";
-import Container from "@material-ui/core/Container"
+import Container from "@material-ui/core/Container";
+import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 
 class SubtopicGrid extends Component {
   componentDidMount() {
-    const topicName = this.props.match.params.topicName;
-    this.props.getAllSubtopics(topicName);
+    this.topicName = this.props.match.params.topicName;
+    this.props.getAllSubtopics(this.topicName);
   }
   render() {
     const { subtopics } = this.props.subtopics;
     if (subtopics.length > 0) {
       return (
         <div id="subtopic-grid-body">
+          <DashboardBreadcrumbs pageType="subtopics" topicName={this.topicName} />
           <Grid id="subtopic-grid-container" container spacing={10}>
             {subtopics.map((subtopic) => (
               <Grid
@@ -27,16 +29,16 @@ class SubtopicGrid extends Component {
                 item
                 xs
               >
-                <Container className = "subtopic-card-container">
-                <Link
-                  to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
-                >
-                  <SubtopicCard
-                    name={subtopic.subtopic_name}
-                    photoUrl={subtopic.photo_url}
-                    description={subtopic.description}
-                  />
-                </Link>
+                <Container className="subtopic-card-container">
+                  <Link
+                    to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
+                  >
+                    <SubtopicCard
+                      name={subtopic.subtopic_name}
+                      photoUrl={subtopic.photo_url}
+                      description={subtopic.description}
+                    />
+                  </Link>
                 </Container>
               </Grid>
             ))}

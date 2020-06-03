@@ -6,21 +6,21 @@ import YouTube from "react-youtube";
 import VideoCard from "../cards/VideoCard";
 import StarIcon from "@material-ui/icons/Star";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
-import ScheduleIcon from '@material-ui/icons/Schedule';
+import ScheduleIcon from "@material-ui/icons/Schedule";
 import Chip from "@material-ui/core/Chip";
 import "./VideoPlayer.css";
 import { Container } from "@material-ui/core";
+import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
 import UserChip from "../chips/UserChip";
 
 class VideoPlayer extends Component {
   componentDidMount() {
-    const topicName = this.props.match.params.topicName;
-    const subtopicName = this.props.match.params.subtopicName;
+    this.topicName = this.props.match.params.topicName;
+    this.subtopicName = this.props.match.params.subtopicName;
     const videoId = this.props.match.params.videoId;
-    this.props.getAllVideos(topicName, subtopicName);
-    this.props.getVideo(topicName, subtopicName, videoId);  
+    this.props.getAllVideos(this.topicName, this.subtopicName);
+    this.props.getVideo(this.topicName, this.subtopicName, videoId);
   }
-  
 
   _onReady(event) {
     // access to player in all event handlers via event.target
@@ -37,6 +37,11 @@ class VideoPlayer extends Component {
     };
     return (
       <div className="video-player-container">
+        <DashboardBreadcrumbs
+          pageType="video"
+          topicName={this.topicName}
+          subtopicName={this.subtopicName}
+        />
         <div>
           <Container className="player">
             <YouTube
@@ -45,26 +50,23 @@ class VideoPlayer extends Component {
               opts={opts}
               onReady={this._onReady}
             />
-            <div className= "video-information">
-            <Chip
-              variant="outlined"
-              className="votes"
-              icon={<StarIcon />}
-              label={video.votes}
-              size="medium"
-            />
-            <Chip
-              variant="outlined"
-              className="date-added"
-              icon={<ScheduleIcon />}
-              label="11th October 2019"
-              size="medium"
-            />
-            <UserChip
-              user_id={video.added_by}
-            />
+            <div className="video-information">
+              <Chip
+                variant="outlined"
+                className="votes"
+                icon={<StarIcon />}
+                label={video.votes}
+                size="medium"
+              />
+              <Chip
+                variant="outlined"
+                className="date-added"
+                icon={<ScheduleIcon />}
+                label="11th October 2019"
+                size="medium"
+              />
+              <UserChip user_id={video.added_by} />
             </div>
-          
           </Container>
           <Container className="side-video-player">
             <div className="meta">

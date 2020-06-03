@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import noSubtopicsPlaceholder from "./assets/no-subtopics.png";
 import "./SubtopicGrid.css";
+import Container from "@material-ui/core/Container"
 
 class SubtopicGrid extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class SubtopicGrid extends Component {
                 item
                 xs
               >
+                <Container className = "subtopic-card-container">
                 <Link
                   to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
                 >
@@ -35,6 +37,7 @@ class SubtopicGrid extends Component {
                     description={subtopic.description}
                   />
                 </Link>
+                </Container>
               </Grid>
             ))}
           </Grid>

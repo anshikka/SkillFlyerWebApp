@@ -23,7 +23,6 @@ class Dashboard extends Component {
       return (
         <div>
           <AuthenticatedNavbar color={"white"} />
-          <div>
             <Switch>
               <Route exact path="/dashboard" component={TopicGrid} />
               <Route
@@ -42,7 +41,6 @@ class Dashboard extends Component {
                 component={VideoPlayer}
               />
             </Switch>
-          </div>
           <ToastContainer
             style={{ textAlign: "center" }}
             autoClose={4000}

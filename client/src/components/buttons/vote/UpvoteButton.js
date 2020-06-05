@@ -12,7 +12,7 @@ class UpvoteButton extends Component {
   render() {
     const { liked_video } = this.props.auth;
     if (liked_video.video_liked === "true") {
-      return <KeyboardArrowUpIcon className="vote-button upvote-selected" />;
+      return <KeyboardArrowUpIcon className="vote-button vote-selected" />;
     } else {
       return <KeyboardArrowUpIcon className="vote-button" />;
     }

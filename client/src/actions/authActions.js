@@ -1,7 +1,15 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, USER_LIKED_VIDEO_LOADED, USER_LIKED_VIDEO_LOADING } from "./types";
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  USER_LOADING,
+  USER_LIKED_VIDEO_LOADED,
+  USER_LIKED_VIDEO_LOADING,
+  USER_DISLIKED_VIDEO_LOADED,
+  USER_DISLIKED_VIDEO_LOADING,
+} from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
@@ -37,7 +45,6 @@ export const loginUser = (userData) => (dispatch) => {
       })
     );
 };
-
 
 // Set logged in user
 export const setCurrentUser = (decoded) => {
@@ -89,5 +96,34 @@ export const dispatchUserLikedVideo = (res) => {
 export const userLikedVideoLoading = () => {
   return {
     type: USER_LIKED_VIDEO_LOADING,
+  };
+};
+
+export const getUserDislikedVideo = (userId, videoId) => (dispatch) => {
+  axios
+    .get("/api/users/inDislikedVideos", {
+      params: { user_id: userId, video_id: videoId },
+    })
+    .then((res) => {
+      dispatch(dispatchUserDislikedVideo(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const dispatchUserDislikedVideo = (res) => {
+  return {
+    type: USER_DISLIKED_VIDEO_LOADED,
+    payload: res,
+  };
+};
+
+export const userDislikedVideoLoading = () => {
+  return {
+    type: USER_DISLIKED_VIDEO_LOADING,
   };
 };

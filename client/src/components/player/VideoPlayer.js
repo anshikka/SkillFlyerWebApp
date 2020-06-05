@@ -86,8 +86,7 @@ class VideoPlayer extends Component {
                   className="rank"
                   icon={<EmojiEventsIcon />}
                   label={
-                    this.props.rank +
-                    " in " +
+                    "#1 in " +
                     this.props.match.params.subtopicName
                   }
                   size="medium"
@@ -100,7 +99,7 @@ class VideoPlayer extends Component {
                     label={video.votes}
                     size="medium"
                   />
-                  <DownvoteButton />
+                  <DownvoteButton videoId = {this.props.match.params.videoId} userId = {user.id}/>
                 </Box>
               </Container>
               {

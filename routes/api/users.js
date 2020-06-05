@@ -136,6 +136,25 @@ userRouter.get("/inLikedVideos", (req, res) => {
   });
 });
 
+
+userRouter.get("/inDislikedVideos", (req, res) => {
+  const videoId = req.query.video_id;
+  const userId = req.query.user_id;
+  User.findOne({ _id: userId }).then((user) => {
+    // Check if user exists
+    if (user) {
+      if (user.disliked_videos.includes(videoId)){
+        res.status(200).json({video_disliked: "true"});
+      } else {
+        res.status(200).json({video_disliked: "false"});
+      }
+      
+    } else {
+      res.status(500).json({ error: "Server Error" });
+    }
+  });
+});
+
 userRouter.use("/folder/", folderRouter);
 
 module.exports = userRouter;

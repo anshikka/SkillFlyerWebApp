@@ -1,21 +1,31 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getUserDislikedVideo } from "../../../actions/authActions";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import PropTypes from "prop-types";
+import "./VoteButton.css";
 
-class DownvoteButton extends Component {
+class UpvoteButton extends Component {
+  componentDidMount() {
+    this.props.getUserDislikedVideo(this.props.userId, this.props.videoId);
+  }
   render() {
-    /*if (disliked_video) {
-    return (
-      <KeyboardArrowDownIcon color="goldenrod" className="vote-button" />
-
-    );
-  } else {*/
-    return <KeyboardArrowDownIcon className="vote-button" />;
+    const { disliked_video } = this.props.auth;
+    if (disliked_video.video_disliked === "true") {
+      return <KeyboardArrowDownIcon className="vote-button vote-selected" />;
+    } else {
+      return <KeyboardArrowDownIcon className="vote-button" />;
+    }
   }
 }
-//}
-DownvoteButton.propTypes = {
-  disliked_video: PropTypes.bool.isRequired,
+UpvoteButton.propTypes = {
+  userId: PropTypes.string.isRequired,
+  videoId: PropTypes.string.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
-export default DownvoteButton;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { getUserDislikedVideo })(UpvoteButton);

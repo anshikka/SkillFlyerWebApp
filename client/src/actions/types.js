@@ -14,4 +14,6 @@ export const VIDEOS_LOADING = "VIDEOS_LOADING";
 export const VIDEO_LOADING = "VIDEO_LOADING";
 export const VIDEOS_LOADED = "VIDEOS_LOADED";
 export const VIDEO_LOADED = "VIDEO_LOADED";
+export const VIDEO_LIKED = "VIDEO_LIKED";
+export const VIDEO_LIKING = "VIDEO_LIKING";
 

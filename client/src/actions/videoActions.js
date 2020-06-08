@@ -5,6 +5,8 @@ import {
   VIDEOS_LOADED,
   VIDEO_LOADING,
   VIDEO_LOADED,
+  VIDEO_LIKED,
+  VIDEO_LIKING,
 } from "./types";
 
 // Topic - get all videos
@@ -27,6 +29,24 @@ export const getVideo = (topicName, subtopicName, video_id) => (dispatch) => {
     .get("/api/" + topicName + "/" + subtopicName + "/videos/" + video_id)
     .then((res) => {
       dispatch(dispatchVideoData(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const likeVideo = (topicName, subtopicName, userId, videoId) => (
+  dispatch
+) => {
+  const user = { user_id: userId };
+  axios
+    .put("/api/" + topicName + "/" + subtopicName + "/videos/" + videoId + "/upvote", user)
+    .then((res) => {
+      console.log(res);
+      dispatch(dispatchLikeVideo(res.data));
     })
     .catch((err) =>
       dispatch({
@@ -61,5 +81,19 @@ export const dispatchVideosData = (videos) => {
 export const setVideosLoading = () => {
   return {
     type: VIDEOS_LOADING,
+  };
+};
+
+export const dispatchLikeVideo = (res) => {
+  console.log("Dispatched")
+  return {
+    type: VIDEO_LIKED,
+    payload: res,
+  };
+};
+
+export const setVideoLiking = () => {
+  return {
+    type: VIDEO_LIKING,
   };
 };

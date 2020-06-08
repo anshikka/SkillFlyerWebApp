@@ -1,4 +1,4 @@
-import { VIDEO_LOADING, VIDEO_LOADED } from "../actions/types";
+import { VIDEO_LOADING, VIDEO_LOADED, VIDEO_LIKED, VIDEO_LIKING } from "../actions/types";
 
 const initialState = {
   video: {},
@@ -21,6 +21,19 @@ export default function (state = initialState, action) {
         loading: true,
         loaded: false,
       };
+    case VIDEO_LIKED:
+      return {
+        ...state,
+        video: action.payload,
+        loaded: true,
+        loading: false
+      }
+    case VIDEO_LIKING:
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      }
     default:
       return {
         ...state,

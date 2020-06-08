@@ -124,62 +124,30 @@ videoRouter.get("/", async (req, res) => {
 });
 
 videoRouter.put("/:_id/upvote", (req, res) => {
-  const v_id = req.params._id;
-  const u_id = req.body.user_id;
-  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: 1 } }).then(
-    User.updateOne(
-      { _id: u_id },
-      {
-        $push: {
-          liked_videos: v_id,
-        },
-      }
-    ).then(res.json({ message: "Video Added to User's Upvoted Videos!" }))
+  const videoId = req.params._id;
+  Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
+    res.json({ message: "Video upvoted!" })
   );
 });
 
 videoRouter.put("/:_id/undoUpvote", (req, res) => {
-  const v_id = req.params._id;
-  const u_id = req.body.user_id;
-  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: -1 } }).then(
-    User.updateOne(
-      { _id: u_id },
-      {
-        $pull: {
-          liked_videos: v_id,
-        },
-      }
-    ).then(res.json({ message: "Video Removed From User's Upvoted Videos!" }))
+  const videoId = req.params._id;
+  Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
+    res.json({ message: "Video upvote removed!" })
   );
 });
 
 videoRouter.put("/:_id/downvote", (req, res) => {
-  const v_id = req.params._id;
-  const u_id = req.body.user_id;
-  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: -1 } }).then(
-    User.updateOne(
-      { _id: u_id },
-      {
-        $push: {
-          disliked_videos: v_id,
-        },
-      }
-    ).then(res.json({ message: "Video Added to User's Downvoted Videos!" }))
+  const videoId = req.params._id;
+  Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
+    res.json({ message: "Video downvoted!" })
   );
 });
 
 videoRouter.put("/:_id/undoDownvote", (req, res) => {
-  const v_id = req.params._id;
-  const u_id = req.body.user_id;
-  Video.findOneAndUpdate({ _id: v_id }, { $inc: { votes: 1 } }).then(
-    User.updateOne(
-      { _id: u_id },
-      {
-        $pull: {
-          disliked_videos: v_id,
-        },
-      }
-    ).then(res.json({ message: "Video Removed to User's Downvoted Videos!" }))
+  const videoId = req.params._id;
+  Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
+    res.json({ message: "Video downvote removed!" })
   );
 });
 

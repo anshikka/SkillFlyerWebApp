@@ -92,14 +92,14 @@ class VideoPlayer extends Component {
                   size="medium"
                 />
                 <Box className="vote-box" component="span" m={1}>
-                  <UpvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} />
+                  <UpvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} topicName={this.props.match.params.topicName} subtopicName={this.props.match.params.subtopicName} />
                   <Chip
                     variant="outlined"
                     className="votes"
                     label={video.votes}
                     size="medium"
                   />
-                  <DownvoteButton videoId = {this.props.match.params.videoId} userId = {user.id}/>
+                  <DownvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} topicName={this.props.match.params.topicName} subtopicName={this.props.match.params.subtopicName}/>
                 </Box>
               </Container>
               {

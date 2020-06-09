@@ -126,9 +126,9 @@ userRouter.get("/inLikedVideos", (req, res) => {
     // Check if user exists
     if (user) {
       if (user.liked_videos.includes(videoId)) {
-        res.status(200).json({ video_liked: "true" });
+        res.status(200).json({ video_liked: true });
       } else {
-        res.status(200).json({ video_liked: "false" });
+        res.status(200).json({ video_liked: false });
       }
     } else {
       res.status(500).json({ error: "Server Error" });
@@ -143,9 +143,9 @@ userRouter.get("/inDislikedVideos", (req, res) => {
     // Check if user exists
     if (user) {
       if (user.disliked_videos.includes(videoId)) {
-        res.status(200).json({ video_disliked: "true" });
+        res.status(200).json({ video_disliked: true });
       } else {
-        res.status(200).json({ video_disliked: "false" });
+        res.status(200).json({ video_disliked: false });
       }
     } else {
       res.status(500).json({ error: "Server Error" });
@@ -177,7 +177,6 @@ userRouter.post("/addToLikedVideos", (req, res) => {
 userRouter.delete("/removeFromLikedVideos", (req, res) => {
   const videoId = req.body.video_id;
   const userId = req.body.user_id;
-
   User.findOne({ _id: userId }).then((user) => {
     // Check if user exists
     if (user) {

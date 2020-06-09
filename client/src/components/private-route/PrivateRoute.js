@@ -9,6 +9,7 @@ const PrivateRoute = ({
   subtopics,
   videos,
   video,
+  votes,
   user,
   ...rest
 }) => (

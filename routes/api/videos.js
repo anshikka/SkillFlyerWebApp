@@ -123,28 +123,28 @@ videoRouter.get("/", async (req, res) => {
   });
 });
 
-videoRouter.put("/:_id/upvote", (req, res) => {
+videoRouter.post("/:_id/upvote", (req, res) => {
   const videoId = req.params._id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
     res.json({ message: "Video upvoted!" })
   );
 });
 
-videoRouter.put("/:_id/undoUpvote", (req, res) => {
+videoRouter.post("/:_id/undoUpvote", (req, res) => {
   const videoId = req.params._id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
     res.json({ message: "Video upvote removed!" })
   );
 });
 
-videoRouter.put("/:_id/downvote", (req, res) => {
+videoRouter.post("/:_id/downvote", (req, res) => {
   const videoId = req.params._id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
     res.json({ message: "Video downvoted!" })
   );
 });
 
-videoRouter.put("/:_id/undoDownvote", (req, res) => {
+videoRouter.post("/:_id/undoDownvote", (req, res) => {
   const videoId = req.params._id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
     res.json({ message: "Video downvote removed!" })

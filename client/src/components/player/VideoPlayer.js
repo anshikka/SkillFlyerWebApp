@@ -7,14 +7,12 @@ import VideoCard from "../cards/VideoCard";
 import StarIcon from "@material-ui/icons/Star";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
-import UpvoteButton from "../buttons/vote/UpvoteButton";
-import DownvoteButton from "../buttons/vote/DownvoteButton";
-import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import "./VideoPlayer.css";
 import { Container } from "@material-ui/core";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 import UserChip from "../chips/UserChip";
+import VoteBox from "../box/VoteBox";
 
 class VideoPlayer extends Component {
   componentDidMount() {
@@ -91,16 +89,7 @@ class VideoPlayer extends Component {
                   }
                   size="medium"
                 />
-                <Box className="vote-box" component="span" m={1}>
-                  <UpvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} topicName={this.props.match.params.topicName} subtopicName={this.props.match.params.subtopicName} />
-                  <Chip
-                    variant="outlined"
-                    className="votes"
-                    label={video.votes}
-                    size="medium"
-                  />
-                  <DownvoteButton videoId = {this.props.match.params.videoId} userId = {user.id} topicName={this.props.match.params.topicName} subtopicName={this.props.match.params.subtopicName}/>
-                </Box>
+                <VoteBox votes = {video.votes} videoId = {this.props.match.params.videoId} userId = {user.id} topicName = {this.props.match.params.topicName} subtopicName = {this.props.match.params.subtopicName} />
               </Container>
               {
                 <Container>

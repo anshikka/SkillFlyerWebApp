@@ -1,9 +1,10 @@
-import { VIDEO_LOADING, VIDEO_LOADED, VIDEO_LIKED, VIDEO_LIKING } from "../actions/types";
+import { VIDEO_LOADING, VIDEO_LOADED, VIDEO_LIKED, VIDEO_LIKING, VIDEO_VOTES_LOADED, VIDEO_VOTES_LOADING, VIDEO_DOWNVOTED, VIDEO_UPVOTED } from "../actions/types";
 
 const initialState = {
   video: {},
   loading: false,
   loaded: false,
+  votes: 0
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +35,28 @@ export default function (state = initialState, action) {
         loading: true,
         loaded: false
       }
+    case VIDEO_VOTES_LOADED:
+      return {
+        ...state, 
+        votes: action.payload,
+        loaded: true
+      }
+    case VIDEO_VOTES_LOADING: 
+      return {
+        ...state,
+        loading: true
+      }
+    case VIDEO_DOWNVOTED:
+      return {
+        ...state,
+        votes: state.votes-1 
+      }
+      case VIDEO_UPVOTED:
+        return {
+          ...state,
+          votes: state.votes + 1 
+        }
+
     default:
       return {
         ...state,

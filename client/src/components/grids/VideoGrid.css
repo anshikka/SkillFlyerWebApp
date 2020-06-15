@@ -39,3 +39,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.add-video-button{
+    position: fixed;
+    bottom: 30px;
+    right: 30px; 
+
+}

@@ -6,7 +6,9 @@ import VideoCard from "../cards/VideoCard";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import noVideosPlaceholder from "./assets/no-videos.png";
-import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
+import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
+import AddVideoButton from "../buttons/AddVideoButton";
+import AddVideoModal from "../modals/AddVideoModal"
 import "./VideoGrid.css";
 
 class VideoGrid extends Component {
@@ -15,6 +17,14 @@ class VideoGrid extends Component {
     this.subtopicName = this.props.match.params.subtopicName;
     this.props.getAllVideos(this.topicName, this.subtopicName);
   }
+  state = {
+    isOpened: false,
+  };
+
+  handleAddVideo = () => {
+    this.setState((prevState) => ({ isOpened : !prevState.isOpened }));
+  };
+
   render() {
     const { videos } = this.props.videos;
     if (videos.length > 0) {
@@ -43,6 +53,12 @@ class VideoGrid extends Component {
               </Grid>
             ))}
           </Grid>
+          <div className="add-video-button">
+            <AddVideoButton onClick={this.handleAddVideo} />
+          </div>
+          <div>
+              <AddVideoModal open={this.state.isOpened} onClose={this.handleAddVideo}/>
+          </div>
         </div>
       );
     } else {

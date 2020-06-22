@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from "@material-ui/core/Modal";
-import FormControl from "@material-ui/core/FormControl";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";

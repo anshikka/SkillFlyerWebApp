@@ -56,9 +56,7 @@ class VideoGrid extends Component {
           <div className="add-video-button">
             <AddVideoButton onClick={this.handleAddVideo} />
           </div>
-          <div>
-              <AddVideoModal open={this.state.isOpened} onClose={this.handleAddVideo}/>
-          </div>
+            <AddVideoModal topicName={this.topicName} subtopicName={this.subtopicName} open={this.state.isOpened} metaExists={true} onClose={this.handleAddVideo}/>
         </div>
       );
     } else {

@@ -2,15 +2,39 @@ import React, { Component } from "react";
 import Modal from "@material-ui/core/Modal";
 import FormControl from "@material-ui/core/FormControl";
 import PropTypes from "prop-types";
-import Input from "@material-ui/core/Input";
-import LinkIcon from "@material-ui/icons/Link";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import InputLabel from "@material-ui/core/InputLabel";
-import BookIcon from "@material-ui/icons/Book";
-import DnsIcon from "@material-ui/icons/Dns";
+import Button from "@material-ui/core/Button";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Select from "react-select";
+import YouTube from "react-youtube";
 import "./AddVideoModal.css";
+import { Container, Typography } from "@material-ui/core";
 
 class AddVideoModal extends Component {
+  state = {
+    youtube_id: "",
+  };
+  componentDidMount() {
+    if (!this.props.subtopicName || !this.props.topicName) {
+      // get all topic names and subtopic names
+    } else {
+      this.topicNames = [
+        { label: this.props.topicName, value: this.props.topicName },
+      ];
+      this.subtopicNames = [
+        { label: this.props.subtopicName, value: this.props.subtopicName },
+      ];
+    }
+  }
+
+  loadYoutubeVideo = (e) => {
+    const youtube_url = e.target.value;
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+    var match = youtube_url.match(regExp);
+    if (match && match[2].length == 11) {
+      this.setState(() => ({ youtube_id: match[2] }));
+      console.log(match[2]);
+    }
+  };
   render() {
     return (
       <Modal
@@ -18,119 +42,67 @@ class AddVideoModal extends Component {
         open={this.props.open}
         onClose={this.props.onClose}
       >
-        <div class="row">
-          <div class="col-md-12">
-            <form action="index.html" method="post">
-              <h1> Sign Up </h1>
-
+        <Container className="add-video-modal-root">
+          <Container className="form-body">
+            <form className="add-video-form" action="index.html" method="post">
               <fieldset>
-                <legend>
-                  <span class="number">1</span> Your Basic Info
-                </legend>
+                <legend>Choose Topic and Subtopic</legend>
 
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="user_name" />
-
-                <label for="email">Email:</label>
-                <input type="email" id="mail" name="user_email" />
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="user_password" />
-
-                <label>Age:</label>
-                <input
-                  type="radio"
-                  id="under_13"
-                  value="under_13"
-                  name="user_age"
+                <label for="topic-name">Topic:</label>
+                <Select
+                  defaultInputValue={this.props.topicName}
+                  defaultValue={this.props.topicName}
+                  id="topic-name-selector"
+                  options={this.topicNames}
+                  isDisabled={this.props.metaExists}
                 />
-                <label for="under_13" class="light">
-                  Under 13
-                </label>
-                <br />
-                <input
-                  type="radio"
-                  id="over_13"
-                  value="over_13"
-                  name="user_age"
+                <label for="subtopic-name">Subtopic:</label>
+                <Select
+                  defaultInputValue={this.props.subtopicName}
+                  defaultValue={this.props.subtopicName}
+                  id="subtopic-name-selector"
+                  options={this.subtopicNames}
+                  isDisabled={this.props.metaExists}
                 />
-                <label for="over_13" class="light">
-                  Over 13
-                </label>
               </fieldset>
               <fieldset>
-                <legend>
-                  <span class="number">2</span> Your Profile
-                </legend>
+                <legend>Link to Video</legend>
 
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="user_bio"></textarea>
-
-                <label for="job">Job Role:</label>
-                <select id="job" name="user_job">
-                  <optgroup label="Web">
-                    <option value="frontend_developer">
-                      Front-End Developer
-                    </option>
-                    <option value="php_developer">PHP Developer</option>
-                    <option value="python_developer">Python Developer</option>
-                    <option value="rails_developer">Rails Developer</option>
-                    <option value="web_designer">Web Designer</option>
-                    <option value="wordpress_developer">
-                      Wordpress Developer
-                    </option>
-                  </optgroup>
-                  <optgroup label="Mobile">
-                    <option value="android_developer">Android Developer</option>
-                    <option value="ios_developer">IOS Developer</option>
-                    <option value="mobile_designer">Mobile Designer</option>
-                  </optgroup>
-                  <optgroup label="Business">
-                    <option value="business_owner">Business Owner</option>
-                    <option value="freelancer">Freelancer</option>
-                  </optgroup>
-                </select>
-
-                <label>Interests:</label>
+                <label for="video-url">Video URL:</label>
                 <input
-                  type="checkbox"
-                  id="development"
-                  value="interest_development"
-                  name="user_interest"
-                />
-                <label class="light" for="development">
-                  Development
-                </label>
-                <br />
-                <input
-                  type="checkbox"
-                  id="design"
-                  value="interest_design"
-                  name="user_interest"
-                />
-                <label class="light" for="design">
-                  Design
-                </label>
-                <br />
-                <input
-                  type="checkbox"
-                  id="business"
-                  value="interest_business"
-                  name="user_interest"
-                />
-                <label class="light" for="business">
-                  Business
-                </label>
+                  onInput={(e) => this.loadYoutubeVideo(e)}
+                  onKeyDown={(e) => this.loadYoutubeVideo(e)}
+                  type="text"
+                  id="video-url"
+                  name="video_url"
+                  pattern="^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$"
+                  title="Please enter a valid YouTube link."
+                ></input>
               </fieldset>
-
-              <button type="submit">Sign Up</button>
+              <Button
+                className="submit-video-button"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload
+              </Button>{" "}
             </form>
-          </div>
-        </div>
+          </Container>
+          <Container className="video-preview">
+            <YouTube
+              className="youtube-player"
+              videoId={this.state.youtube_id}
+            />
+          </Container>
+        </Container>
       </Modal>
     );
   }
 }
-AddVideoModal.propTypes = {};
+AddVideoModal.propTypes = {
+  topicName: PropTypes.string,
+  subtopicName: PropTypes.string,
+  metaExists: PropTypes.bool,
+};
 
 export default AddVideoModal;

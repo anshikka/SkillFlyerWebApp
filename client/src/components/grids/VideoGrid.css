@@ -46,3 +46,7 @@
     right: 30px; 
 
 }
+.modal {
+  width: 80%;
+  margin: 0 auto;
+}

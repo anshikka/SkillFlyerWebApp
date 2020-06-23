@@ -9,7 +9,9 @@ import {
   VIDEO_VOTES_LOADED,
   VIDEO_VOTES_LOADING,
   VIDEO_UPVOTED,
-  VIDEO_DOWNVOTED
+  VIDEO_DOWNVOTED,
+  VIDEO_SUBMITTED,
+  VIDEO_SUBMITTING,
 } from "./types";
 
 // Topic - get all videos
@@ -18,6 +20,7 @@ export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
     .get("/api/" + topicName + "/" + subtopicName + "/videos")
     .then((res) => {
       dispatch(dispatchVideosData(res.data));
+      console.log(res.data)
     })
     .catch((err) =>
       dispatch({
@@ -40,7 +43,9 @@ export const getVideo = (topicName, subtopicName, video_id) => (dispatch) => {
       })
     );
 };
-export const getVideoVotes = (topicName, subtopicName, video_id) => (dispatch) => {
+export const getVideoVotes = (topicName, subtopicName, video_id) => (
+  dispatch
+) => {
   axios
     .get("/api/" + topicName + "/" + subtopicName + "/videos/" + video_id)
     .then((res) => {
@@ -53,9 +58,23 @@ export const getVideoVotes = (topicName, subtopicName, video_id) => (dispatch) =
       })
     );
 };
-export const upvote = (topicName, subtopicName, videoId) => (
-  dispatch
-) => {
+export const addVideo = (video) => (dispatch) => {
+  axios
+    .post(
+      "/api/" + video.topicName + "/" + video.subtopicName + "/videos/addVideo",
+      video
+    )
+    .then((res) => {
+      dispatch(dispatchAddVideo(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+export const upvote = (topicName, subtopicName, videoId) => (dispatch) => {
   axios
     .post(
       "/api/" +
@@ -65,7 +84,8 @@ export const upvote = (topicName, subtopicName, videoId) => (
         "/videos/" +
         videoId +
         "/upvote"
-    ).then((res) => {
+    )
+    .then((res) => {
       dispatch(dispatchUpvote(res.data));
     })
     .catch((err) =>
@@ -76,9 +96,7 @@ export const upvote = (topicName, subtopicName, videoId) => (
     );
 };
 
-export const downvote = (topicName, subtopicName, videoId) => (
-  dispatch
-) => {
+export const downvote = (topicName, subtopicName, videoId) => (dispatch) => {
   axios
     .post(
       "/api/" +
@@ -88,7 +106,8 @@ export const downvote = (topicName, subtopicName, videoId) => (
         "/videos/" +
         videoId +
         "/downvote"
-    ).then((res) => {
+    )
+    .then((res) => {
       dispatch(dispatchDownvote(res.data));
     })
     .catch((err) =>
@@ -106,13 +125,19 @@ export const dispatchUpvote = (res) => {
   };
 };
 
+export const dispatchAddVideo = (res) => {
+  return {
+    type: VIDEO_SUBMITTED,
+    payload: res,
+  };
+};
+
 export const dispatchDownvote = (res) => {
   return {
     type: VIDEO_DOWNVOTED,
     payload: res,
   };
 };
-
 
 // get single video data
 export const dispatchVideoData = (video) => {
@@ -146,6 +171,12 @@ export const dispatchVideosData = (videos) => {
   return {
     type: VIDEOS_LOADED,
     payload: videos,
+  };
+};
+
+export const setVideoSubmitting = () => {
+  return {
+    type: VIDEO_SUBMITTING,
   };
 };
 

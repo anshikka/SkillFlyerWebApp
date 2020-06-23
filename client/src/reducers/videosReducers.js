@@ -1,4 +1,4 @@
-import { VIDEOS_LOADING, VIDEOS_LOADED } from "../actions/types";
+import { VIDEOS_LOADING, VIDEOS_LOADED, VIDEO_SUBMITTED, VIDEO_SUBMITTING } from "../actions/types";
 
 const initialState = {
   videos: [],
@@ -20,6 +20,19 @@ export default function (state = initialState, action) {
         loading: true,
         loaded: false,
       };
+    case VIDEO_SUBMITTING: {
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      }
+    }
+    case VIDEO_SUBMITTED: 
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+      }
 
     default:
       return state;

@@ -1,10 +1,22 @@
-import { VIDEO_LOADING, VIDEO_LOADED, VIDEO_LIKED, VIDEO_LIKING, VIDEO_VOTES_LOADED, VIDEO_VOTES_LOADING, VIDEO_DOWNVOTED, VIDEO_UPVOTED } from "../actions/types";
+import {
+  VIDEO_LOADING,
+  VIDEO_LOADED,
+  VIDEO_LIKED,
+  VIDEO_LIKING,
+  VIDEO_VOTES_LOADED,
+  VIDEO_VOTES_LOADING,
+  VIDEO_DOWNVOTED,
+  VIDEO_UPVOTED,
+  VIDEO_SUBMITTING,
+  VIDEO_SUBMITTED,
+} from "../actions/types";
 
 const initialState = {
   video: {},
   loading: false,
   loaded: false,
-  votes: 0
+  votes: 0,
+  status: {}
 };
 
 export default function (state = initialState, action) {
@@ -27,35 +39,46 @@ export default function (state = initialState, action) {
         ...state,
         video: action.payload,
         loaded: true,
-        loading: false
-      }
+        loading: false,
+      };
     case VIDEO_LIKING:
       return {
         ...state,
         loading: true,
-        loaded: false
-      }
+        loaded: false,
+      };
     case VIDEO_VOTES_LOADED:
       return {
-        ...state, 
+        ...state,
         votes: action.payload,
-        loaded: true
-      }
-    case VIDEO_VOTES_LOADING: 
+        loaded: true,
+      };
+    case VIDEO_VOTES_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case VIDEO_DOWNVOTED:
+      return {
+        ...state,
+        votes: state.votes - 1,
+      };
+    case VIDEO_UPVOTED:
+      return {
+        ...state,
+        votes: state.votes + 1,
+      };
+    case VIDEO_SUBMITTING:
       return {
         ...state,
         loading: true
       }
-    case VIDEO_DOWNVOTED:
-      return {
-        ...state,
-        votes: state.votes-1 
-      }
-      case VIDEO_UPVOTED:
-        return {
-          ...state,
-          votes: state.votes + 1 
-        }
+    case VIDEO_SUBMITTED:
+    return {
+      ...state,
+      status: action.payload
+
+    }
 
     default:
       return {

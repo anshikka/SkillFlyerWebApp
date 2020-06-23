@@ -11,6 +11,20 @@ import { Container, Typography } from "@material-ui/core";
 class AddVideoModal extends Component {
   state = {
     youtube_id: "",
+    topicName: this.props.topicName,
+    subtopicName: this.props.subtopicName,
+    youtube_link: "",
+  };
+  
+  onSubmit = (e) => {
+    e.preventDefault();
+    const newVideo = {
+      topic_name: this.state.topicName,
+      subtopic_name: this.state.subtopicName,
+      youtube_url: this.state.youtube_link,
+      added_by: this.props.user.id,
+    };
+    this.props.submitVideo(newVideo);
   };
   componentDidMount() {
     if (!this.props.subtopicName || !this.props.topicName) {
@@ -29,12 +43,12 @@ class AddVideoModal extends Component {
     const youtube_url = e.target.value;
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
     var match = youtube_url.match(regExp);
-    if (match && match[2].length == 11) {
-      this.setState(() => ({ youtube_id: match[2] }));
-      console.log(match[2]);
+    if (match && match[2].length === 11) {
+      this.setState(() => ({ youtube_id: match[2], youtube_link: youtube_url}));
     }
   };
   render() {
+    console.log(this.props.user)
     return (
       <Modal
         className="add-video-modal"
@@ -43,13 +57,14 @@ class AddVideoModal extends Component {
       >
         <Container className="add-video-modal-root">
           <Container className="form-body">
-            <form className="add-video-form" action="index.html" method="post">
+            <form className="add-video-form" onSubmit={this.onSubmit}>
               <fieldset>
                 <legend>Choose Topic and Subtopic</legend>
 
                 <label for="topic-name">Topic:</label>
                 <Select
                   defaultInputValue={this.props.topicName}
+                  name="topicName"
                   defaultValue={this.props.topicName}
                   id="topic-name-selector"
                   options={this.topicNames}
@@ -57,6 +72,7 @@ class AddVideoModal extends Component {
                 />
                 <label for="subtopic-name">Subtopic:</label>
                 <Select
+                  name="subtopicName"
                   defaultInputValue={this.props.subtopicName}
                   defaultValue={this.props.subtopicName}
                   id="subtopic-name-selector"
@@ -71,15 +87,17 @@ class AddVideoModal extends Component {
                 <input
                   onInput={(e) => this.loadYoutubeVideo(e)}
                   onKeyDown={(e) => this.loadYoutubeVideo(e)}
+                  value={this.state.youtube_url}
                   type="text"
-                  id="video-url"
-                  name="video_url"
+                  name="youtube_url"
                   pattern="^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$"
                   title="Please enter a valid YouTube link."
                 ></input>
+
               </fieldset>
               <Button
                 className="submit-video-button"
+                type="submit"
                 variant="contained"
                 startIcon={<CloudUploadIcon />}
               >
@@ -98,10 +116,12 @@ class AddVideoModal extends Component {
     );
   }
 }
+
 AddVideoModal.propTypes = {
   topicName: PropTypes.string,
   subtopicName: PropTypes.string,
-  metaExists: PropTypes.bool,
+  metaExists: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 export default AddVideoModal;

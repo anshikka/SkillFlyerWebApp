@@ -1,6 +1,7 @@
 const express = require("express");
 const videoRouter = express.Router({ mergeParams: true });
 const mongoose = require("mongoose");
+const axios = require("axios");
 
 // Load Video model
 const Video = require("../../models/Video");
@@ -14,6 +15,15 @@ function extractIdFromYouTubeVideo(youtube_url) {
   return youtube_url.match(
     /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
   )[1];
+}
+
+function validateVideoSubmission(youtube_data) {
+  const meta = youtube_data.data.items[0].snippet;
+  if (meta.categoryId < "26" || meta.categoryId > "28") {
+    return { status: "CRITERIA UNMATCHED" };
+  } else {
+    return { status: "CRITERIA MATCHED" };
+  }
 }
 
 function validateYouTubeLink(youtube_url) {
@@ -34,7 +44,9 @@ function getTopicId(name) {
     if (topic) {
       return topic._id;
     } else {
-      //return res.status(404).json({message: "There is no such topic with this name!"});
+      return res
+        .status(404)
+        .json({ message: "There is no such topic with this name!" });
     }
   });
 }
@@ -44,7 +56,9 @@ function getSubtopicId(name) {
     if (subtopic) {
       return subtopic._id;
     } else {
-      console.log("No such subtopic with name!");
+      return res
+        .status(404)
+        .json({ message: "There is no such subtopic with this name!" });
     }
   });
 }
@@ -56,8 +70,8 @@ function validateVideoID(video_id) {
 // @desc add video
 // @access Public
 videoRouter.post("/addVideo", async (req, res) => {
-  s_id = await getSubtopicId(req.params.subtopic_name);
-  t_id = await getTopicId(req.params.topic_name);
+  s_id = await getSubtopicId(req.body.subtopic_name);
+  t_id = await getTopicId(req.body.topic_name);
   Video.findOne({
     youtube_url: req.body.youtube_url,
     subtopic_id: s_id,
@@ -71,18 +85,39 @@ videoRouter.post("/addVideo", async (req, res) => {
       if (!validateYouTubeLink(req.body.youtube_url)) {
         return res.status(400).json({ message: "Invalid YouTube URL!" });
       }
-      const newVideo = new Video({
-        youtube_url: req.body.youtube_url,
-        youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
-        topic_id: t_id,
-        subtopic_id: s_id,
-        votes: 0,
-        title: req.body.title,
-        added_by: req.body.user_id,
-        thumbnail_url: req.body.thumbnail_url,
-        description: req.body.description,
+      // call youtube api to get video details
+      youtube_req_url =
+        "https://www.googleapis.com/youtube/v3/videos?id=" +
+        extractIdFromYouTubeVideo(req.body.youtube_url) +
+        "&key=AIzaSyB15z0q8x96VGbfxydmMTvIuBoxD6YWLzw&part=snippet,contentDetails,statistics,status";
+      axios.get(youtube_req_url).then((youtube_data) => {
+        if (
+          validateVideoSubmission(youtube_data).status === "CRITERIA UNMATCHED"
+        ) {
+          return res
+            .status(400)
+            .json({ message: "Video did not meet SkillFlyer's criteria!" });
+        } else {
+          const meta = youtube_data.data.items[0].snippet;
+          const newVideo = new Video({
+            youtube_url: req.body.youtube_url,
+            youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
+            topic_id: t_id,
+            subtopic_id: s_id,
+            votes: 0,
+            title: meta.title,
+            added_by: req.body.added_by,
+            thumbnail_url: meta.thumbnails.medium.url,
+            description: meta.description,
+          });
+
+          newVideo.save().then(() =>
+            res.status(200).json({
+              message: "Successfuly Submited Video to SkillFlyer!",
+            })
+          );
+        }
       });
-      newVideo.save().then((video) => res.json(video));
     }
   });
 });

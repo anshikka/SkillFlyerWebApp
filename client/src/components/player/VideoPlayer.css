@@ -45,6 +45,14 @@
     float: right;
 }
 
+.player .video-information {
+  margin-top: 1vh;
+}
+
 .vote-box .votes {
     font-size: large;
+}
+.meta .video-information p {
+  height: 20vh;
+  overflow-y: auto;
 }

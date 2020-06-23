@@ -83,13 +83,16 @@ class VideoPlayer extends Component {
                 <Chip
                   className="rank"
                   icon={<EmojiEventsIcon />}
-                  label={
-                    "#1 in " +
-                    this.props.match.params.subtopicName
-                  }
+                  label={"#1 in " + this.props.match.params.subtopicName}
                   size="medium"
                 />
-                <VoteBox votes = {video.votes} videoId = {this.props.match.params.videoId} userId = {user.id} topicName = {this.props.match.params.topicName} subtopicName = {this.props.match.params.subtopicName} />
+                <VoteBox
+                  votes={video.votes}
+                  videoId={this.props.match.params.videoId}
+                  userId={user.id}
+                  topicName={this.props.match.params.topicName}
+                  subtopicName={this.props.match.params.subtopicName}
+                />
               </Container>
               {
                 <Container>

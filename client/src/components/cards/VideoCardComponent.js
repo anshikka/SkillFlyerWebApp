@@ -25,7 +25,7 @@ const Container = styled.div`
 
 const RankContainer = styled.div`
   background-color: ${(props) => props.bgColor};
-  font-size: 20px;
+  font-size: large;
   font-weight: 500;
   text-transform: uppercase;
   width: 20%;
@@ -57,20 +57,22 @@ const WatchButton = styled.span`
 
 const WatchButtonText = styled.span`
   font-weight: 500;
-  font-size: 15px;
+  font-size: medium;
 `;
 
 const Title = styled.span`
   display: block;
-  font-size: 48px;
+  font-size: x-large;
   font-weight: 700;
   margin-top: 8px;
   padding-bottom: 10px;
   color: ${(props) => props.color};
+  height: 12vh;
+  overflow-y: auto;
 `;
 
 const PreTitle = styled.span`
-  font-size: 16px;
+  font-size: small;
   color: ${(props) => props.color};
 `;
 

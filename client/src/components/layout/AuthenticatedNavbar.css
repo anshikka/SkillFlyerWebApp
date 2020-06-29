@@ -15,17 +15,7 @@
   color: white;
   display: inline-block;
 }
-#navbar-logo-link {
-  float: left;
-  margin-right: 0;
-}
 
-#navbar-user-link {
-  width: 5%;
-  float: right;
-  text-align: center;
-  margin-left: 25%;
-}
 #navbar-search {
   width: 60%;
 }
@@ -57,7 +47,15 @@
   width: 100%;
 }
 
-#navbar-user-link figcaption {
+.user-menu-button figcaption {
   font-size: small;
   color: white;
+}
+
+.user-menu-root {
+margin-left: 6vw;
+}
+.user-menu {
+  margin-left: 91vw;
+  margin-top: -40vh;
 }

@@ -60,13 +60,6 @@ class VideoPlayer extends Component {
             <div className="video-information">
               <Chip
                 variant="outlined"
-                className="votes"
-                icon={<StarIcon />}
-                label={video.votes}
-                size="medium"
-              />
-              <Chip
-                variant="outlined"
                 className="date-added"
                 icon={<ScheduleIcon />}
                 label="11th October 2019"

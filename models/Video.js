@@ -8,11 +8,13 @@ const VideoSchema = new Schema({
     required: true,
   },
   topic_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "topics",
     required: true,
   },
   subtopic_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "subtopics",
     required: true,
   },
   added_by: {

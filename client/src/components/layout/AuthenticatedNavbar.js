@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core";
 import "./AuthenticatedNavbar.css";
 import darkLogo from "./assets/logo-dark.svg";
@@ -62,7 +63,7 @@ class AuthenticatedNavbar extends Component {
             open={this.state.anchorEl}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={this.handleClose}>My Folders</MenuItem>
+            <MenuItem><Link to={`/dashboard/folders`}>My Folders</Link></MenuItem>
             <MenuItem onClick={this.props.logoutUser}>Logout</MenuItem>
           </Menu>
           </div>

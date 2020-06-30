@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicGrid from "../grids/TopicGrid";
 import VideoGrid from "../grids/VideoGrid";
+import FolderGrid from "../grids/FolderGrid";
 import { Route, Switch } from "react-router-dom";
 import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
@@ -23,24 +24,29 @@ class Dashboard extends Component {
       return (
         <div>
           <AuthenticatedNavbar color={"white"} />
-            <Switch>
-              <Route exact path="/dashboard" component={TopicGrid} />
-              <Route
-                exact
-                path="/dashboard/:topicName"
-                component={SubtopicGrid}
-              />
-              <Route
-                exact
-                path="/dashboard/:topicName/:subtopicName"
-                component={VideoGrid}
-              />
-              <Route
-                exact
-                path="/dashboard/:topicName/:subtopicName/:videoId"
-                component={VideoPlayer}
-              />
-            </Switch>
+          <Switch>
+            <Route exact path="/dashboard" component={TopicGrid} />
+            <Route
+              exact
+              path="/dashboard/folders"
+              component={FolderGrid}
+            />
+            <Route
+              exact
+              path="/dashboard/:topicName"
+              component={SubtopicGrid}
+            />
+            <Route
+              exact
+              path="/dashboard/:topicName/:subtopicName"
+              component={VideoGrid}
+            />
+            <Route
+              exact
+              path="/dashboard/:topicName/:subtopicName/:videoId"
+              component={VideoPlayer}
+            />
+          </Switch>
           <ToastContainer
             style={{ textAlign: "center" }}
             autoClose={4000}

@@ -9,7 +9,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
-const Video = require("../../models/Video");
+const Folder = require("../../models/Folder");
 
 // @route POST api/users/register
 // @desc Register user
@@ -31,15 +31,22 @@ userRouter.post("/register", (req, res) => {
         password: req.body.password,
         education_institution: req.body.education_institution,
       });
+
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser
-            .save()
-            .then((user) => res.json(user))
-            .catch((err) => console.log(err));
+          newUser.save().then((user) => {
+            const likedVideosFolder = new Folder({
+              is_required: true,
+              folder_name: "Liked Videos",
+              added_by: user.id,
+            });
+            likedVideosFolder.save().then(() => {
+              res.json({ message: "User created!" });
+            });
+          });
         });
       });
     }
@@ -200,15 +207,14 @@ userRouter.post("/addToDislikedVideos", (req, res) => {
   User.findOne({ _id: userId }).then((user) => {
     // Check if user exists
     if (user) {
-        User.updateOne(
-          { _id: userId },
-          {
-            $push: {
-              disliked_videos: videoId,
-            },
-          }
-        ).then(res.json({ message: "Video added to disliked videos!" }));
-      
+      User.updateOne(
+        { _id: userId },
+        {
+          $push: {
+            disliked_videos: videoId,
+          },
+        }
+      ).then(res.json({ message: "Video added to disliked videos!" }));
     } else {
       res.status(500).json({ error: "Server Error" });
     }
@@ -221,21 +227,20 @@ userRouter.delete("/removeFromDislikedVideos", (req, res) => {
   User.findOne({ _id: userId }).then((user) => {
     // Check if user exists
     if (user) {
-        User.updateOne(
-          { _id: userId },
-          {
-            $pull: {
-              disliked_videos: videoId,
-            },
-          }
-        ).then(res.json({ message: "Video removed from disliked videos!" }));
-      
+      User.updateOne(
+        { _id: userId },
+        {
+          $pull: {
+            disliked_videos: videoId,
+          },
+        }
+      ).then(res.json({ message: "Video removed from disliked videos!" }));
     } else {
       res.status(500).json({ error: "Server Error" });
     }
   });
 });
 
-userRouter.use("/folder/", folderRouter);
+userRouter.use("/folders/", folderRouter);
 
 module.exports = userRouter;

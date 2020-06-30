@@ -20,10 +20,17 @@ folderRouter.post("/addFolder", (req, res) => {
         return res.status(403).json({ message: "Innappropriate Folder Name" });
       }
       const newFolder = new Folder({
+        is_required: false,
         folder_name: req.body.folder_name,
         added_by: req.body.user_id,
       });
-      newFolder.save().then((folder) => res.json(folder));
+      newFolder
+        .save()
+        .then((folder) =>
+          res.json({
+            message: "Folder '" + folder.folder_name + "' successfully created",
+          })
+        );
     }
   });
 });
@@ -31,20 +38,15 @@ folderRouter.post("/addFolder", (req, res) => {
 // @route GET api/folders/
 // @desc return all folders
 // @access Public
-folderRouter.get("/", (req, res) => {
-  Folder.find({}).then((folders) => {
-    // Check if folders exists
-    if (folders.length == 0) {
-      return res
-        .status(404)
-        .json({ foldersonotfound: "You haven't created any folders!" });
-    } else {
-      return res.status(200).json(folders);
-    }
+folderRouter.post("/", (req, res) => {
+  Folder.find({
+    added_by: req.body.user_id,
+  }).then((folders) => {
+    return res.status(200).json(folders);
   });
 });
 
-folderRouter.get("/:folder_name", (req, res) => {
+folderRouter.post("/:folder_name", (req, res) => {
   const f_name = req.params.folder_name;
   const u_id = req.body.user_id;
   // Find folder by name and user id -> returns all videos in folder
@@ -82,11 +84,36 @@ folderRouter.post("/:folder_name/addVideo", (req, res) => {
   });
 });
 
+folderRouter.delete("/:folder_name/deleteVideo", (req, res) => {
+  const v_id = req.body.video_id;
+  const f_id = req.body.folder_id;
+  Folder.findOne({
+    _id: f_id,
+    videos: { $in: [v_id] },
+  }).then((folderVideoObj) => {
+    if (folderVideoObj) {
+      Folder.updateOne(
+        { _id: f_id },
+        {
+          $pull: {
+            videos: v_id,
+          },
+        }
+      ).then(res.json({ message: "Video Removed From Folder" }));
+    }
+  });
+});
+
 folderRouter.delete("/deleteFolder", (req, res) => {
   const f_id = req.body.folder_id;
   const u_id = req.body.user_id;
-  Folder.deleteOne({ _id: f_id, added_by: u_id }).then(
-    res.json({ message: "Folder deleted!" })
-  );
+  const is_required = req.body.is_required;
+  if (!is_required) {
+    Folder.deleteOne({ _id: f_id, added_by: u_id }).then(
+      res.json({ message: "Folder deleted!" })
+    );
+  } else {
+    res.json({ message: "This folder cannot be deleted!" });
+  }
 });
 module.exports = folderRouter;

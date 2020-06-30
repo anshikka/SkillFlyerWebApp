@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const FolderSchema = new Schema({
+  is_required: {
+    type: Boolean,
+    required: true
+  },
   folder_name: {
     type: String,
     required: true,

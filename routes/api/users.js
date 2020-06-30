@@ -114,7 +114,7 @@ userRouter.post("/getUser", (req, res) => {
       const payload = {
         name: "Deleted User",
       };
-      res.status(200).json(payload);
+      res.status(404).json(payload);
     }
   });
 });

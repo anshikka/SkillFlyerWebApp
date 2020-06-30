@@ -62,8 +62,7 @@ class AuthenticatedNavbar extends Component {
             open={this.state.anchorEl}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+            <MenuItem onClick={this.handleClose}>My Folders</MenuItem>
             <MenuItem onClick={this.props.logoutUser}>Logout</MenuItem>
           </Menu>
           </div>

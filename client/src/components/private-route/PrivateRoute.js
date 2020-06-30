@@ -12,6 +12,7 @@ const PrivateRoute = ({
   votes,
   user,
   errors,
+  folders,
   ...rest
 }) => (
   <Route

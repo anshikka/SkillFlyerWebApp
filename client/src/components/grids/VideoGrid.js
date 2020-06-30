@@ -14,9 +14,10 @@ import "./VideoGrid.css";
 
 class VideoGrid extends Component {
   componentDidMount() {
-    this.topicName = this.props.match.params.topicName;
-    this.subtopicName = this.props.match.params.subtopicName;
-    this.props.getAllVideos(this.topicName, this.subtopicName);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   }
   state = {
     isOpened: false,
@@ -29,14 +30,22 @@ class VideoGrid extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.video.status !== this.props.video.status) {
       toast.info(this.props.video.status.message);
-      this.props.getAllVideos(this.topicName, this.subtopicName);
+    } else if (prevProps.errors !== this.props.errors) {
+      toast.info(this.props.errors.message);
     }
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   }
 
   submitVideo = (video) => {
     this.props.addVideo(video);
     this.handleAddVideo();
-    this.props.getAllVideos(this.topicName, this.subtopicName);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   };
 
   render() {
@@ -46,8 +55,8 @@ class VideoGrid extends Component {
         <div>
           <DashboardBreadcrumbs
             pageType="video"
-            topicName={this.topicName}
-            subtopicName={this.subtopicName}
+            topicName={this.props.match.params.topicName}
+            subtopicName={this.props.match.params.subtopicName}
           />
           <Grid id="video-grid-container" container spacing={10}>
             {videos.map((video, index) => (
@@ -73,8 +82,8 @@ class VideoGrid extends Component {
           <AddVideoModal
             submitVideo={this.submitVideo}
             user={this.props.auth.user}
-            topicName={this.topicName}
-            subtopicName={this.subtopicName}
+            topicName={this.props.match.params.topicName}
+            subtopicName={this.props.match.params.subtopicName}
             open={this.state.isOpened}
             metaExists={true}
             onClose={this.handleAddVideo}
@@ -83,10 +92,29 @@ class VideoGrid extends Component {
       );
     } else {
       return (
-        <div className="no-videos-message">
-          <img src={noVideosPlaceholder} alt="no-videos" />
-          <h1>No Videos Under {this.props.match.params.subtopicName}</h1>
-          <p>Be the first to add a video to this subtopic!</p>
+        <div class="empty-page">
+          <DashboardBreadcrumbs
+            pageType="video"
+            topicName={this.props.match.params.topicName}
+            subtopicName={this.props.match.params.subtopicName}
+          />
+          <div className="no-videos-message">
+            <img src={noVideosPlaceholder} alt="no-videos" />
+            <h1>No Videos Under {this.props.match.params.subtopicName}</h1>
+            <p>Be the first to add a video to this subtopic!</p>
+            <div className="add-video-button">
+              <AddVideoButton onClick={this.handleAddVideo} />
+            </div>
+            <AddVideoModal
+              submitVideo={this.submitVideo}
+              user={this.props.auth.user}
+              topicName={this.props.match.params.topicName}
+              subtopicName={this.props.match.params.subtopicName}
+              open={this.state.isOpened}
+              metaExists={true}
+              onClose={this.handleAddVideo}
+            />
+          </div>
         </div>
       );
     }
@@ -98,11 +126,13 @@ VideoGrid.propTypes = {
   getAllVideos: PropTypes.func.isRequired,
   videos: PropTypes.object.isRequired,
   addVideo: PropTypes.func.isRequired,
+  errors: PropTypes.object,
   video: PropTypes.object,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
   videos: state.videos,
   video: state.video,
+  errors: state.errors
 });
 export default connect(mapStateToProps, { getAllVideos, addVideo })(VideoGrid);

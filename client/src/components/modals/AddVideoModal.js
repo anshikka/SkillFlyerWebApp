@@ -17,6 +17,7 @@ class AddVideoModal extends Component {
   };
   
   onSubmit = (e) => {
+    console.log(this.state)
     e.preventDefault();
     const newVideo = {
       topic_name: this.state.topicName,
@@ -48,7 +49,6 @@ class AddVideoModal extends Component {
     }
   };
   render() {
-    console.log(this.props.user)
     return (
       <Modal
         className="add-video-modal"

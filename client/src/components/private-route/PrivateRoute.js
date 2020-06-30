@@ -11,6 +11,7 @@ const PrivateRoute = ({
   video,
   votes,
   user,
+  errors,
   ...rest
 }) => (
   <Route

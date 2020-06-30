@@ -44,9 +44,7 @@ function getTopicId(name) {
     if (topic) {
       return topic._id;
     } else {
-      return res
-        .status(404)
-        .json({ message: "There is no such topic with this name!" });
+      console.log("No topic with this name!")
     }
   });
 }
@@ -56,9 +54,7 @@ function getSubtopicId(name) {
     if (subtopic) {
       return subtopic._id;
     } else {
-      return res
-        .status(404)
-        .json({ message: "There is no such subtopic with this name!" });
+      console.log("No subtopic with this name!")
     }
   });
 }
@@ -94,6 +90,7 @@ videoRouter.post("/addVideo", async (req, res) => {
         if (
           validateVideoSubmission(youtube_data).status === "CRITERIA UNMATCHED"
         ) {
+          
           return res
             .status(400)
             .json({ message: "Video did not meet SkillFlyer's criteria!" });

@@ -10,7 +10,7 @@ import Container from "@material-ui/core/Container";
 
 class FolderGrid extends Component {
     componentDidMount() {
-        this.props.getAllFolders({user_id: this.props.auth.user.id});
+        this.props.getAllFolders({ user_id: this.props.auth.user.id });
 
     }
     render() {
@@ -25,15 +25,14 @@ class FolderGrid extends Component {
                             item
                             xs
                         >
-                            <Container className="folder-card-container">
-                                <Link
-                                    to={``}
-                                >
-                                    <FolderCard
-                                        name={folder.folder_name}
-                                    />
-                                </Link>
-                            </Container>
+                        
+
+                                <FolderCard
+                                    name={folder.folder_name}
+                                    length = {folder.videos.length}
+                                />
+
+                           
                         </Grid>
                     ))}
                 </Grid>

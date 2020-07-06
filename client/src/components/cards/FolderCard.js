@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import "./FolderCard.css";
 
 class FolderCard extends Component {
@@ -13,7 +14,7 @@ class FolderCard extends Component {
     <h6>{this.props.length + " videos in " + this.props.name}</h6>
 				</div>
 				<div class="fav">
-					<i class="far fa-heart"></i>
+					<i><DeleteOutlineIcon/></i>
 				</div>
 			</div>
 		</div>

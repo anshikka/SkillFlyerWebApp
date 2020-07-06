@@ -32,6 +32,7 @@ class FolderGrid extends Component {
       toast.info(this.props.folders.status.message);
     } else if (prevProps.errors !== this.props.errors) {
       toast.info(this.props.errors.message);
+      this.handleAddFolder();
     }
     this.props.getAllFolders({ user_id: this.props.auth.user.id });
   }

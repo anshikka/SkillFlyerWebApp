@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import noVideosPlaceholder from "./assets/no-videos.png";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
-import AddVideoButton from "../buttons/AddVideoButton";
+import AddButton from "../buttons/AddButton";
 import AddVideoModal from "../modals/AddVideoModal";
 import { toast } from "react-toastify";
 import "./VideoGrid.css";
@@ -77,7 +77,7 @@ class VideoGrid extends Component {
             ))}
           </Grid>
           <div className="add-video-button">
-            <AddVideoButton onClick={this.handleAddVideo} />
+            <AddButton onClick={this.handleAddVideo} />
           </div>
           <AddVideoModal
             submitVideo={this.submitVideo}
@@ -103,7 +103,7 @@ class VideoGrid extends Component {
             <h1>No Videos Under {this.props.match.params.subtopicName}</h1>
             <p>Be the first to add a video to this subtopic!</p>
             <div className="add-video-button">
-              <AddVideoButton onClick={this.handleAddVideo} />
+              <AddButton onClick={this.handleAddVideo} />
             </div>
             <AddVideoModal
               submitVideo={this.submitVideo}

@@ -1,0 +1,41 @@
+.add-folder-form {
+  padding: 2% 4%;
+  background: #f4f7f8;
+  border-radius: 8px;
+  margin-top: 50%;
+}
+
+
+.add-folder-modal-root {
+  background-color: #f4f7f8;
+  width: 30% !important;
+}
+
+.submit-folder-button {
+  width: 100%;
+  background-color: #00416a !important;
+  color: white !important;
+  height: 6vh;
+}
+
+fieldset {
+  border-radius: 10px;
+  border-color: #00416a;
+  padding-bottom: 5%;
+  margin-bottom: 5%;
+}
+
+legend {
+  font-size: x-large;
+  text-align: center;
+}
+
+label {
+  font-size: medium;
+  text-align: left;
+}
+
+.add-folder-modal .title {
+  text-align: center;
+  color: #00416a;
+}

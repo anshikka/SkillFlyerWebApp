@@ -15,9 +15,8 @@ class AddVideoModal extends Component {
     subtopicName: this.props.subtopicName,
     youtube_link: "",
   };
-  
+
   onSubmit = (e) => {
-    console.log(this.state)
     e.preventDefault();
     const newVideo = {
       topic_name: this.state.topicName,
@@ -45,7 +44,10 @@ class AddVideoModal extends Component {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
     var match = youtube_url.match(regExp);
     if (match && match[2].length === 11) {
-      this.setState(() => ({ youtube_id: match[2], youtube_link: youtube_url}));
+      this.setState(() => ({
+        youtube_id: match[2],
+        youtube_link: youtube_url,
+      }));
     }
   };
   render() {
@@ -92,8 +94,8 @@ class AddVideoModal extends Component {
                   name="youtube_url"
                   pattern="^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$"
                   title="Please enter a valid YouTube link."
+                  required
                 ></input>
-
               </fieldset>
               <Button
                 className="submit-video-button"
@@ -121,7 +123,7 @@ AddVideoModal.propTypes = {
   topicName: PropTypes.string,
   subtopicName: PropTypes.string,
   metaExists: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 export default AddVideoModal;

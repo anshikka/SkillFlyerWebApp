@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
-import "./AddVideoButton.css"
+import "./AddButton.css"
 
 
-class AddVideoButton extends Component {
+class AddButton extends Component {
   render() {
     return (
     <Fab aria-label="add" className = "add-button" onClick={this.props.onClick}>
@@ -14,4 +14,4 @@ class AddVideoButton extends Component {
   }
 }
 
-export default AddVideoButton;
+export default AddButton;

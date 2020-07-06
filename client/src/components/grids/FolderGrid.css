@@ -34,5 +34,11 @@
   .folder-card-container {
     display: block;
     height: 20vh;
+    margin: 0 auto;
   }
-  
+  .add-folder-button{
+    position: fixed;
+    bottom: 30px;
+    right: 30px; 
+
+}

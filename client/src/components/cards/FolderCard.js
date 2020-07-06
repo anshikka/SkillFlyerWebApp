@@ -16,10 +16,10 @@ class FolderCard extends Component {
   render() {
     if (this.props.isRequired) {
       return (
-        <div>
-          <div class="card">
-            <div class="overlay"></div>
-            <div class="content">
+        <div className = "folder-card">
+          <div className="card">
+            <div className="overlay"></div>
+            <div className="content">
               <h4>{this.props.name}</h4>
               <h6>{this.props.length + " videos in " + this.props.name}</h6>
             </div>
@@ -28,10 +28,10 @@ class FolderCard extends Component {
       );
     } else {
       return (
-        <div>
-          <div class="card">
-            <div class="overlay"></div>
-            <div class="content">
+        <div className = "folder-card">
+          <div className="card">
+            <div className="overlay"></div>
+            <div className="content">
               <h4>{this.props.name}</h4>
               <h6>{this.props.length + " videos in " + this.props.name}</h6>
             </div>

@@ -1,11 +1,9 @@
 
-.card {
+.folder-card .card {
 	position: relative;
 
 	height: 170px;
 	background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(0, 65, 106, 0.73)), url("https://www.pixelstalk.net/wp-content/uploads/2016/04/Images-abstract-minimalist-wallpaper-HD.jpg") !important;
-  background-attachment: fixed ;
-  background-repeat: no-repeat;
   background-size: cover !important;
 	border-radius: 25px !important;
   margin: 10px !important;
@@ -13,42 +11,42 @@
 }
 
 
-.card .content {
+.folder-card .card .content {
 	margin: 0 auto !important;
 	margin-top: 6vh !important;
 }
 
-.card .content h4 {
+.folder-card .card .content h4 {
 	margin: 0 auto !important;
 	font-size: 24px;
 	font-weight: bold;
 	color: white;
 }
 
-.card .content h6 {
+.folder-card .card .content h6 {
 	margin: 0 auto !important;
 	font-size: 16px;
 	margin-top: 2vh !important;
 	color: white;
 }
 
-.card .delete {
+.folder-card .card .delete {
 	position: absolute;
 	top: 25px;
 	right: 25px;
 	cursor: pointer;
 }
 
-.card .delete i {
-	color: white;
+.folder-card .card .delete i {
+	color: white !important;
 }
 
-.card:hover {
+.folder-card .card:hover {
 
 
 transform: none !important;
 }
 
-.card:hover {
+.folder-card .card:hover {
 	background-position: top;
 }

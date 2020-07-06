@@ -29,13 +29,19 @@ export default function (state = initialState, action) {
             loaded: true,
             loading: false
         }
-    case FOLDER_CONTENT_LOADING, FOLDER_ADDING, VIDEO_ADDING_TO_FOLDER, VIDEO_DELETING_FROM_FOLDER, FOLDER_DELETING: 
+    case FOLDER_CONTENT_LOADING:
         return {
             ...state,
             loaded: false,
             loading: true
         }
-    case FOLDER_ADDED, VIDEO_ADDED_TO_FOLDER, VIDEO_DELETED_FROM_FOLDER, FOLDER_DELETED:
+    case FOLDER_ADDED:
+      return {
+        ...state,
+        status: action.payload,
+        loaded: true
+      }
+    case FOLDER_DELETED:
       return {
         ...state,
         status: action.payload,

@@ -84,7 +84,7 @@ export const deleteVideoFromFolder = (folder_name, videoDetails) => (dispatch) =
 
 export const deleteFolder = (folderDetails) => (dispatch) => {
     axios
-      .post("/api/users/folders/deleteFolder", folderDetails)
+      .put("/api/users/folders/deleteFolder", folderDetails)
       .then((res) => {
         dispatch(dispatchDeleteFolder(res.data));
       })

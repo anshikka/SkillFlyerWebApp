@@ -104,16 +104,17 @@ folderRouter.delete("/:folder_name/deleteVideo", (req, res) => {
   });
 });
 
-folderRouter.delete("/deleteFolder", (req, res) => {
+folderRouter.put("/deleteFolder", (req, res) => {
+
   const f_id = req.body.folder_id;
   const u_id = req.body.user_id;
-  const is_required = req.body.is_required;
+  const is_required = req.body.is_required === 'true';
   if (!is_required) {
     Folder.deleteOne({ _id: f_id, added_by: u_id }).then(
-      res.json({ message: "Folder deleted!" })
+      res.status(200).json({ message: "Folder deleted!" })
     );
   } else {
-    res.json({ message: "This folder cannot be deleted!" });
+    res.status(400).json({ message: "This folder cannot be deleted!" });
   }
 });
 module.exports = folderRouter;

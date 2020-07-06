@@ -62,6 +62,7 @@ class FolderGrid extends Component {
                     folderId={folder._id}
                     name={folder.folder_name}
                     length = {folder.videos.length}
+                    isRequired = {folder.is_required}
                   />
                 </Link>
               </Container>
@@ -86,6 +87,7 @@ FolderGrid.propTypes = {
   auth: PropTypes.object.isRequired,
   getAllFolders: PropTypes.func.isRequired,
   addFolder: PropTypes.func.isRequired,
+  deleteFolder: PropTypes.func.isRequired,
   folders: PropTypes.object.isRequired,
   errors: PropTypes.object,
 };

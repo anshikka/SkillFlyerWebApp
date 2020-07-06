@@ -61,6 +61,7 @@ class FolderGrid extends Component {
                     user={this.props.auth.user}
                     folderId={folder._id}
                     name={folder.folder_name}
+                    length = {folder.videos.length}
                   />
                 </Link>
               </Container>

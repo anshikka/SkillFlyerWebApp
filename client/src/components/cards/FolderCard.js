@@ -5,20 +5,25 @@ import "./FolderCard.css";
 class FolderCard extends Component {
   render() {
     return (
-      <div>
-        <div class="col-md-4 folder">
-          <div class="card card-1">
-            <div id="folder-name">
-              <h3 className="folder-card-name">{this.props.name}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+		<div>
+			<div class="card">
+				<div class="overlay"></div>
+				<div class="content">
+    <h4>{this.props.name}</h4>
+    <h6>{this.props.length + " videos in " + this.props.name}</h6>
+				</div>
+				<div class="fav">
+					<i class="far fa-heart"></i>
+				</div>
+			</div>
+		</div>
+
     );
   }
 }
 
 FolderCard.propTypes = {
   name: PropTypes.string,
+  length: PropTypes.number,
 };
 export default FolderCard;

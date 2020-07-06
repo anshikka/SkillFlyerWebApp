@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getVideo, getAllVideos } from "../../actions/videoActions";
+import { addVideoToFolder, getAllFolders } from "../../actions/folderActions"
 import { connect } from "react-redux";
 import YouTube from "react-youtube";
 import VideoCard from "../cards/VideoCard";
-import StarIcon from "@material-ui/icons/Star";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Chip from "@material-ui/core/Chip";
@@ -13,6 +13,7 @@ import { Container } from "@material-ui/core";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 import UserChip from "../chips/UserChip";
 import VoteBox from "../box/VoteBox";
+import { toast } from "react-toastify";
 
 class VideoPlayer extends Component {
   componentDidMount() {
@@ -21,22 +22,29 @@ class VideoPlayer extends Component {
     const videoId = this.props.match.params.videoId;
     this.props.getAllVideos(this.topicName, this.subtopicName);
     this.props.getVideo(this.topicName, this.subtopicName, videoId);
+    this.props.getAllFolders({user_id: this.props.auth.user.id})
   }
+
 
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.folders.status !== this.props.folders.status) {
+      toast.info(this.props.folders.status.message);
+    } else if (prevProps.errors !== this.props.errors) {
+      toast.info(this.props.errors.message);
+    }
+  }
+  
 
-  upvoteVideo() {}
-
-  downvoteVideo() {}
 
   render() {
     const { videos } = this.props.videos;
     const { video } = this.props.video;
     const { user } = this.props.auth;
-
+    const { folders } = this.props.folders;
     const opts = {
       playerVars: {
         autoplay: 1,
@@ -127,18 +135,25 @@ VideoPlayer.propTypes = {
   rank: PropTypes.number,
   getAllVideos: PropTypes.func.isRequired,
   getVideo: PropTypes.func.isRequired,
+  getAllFolders: PropTypes.func.isRequired,
+  addVideoToFolder: PropTypes.func.isRequired,
   videos: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   video: PropTypes.object.isRequired,
+  folders: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   videos: state.videos,
   video: state.video,
+  folders: state.folders,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, {
   getAllVideos,
   getVideo,
+  getAllFolders,
+  addVideoToFolder
 })(VideoPlayer);

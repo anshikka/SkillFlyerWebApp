@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getVideo, getAllVideos } from "../../actions/videoActions";
-import { addVideoToFolder, getAllFolders } from "../../actions/folderActions"
+import { addVideoToFolder, getAllFolders } from "../../actions/folderActions";
 import { connect } from "react-redux";
 import YouTube from "react-youtube";
 import VideoCard from "../cards/VideoCard";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import Chip from "@material-ui/core/Chip";
 import AddButton from "../buttons/AddButton";
 import "./VideoPlayer.css";
@@ -23,9 +24,8 @@ class VideoPlayer extends Component {
     const videoId = this.props.match.params.videoId;
     this.props.getAllVideos(this.topicName, this.subtopicName);
     this.props.getVideo(this.topicName, this.subtopicName, videoId);
-    this.props.getAllFolders({user_id: this.props.auth.user.id})
+    this.props.getAllFolders({ user_id: this.props.auth.user.id });
   }
-
 
   _onReady(event) {
     // access to player in all event handlers via event.target
@@ -38,8 +38,6 @@ class VideoPlayer extends Component {
       toast.info(this.props.errors.message);
     }
   }
-  
-
 
   render() {
     const { videos } = this.props.videos;
@@ -58,6 +56,7 @@ class VideoPlayer extends Component {
           topicName={this.topicName}
           subtopicName={this.subtopicName}
         />
+
         <div className="add-folder-button">
           <AddButton onClick={this.handleAddVideo} />
         </div>
@@ -84,19 +83,26 @@ class VideoPlayer extends Component {
             <div className="meta">
               <Container className="video-information">
                 <h2 className="title"> {video.title}</h2>
-                <p> {video.description}</p>
                 <Chip
                   className="rank"
                   icon={<EmojiEventsIcon />}
                   label={"#1 in " + this.props.match.params.subtopicName}
                   size="medium"
                 />
+                <p> {video.description}</p>
+
                 <VoteBox
                   votes={video.votes}
                   videoId={this.props.match.params.videoId}
                   userId={user.id}
                   topicName={this.props.match.params.topicName}
                   subtopicName={this.props.match.params.subtopicName}
+                />
+                <Chip
+                  className="add-to-folder"
+                  icon={<CreateNewFolderIcon />}
+                  label={"Add to Folder"}
+                  size="medium"
                 />
               </Container>
               {
@@ -144,7 +150,7 @@ VideoPlayer.propTypes = {
   videos: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   video: PropTypes.object.isRequired,
-  folders: PropTypes.object.isRequired
+  folders: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -152,12 +158,12 @@ const mapStateToProps = (state) => ({
   videos: state.videos,
   video: state.video,
   folders: state.folders,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, {
   getAllVideos,
   getVideo,
   getAllFolders,
-  addVideoToFolder
+  addVideoToFolder,
 })(VideoPlayer);

@@ -71,7 +71,7 @@ class FolderGrid extends Component {
           ))}
         </Grid>
         <div className="add-folder-button">
-          <AddButton onClick={this.handleAddFolder} />
+          <AddButton className = "add-button" onClick={this.handleAddFolder} />
         </div>
         <AddFolderModal
           submitFolder={this.submitFolder}

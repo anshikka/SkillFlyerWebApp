@@ -56,10 +56,6 @@ class VideoPlayer extends Component {
           topicName={this.topicName}
           subtopicName={this.subtopicName}
         />
-
-        <div className="add-folder-button">
-          <AddButton onClick={this.handleAddVideo} />
-        </div>
         <div>
           <Container className="player">
             <YouTube

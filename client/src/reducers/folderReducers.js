@@ -47,6 +47,18 @@ export default function (state = initialState, action) {
         status: action.payload,
         loaded: true
       }
+    case VIDEO_ADDED_TO_FOLDER:
+      return {
+        ...state,
+        status: action.payload,
+        loaded: true
+      }
+    case VIDEO_DELETED_FROM_FOLDER:
+      return {
+        ...state,
+        status: action.payload,
+        loaded: true
+      }
     default:
       return state;
   }

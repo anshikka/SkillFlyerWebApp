@@ -24,13 +24,11 @@ folderRouter.post("/addFolder", (req, res) => {
         folder_name: req.body.folder_name,
         added_by: req.body.user_id,
       });
-      newFolder
-        .save()
-        .then((folder) =>
-          res.json({
-            message: "Folder '" + folder.folder_name + "' successfully created",
-          })
-        );
+      newFolder.save().then((folder) =>
+        res.json({
+          message: "Folder '" + folder.folder_name + "' successfully created",
+        })
+      );
     }
   });
 });
@@ -46,11 +44,11 @@ folderRouter.post("/", (req, res) => {
   });
 });
 
-folderRouter.post("/:folder_name", (req, res) => {
-  const f_name = req.params.folder_name;
+folderRouter.post("/getFolder", (req, res) => {
+  const f_id = req.body.folder_id;
   const u_id = req.body.user_id;
   // Find folder by name and user id -> returns all videos in folder
-  Folder.findOne({ folder_name: f_name, added_by: u_id }).then((folder) => {
+  Folder.findOne({ _id: f_id, added_by: u_id }).then((folder) => {
     // Check if folder exists
     if (folder) {
       return res.status(200).json(folder);
@@ -60,7 +58,8 @@ folderRouter.post("/:folder_name", (req, res) => {
   });
 });
 
-folderRouter.post("/:folder_name/addVideo", (req, res) => {
+folderRouter.post("/addVideo", (req, res) => {
+  console.log(req.body);
   const v_id = req.body.video_id;
   const f_id = req.body.folder_id;
   Folder.findOne({
@@ -72,19 +71,23 @@ folderRouter.post("/:folder_name/addVideo", (req, res) => {
         .status(400)
         .json({ message: "Video already exists in folder!" });
     } else {
-      Folder.updateOne(
+      Folder.findOneAndUpdate(
         { _id: f_id },
         {
           $push: {
             videos: v_id,
           },
         }
-      ).then(res.json({ message: "Video Added to Folder" }));
+      ).then((folder) => {
+        return res
+          .status(200)
+          .json({ message: "Video Added to '" + folder.folder_name + "'" });
+      });
     }
   });
 });
 
-folderRouter.delete("/:folder_name/deleteVideo", (req, res) => {
+folderRouter.put("/deleteVideo", (req, res) => {
   const v_id = req.body.video_id;
   const f_id = req.body.folder_id;
   Folder.findOne({
@@ -92,23 +95,26 @@ folderRouter.delete("/:folder_name/deleteVideo", (req, res) => {
     videos: { $in: [v_id] },
   }).then((folderVideoObj) => {
     if (folderVideoObj) {
-      Folder.updateOne(
+      Folder.findOneAndUpdate(
         { _id: f_id },
         {
           $pull: {
             videos: v_id,
           },
         }
-      ).then(res.json({ message: "Video Removed From Folder" }));
+      ).then((folder) => {
+        return res
+          .status(200)
+          .json({ message: "Video Removed From '" + folder.folder_name + "'" });
+      });
     }
   });
 });
 
 folderRouter.put("/deleteFolder", (req, res) => {
-
   const f_id = req.body.folder_id;
   const u_id = req.body.user_id;
-  const is_required = req.body.is_required === 'true';
+  const is_required = req.body.is_required === "true";
   if (!is_required) {
     Folder.deleteOne({ _id: f_id, added_by: u_id }).then(
       res.status(200).json({ message: "Folder deleted!" })

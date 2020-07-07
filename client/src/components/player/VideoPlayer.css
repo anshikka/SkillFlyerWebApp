@@ -21,28 +21,25 @@
   width: 100%;
 }
 .related-videos {
-    overflow-y: auto;
-    height: 45vh;
+  overflow-y: auto;
+  height: 45vh;
 }
 .related-videos li {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 .meta .video-information .title {
   color: black;
 }
-
-
 .meta .video-information .rank {
-    display: inline-flex;
-    font-size: large;
-    float: right;
+  font-size: large;
+  display: inline-flex;
 }
 
 .vote-icon {
-    margin-right: 2px;
+  margin-right: 2px;
 }
 .player .video-information .added-by {
-    float: right;
+  float: right;
 }
 
 .player .video-information {
@@ -50,9 +47,14 @@
 }
 
 .vote-box .votes {
-    font-size: large;
+  font-size: large;
 }
 .meta .video-information p {
   height: 20vh;
   overflow-y: auto;
+}
+
+.meta .video-information .add-to-folder {
+  float: right;
+  font-size: medium;
 }

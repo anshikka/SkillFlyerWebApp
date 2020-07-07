@@ -12,7 +12,6 @@ class VideoCountChip extends Component {
         icon = {<VideoLibraryIcon className="video-library-icon" />}
         label={this.props.length}
         size="medium"
-        color="secondary"
       />
     );
   }

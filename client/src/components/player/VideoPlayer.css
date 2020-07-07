@@ -56,9 +56,3 @@
   height: 20vh;
   overflow-y: auto;
 }
-.add-folder-button{
-  position: absolute;
-  top: 100px;
-  right: 30px; 
-
-}

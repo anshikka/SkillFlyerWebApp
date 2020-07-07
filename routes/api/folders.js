@@ -59,7 +59,6 @@ folderRouter.post("/getFolder", (req, res) => {
 });
 
 folderRouter.post("/addVideo", (req, res) => {
-  console.log(req.body);
   const v_id = req.body.video_id;
   const f_id = req.body.folder_id;
   Folder.findOne({

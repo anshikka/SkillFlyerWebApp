@@ -1,6 +1,5 @@
-.add-video-modal {
+.add-video-to-folder-modal {
   width: 100%;
-  min-height: 75vh;
   margin-top: 12.5vh;
 }
 
@@ -11,31 +10,10 @@
   border-radius: 8px;
 }
 
-.add-video-modal .add-video-modal-root .form-body {
-  width: 50% !important;
-  float: left;
-  height: 75vh !important;
-  display: inline-block;
-}
 .add-video-modal-root {
-  width: 80% !important;
-  max-width: none !important;
-  height: 90% !important;
   background-color: #f4f7f8;
 }
-.video-preview {
-  width: 50% !important;
-  float: right;
-  vertical-align: middle;
-  margin-top: 13vh;
-}
-.youtube-player {
-  display: inline-flex;
-  width: 100%;
-  vertical-align: middle;
-}
 .add-video-modal-root {
-  max-height: 75vh !important;
   vertical-align: middle;
 }
 .add-video-form {

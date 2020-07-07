@@ -6,7 +6,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Select from "react-select";
 import YouTube from "react-youtube";
 import "./AddVideoModal.css";
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 class AddVideoModal extends Component {
   state = {

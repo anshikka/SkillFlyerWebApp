@@ -9,13 +9,14 @@ import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import Chip from "@material-ui/core/Chip";
-import AddButton from "../buttons/AddButton";
-import "./VideoPlayer.css";
 import { Container } from "@material-ui/core";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 import UserChip from "../chips/UserChip";
 import VoteBox from "../box/VoteBox";
+import AddVideoToFolderModal from "../modals/AddVideoToFolderModal";
 import { toast } from "react-toastify";
+import "./VideoPlayer.css";
+
 
 class VideoPlayer extends Component {
   componentDidMount() {
@@ -31,6 +32,18 @@ class VideoPlayer extends Component {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
+  state = {
+    isOpened: false,
+  };
+
+  submitVideoToFolder = (video) => {
+    this.props.addVideoToFolder(video);
+    this.handleAddVideoToFolder();
+  }
+
+  handleAddVideoToFolder = () => {
+    this.setState((prevState) => ({ isOpened: !prevState.isOpened }));
+  };
   componentDidUpdate(prevProps) {
     if (prevProps.folders.status !== this.props.folders.status) {
       toast.info(this.props.folders.status.message);
@@ -98,6 +111,14 @@ class VideoPlayer extends Component {
                   icon={<CreateNewFolderIcon />}
                   label={"Add to Folder"}
                   size="medium"
+                  onClick={this.handleAddVideoToFolder}
+                />
+                <AddVideoToFolderModal
+                  submitVideoToFolder={this.submitVideoToFolder}
+                  open={this.state.isOpened}
+                  onClose={this.handleAddVideoToFolder}
+                  folders={folders}
+                  videoId = {video._id}
                 />
               </Container>
               {

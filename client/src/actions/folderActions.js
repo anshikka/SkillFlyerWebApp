@@ -59,7 +59,6 @@ export const addFolder = (folderDetails) => (dispatch) => {
 };
 
 export const addVideoToFolder = (videoDetails) => (dispatch) => {
-    console.log(videoDetails)
     axios.post("/api/users/folders/addVideo", videoDetails).then((res)=> {
         dispatch(dispatchAddVideoToFolder(res.data));
     })

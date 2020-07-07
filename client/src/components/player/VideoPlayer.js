@@ -8,6 +8,7 @@ import StarIcon from "@material-ui/icons/Star";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Chip from "@material-ui/core/Chip";
+import AddButton from "../buttons/AddButton";
 import "./VideoPlayer.css";
 import { Container } from "@material-ui/core";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
@@ -28,9 +29,9 @@ class VideoPlayer extends Component {
     event.target.pauseVideo();
   }
 
-  upvoteVideo() {}
+  upvoteVideo() { }
 
-  downvoteVideo() {}
+  downvoteVideo() { }
 
   render() {
     const { videos } = this.props.videos;
@@ -49,6 +50,9 @@ class VideoPlayer extends Component {
           topicName={this.topicName}
           subtopicName={this.subtopicName}
         />
+        <div className="add-folder-button">
+          <AddButton onClick={this.handleAddVideo} />
+        </div>
         <div>
           <Container className="player">
             <YouTube

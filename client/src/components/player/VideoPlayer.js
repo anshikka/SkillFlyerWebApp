@@ -90,7 +90,6 @@ class VideoPlayer extends Component {
                   size="medium"
                 />
                 <p> {video.description}</p>
-
                 <VoteBox
                   votes={video.votes}
                   videoId={this.props.match.params.videoId}

@@ -33,7 +33,7 @@ folderRouter.post("/addFolder", (req, res) => {
   });
 });
 
-// @route GET api/folders/
+// @route POST api/folders/
 // @desc return all folders
 // @access Public
 folderRouter.post("/", (req, res) => {

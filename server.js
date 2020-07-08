@@ -5,6 +5,9 @@ const app = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
 const topics = require("./routes/api/topics");
+const subtopics = require("./routes/api/subtopics");
+const videos = require("./routes/api/videos");
+const folders = require("./routes/api/folders");
 const Video = require("./models/Video");
 // Bodyparser middleware
 app.use(
@@ -39,7 +42,10 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
-app.use("/api/", topics);
+app.use("/api/topics", topics);
+app.use("/api/subtopics", subtopics);
+app.use("/api/videos", videos);
+app.use("/api/folders", folders)
 
 
 

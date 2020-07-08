@@ -64,7 +64,7 @@ class AddVideoToFolderModal extends Component {
                 variant="contained"
                 startIcon={<CreateNewFolderIcon />}
               >
-                Upload
+                Add Video to Folder
               </Button>{" "}
             </form>
           </Container>

@@ -46,9 +46,8 @@ folderRouter.post("/", (req, res) => {
 
 folderRouter.post("/getFolder", (req, res) => {
   const f_id = req.body.folder_id;
-  const u_id = req.body.user_id;
   // Find folder by name and user id -> returns all videos in folder
-  Folder.findOne({ _id: f_id, added_by: u_id }).then((folder) => {
+  Folder.findOne({ _id: f_id}).then((folder) => {
     // Check if folder exists
     if (folder) {
       return res.status(200).json(folder);

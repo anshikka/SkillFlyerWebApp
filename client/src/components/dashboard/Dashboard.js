@@ -12,6 +12,7 @@ import "./Dashboard.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import VideoPlayer from "../player/VideoPlayer";
+import FolderVideoGrid from "../grids/FolderVideoGrid";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -30,6 +31,11 @@ class Dashboard extends Component {
               exact
               path="/dashboard/folders"
               component={FolderGrid}
+            />
+            <Route
+              exact
+              path="/dashboard/folders/:folderId"
+              component={FolderVideoGrid}
             />
             <Route
               exact

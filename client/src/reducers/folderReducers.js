@@ -5,6 +5,7 @@ const initialState = {
   folders: [],
   loading: false,
   loaded: false,
+  folder_content_loaded: false,
   status: {}
 };
 export default function (state = initialState, action) {
@@ -27,6 +28,7 @@ export default function (state = initialState, action) {
             ...state,
             folder: action.payload,
             loaded: true,
+            folder_content_loaded: true,
             loading: false
         }
     case FOLDER_CONTENT_LOADING:

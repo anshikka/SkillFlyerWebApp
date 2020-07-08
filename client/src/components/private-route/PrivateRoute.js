@@ -35,6 +35,7 @@ const mapStateToProps = (state) => ({
   subtopics: state.subtopics,
   videos: state.videos,
   video: state.video,
-  user: state.user
+  user: state.user,
+  folders: state.folders
 });
 export default connect(mapStateToProps)(PrivateRoute);

@@ -43,6 +43,21 @@ export const getVideo = (topicName, subtopicName, video_id) => (dispatch) => {
       })
     );
 };
+
+export const getVideoById = (videoId) => (dispatch) => {
+  axios
+    .get("/api/videos/" + videoId )
+    .then((res) => {
+      dispatch(dispatchVideoData(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 export const getVideoVotes = (topicName, subtopicName, video_id) => (
   dispatch
 ) => {

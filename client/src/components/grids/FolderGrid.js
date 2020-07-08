@@ -56,7 +56,7 @@ class FolderGrid extends Component {
           {folders.map((folder) => (
             <Grid className="folder-card-grid-item" key={folder._id} item xs>
               <Container className="folder-card-container">
-                <Link to={``}>
+                <Link to={`/dashboard/folders/${folder._id}`}>
                   <FolderCard
                     deleteFolder={this.deleteFolder}
                     user={this.props.auth.user}

@@ -30,9 +30,9 @@ export const getAllFolders = (user) => (dispatch) => {
     );
 };
 
-export const getFolderContent = (folder_name, user) => (dispatch) => {
+export const getFolderContent = (folderDetails) => (dispatch) => {
   axios
-    .post("/api/users/folders/" + folder_name, user)
+    .post("/api/users/folders/getFolder", folderDetails)
     .then((res) => {
       dispatch(dispatchFolderContent(res.data));
     })

@@ -15,9 +15,9 @@ import {
 } from "./types";
 
 // Topic - get all videos
-export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
+export const getAllVideos = (subtopic) => (dispatch) => {
   axios
-    .get("/api/" + topicName + "/" + subtopicName + "/videos")
+    .post("/api/videos", subtopic)
     .then((res) => {
       dispatch(dispatchVideosData(res.data));
       console.log(res.data)
@@ -30,9 +30,9 @@ export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
     );
 };
 
-export const getVideo = (topicName, subtopicName, video_id) => (dispatch) => {
+export const getVideo = (video_id) => (dispatch) => {
   axios
-    .get("/api/" + topicName + "/" + subtopicName + "/videos/" + video_id)
+    .get("/api/videos" + video_id)
     .then((res) => {
       dispatch(dispatchVideoData(res.data));
     })
@@ -44,25 +44,11 @@ export const getVideo = (topicName, subtopicName, video_id) => (dispatch) => {
     );
 };
 
-export const getVideoById = (videoId) => (dispatch) => {
-  axios
-    .get("/api/videos/" + videoId )
-    .then((res) => {
-      dispatch(dispatchVideoData(res.data));
-    })
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
-
-export const getVideoVotes = (topicName, subtopicName, video_id) => (
+export const getVideoVotes = (video_id) => (
   dispatch
 ) => {
   axios
-    .get("/api/" + topicName + "/" + subtopicName + "/videos/" + video_id)
+    .get("/api/videos/" + video_id)
     .then((res) => {
       dispatch(dispatchVideoVotesData(res.data));
     })
@@ -73,10 +59,11 @@ export const getVideoVotes = (topicName, subtopicName, video_id) => (
       })
     );
 };
+
 export const addVideo = (video) => (dispatch) => {
   axios
     .post(
-      "/api/" + video.topicName + "/" + video.subtopicName + "/videos/addVideo",
+      "/api/videos/addVideo",
       video
     )
     .then((res) => {
@@ -90,16 +77,11 @@ export const addVideo = (video) => (dispatch) => {
       })
     );
 };
-export const upvote = (topicName, subtopicName, videoId) => (dispatch) => {
+export const upvote = (video) => (dispatch) => {
   axios
     .post(
-      "/api/" +
-        topicName +
-        "/" +
-        subtopicName +
-        "/videos/" +
-        videoId +
-        "/upvote"
+      "/api/videos/upvote",
+      video 
     )
     .then((res) => {
       dispatch(dispatchUpvote(res.data));
@@ -112,16 +94,11 @@ export const upvote = (topicName, subtopicName, videoId) => (dispatch) => {
     );
 };
 
-export const downvote = (topicName, subtopicName, videoId) => (dispatch) => {
+export const downvote = (video) => (dispatch) => {
   axios
     .post(
-      "/api/" +
-        topicName +
-        "/" +
-        subtopicName +
-        "/videos/" +
-        videoId +
-        "/downvote"
+      "/api/videos/downvote",
+      video
     )
     .then((res) => {
       dispatch(dispatchDownvote(res.data));

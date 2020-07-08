@@ -4,7 +4,7 @@ import { GET_ERRORS, TOPIC_LOADING, TOPIC_LOADED } from "./types";
 // Topic - get all topics
 export const getAllTopics = () => (dispatch) => {
   axios
-    .get("/api/")
+    .get("/api/topics")
     .then((res) => {
       dispatch(dispatchTopicData(res.data));
     })

@@ -18,7 +18,7 @@ import {
 // Topic - get all topics
 export const getAllFolders = (user) => (dispatch) => {
   axios
-    .post("/api/users/folders/", user)
+    .post("/api/folders/", user)
     .then((res) => {
       dispatch(dispatchFolderData(res.data));
     })
@@ -32,7 +32,7 @@ export const getAllFolders = (user) => (dispatch) => {
 
 export const getFolderContent = (folderDetails) => (dispatch) => {
   axios
-    .post("/api/users/folders/getFolder", folderDetails)
+    .post("/api/folders/getFolder", folderDetails)
     .then((res) => {
       dispatch(dispatchFolderContent(res.data));
     })
@@ -46,7 +46,7 @@ export const getFolderContent = (folderDetails) => (dispatch) => {
 
 export const addFolder = (folderDetails) => (dispatch) => {
   axios
-    .post("/api/users/folders/addFolder", folderDetails)
+    .post("/api/folders/addFolder", folderDetails)
     .then((res) => {
       dispatch(dispatchAddFolder(res.data));
     })
@@ -59,7 +59,7 @@ export const addFolder = (folderDetails) => (dispatch) => {
 };
 
 export const addVideoToFolder = (videoDetails) => (dispatch) => {
-    axios.post("/api/users/folders/addVideo", videoDetails).then((res)=> {
+    axios.post("/api/folders/addVideo", videoDetails).then((res)=> {
         dispatch(dispatchAddVideoToFolder(res.data));
     })
     .catch((err) =>
@@ -71,7 +71,7 @@ export const addVideoToFolder = (videoDetails) => (dispatch) => {
 }
 
 export const deleteVideoFromFolder = (videoDetails) => (dispatch) => {
-    axios.put("/api/users/folders/deleteVideo", videoDetails).then((res)=> {
+    axios.put("/api/folders/deleteVideo", videoDetails).then((res)=> {
         dispatch(dispatchDeleteVideoFromFolder(res.data));
     })
     .catch((err) =>
@@ -84,7 +84,7 @@ export const deleteVideoFromFolder = (videoDetails) => (dispatch) => {
 
 export const deleteFolder = (folderDetails) => (dispatch) => {
     axios
-      .put("/api/users/folders/deleteFolder", folderDetails)
+      .put("/api/folders/deleteFolder", folderDetails)
       .then((res) => {
         dispatch(dispatchDeleteFolder(res.data));
       })

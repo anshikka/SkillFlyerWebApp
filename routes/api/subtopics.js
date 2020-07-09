@@ -1,6 +1,5 @@
 const express = require("express");
 const subtopicRouter = express.Router({ mergeParams: true });
-const videoRouter = require("./videos");
 const profanityChecker = require("leo-profanity");
 
 // Load Subtopic model
@@ -21,7 +20,7 @@ function getTopicId(name) {
 // @desc add subtopic
 // @access Public
 subtopicRouter.post("/addSubtopic", async (req, res) => {
-  t_id = await getTopicId(req.params.topic_name);
+  t_id = await getTopicId(req.body.topic_id);
   Subtopic.findOne({
     subtopic_name: req.body.subtopic_name,
     topic_id: t_id,
@@ -46,11 +45,11 @@ subtopicRouter.post("/addSubtopic", async (req, res) => {
   });
 });
 
-// @route GET api/:topic_name/
-// @desc return all subtopics under topic
+// @route GET api/subtopics/
+// @desc return all subtopics based on topic
 // @access Public
-subtopicRouter.get("/", async (req, res) => {
-  t_id = await getTopicId(req.params.topic_name);
+subtopicRouter.post("/", async (req, res) => {
+  t_id = req.body.topic_id;
   Subtopic.find({ topic_id: t_id }).then((subtopics) => {
     // Check if topic exists
     if (subtopics.length == 0) {
@@ -63,5 +62,4 @@ subtopicRouter.get("/", async (req, res) => {
   });
 });
 
-subtopicRouter.use("/:subtopic_name/videos", videoRouter);
 module.exports = subtopicRouter;

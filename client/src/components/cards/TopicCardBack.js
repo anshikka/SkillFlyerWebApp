@@ -16,7 +16,12 @@ class TopicCardBack extends Component {
     return (
       <div id="card">
         <Card id="card-root">
-          <Link to={`/dashboard/${this.props.name}`}>
+          <Link
+            to={{
+              pathname: `/dashboard/${this.props.name}`,
+              state: { topicId: this.props.topicId },
+            }}
+          >
             <CardActionArea id="topic-card-back-content">
               <CardContent>
                 <Typography

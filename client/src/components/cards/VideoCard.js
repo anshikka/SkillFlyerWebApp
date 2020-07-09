@@ -14,7 +14,10 @@ class VideoCard extends Component {
         bgPhoto={this.props.thumbnailUrl}
         rank={"#" + (this.props.rank + 1)}
         watchButton="&#xF144; Watch Now"
-        videoUrl={window.location.href + "/" + this.props.videoId}
+        videoId = {this.props.videoId}
+        subtopicId = {this.props.subtopicId}
+        topicName = {this.props.topicName}
+        subtopicName = {this.props.subtopicName}
         title={this.props.title}
       />
     );

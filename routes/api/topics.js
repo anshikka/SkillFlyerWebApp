@@ -1,6 +1,5 @@
 const express = require("express");
 const topicRouter = express.Router();
-const subtopicRouter = require("./subtopics");
 const profanityChecker = require("leo-profanity");
 
 // Load Topic model
@@ -43,5 +42,4 @@ topicRouter.get("/", (req, res) => {
   });
 });
 
-topicRouter.use("/:topic_name/", subtopicRouter);
 module.exports = topicRouter;

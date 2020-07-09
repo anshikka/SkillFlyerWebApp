@@ -20,7 +20,6 @@ export const getAllVideos = (subtopic) => (dispatch) => {
     .post("/api/videos", subtopic)
     .then((res) => {
       dispatch(dispatchVideosData(res.data));
-      console.log(res.data)
     })
     .catch((err) =>
       dispatch({
@@ -32,7 +31,7 @@ export const getAllVideos = (subtopic) => (dispatch) => {
 
 export const getVideo = (video_id) => (dispatch) => {
   axios
-    .get("/api/videos" + video_id)
+    .get("/api/videos/" + video_id)
     .then((res) => {
       dispatch(dispatchVideoData(res.data));
     })

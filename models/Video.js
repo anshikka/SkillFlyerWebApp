@@ -7,11 +7,6 @@ const VideoSchema = new Schema({
     type: String,
     required: true,
   },
-  topic_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "topics",
-    required: true,
-  },
   subtopic_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "subtopics",
@@ -43,5 +38,13 @@ const VideoSchema = new Schema({
     type: String,
     required: false,
   },
+  topic_name: {
+    type: String,
+    required: true,
+  },
+  subtopic_name: {
+    type: String,
+    required: true
+  }
 });
 module.exports = Video = mongoose.model("videos", VideoSchema);

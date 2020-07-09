@@ -13,14 +13,18 @@ import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
 class SubtopicGrid extends Component {
   componentDidMount() {
     this.topicName = this.props.match.params.topicName;
-    this.props.getAllSubtopics(this.topicName);
+    this.topicId = this.props.location.state.topicId;
+    this.props.getAllSubtopics({ topic_id: this.topicId });
   }
   render() {
     const { subtopics } = this.props.subtopics;
     if (subtopics.length > 0) {
       return (
         <div id="subtopic-grid-body">
-          <DashboardBreadcrumbs pageType="subtopics" topicName={this.topicName} />
+          <DashboardBreadcrumbs
+            pageType="subtopics"
+            topicName={this.topicName}
+          />
           <Grid id="subtopic-grid-container" container spacing={10}>
             {subtopics.map((subtopic) => (
               <Grid
@@ -31,7 +35,10 @@ class SubtopicGrid extends Component {
               >
                 <Container className="subtopic-card-container">
                   <Link
-                    to={`/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`}
+                    to={{
+                      pathname: `/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`,
+                      state: { subtopicId: subtopic._id },
+                    }}
                   >
                     <SubtopicCard
                       name={subtopic.subtopic_name}

@@ -49,7 +49,7 @@ class Dashboard extends Component {
             />
             <Route
               exact
-              path="/dashboard/:topicName/:subtopicName/:videoId"
+              path="/dashboard/:topicName/:subtopicName/videos/:videoId"
               component={VideoPlayer}
             />
           </Switch>

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -80,7 +81,10 @@ const VideoCardComponent = ({
   preTitle,
   preTitleColor = "white",
   title,
-  videoUrl,
+  topicName,
+  subtopicName,
+  videoId,
+  subtopicId,
   titleColor = "white",
   overlayColor = "rgba(46, 49, 49, 0.8)",
   watchButton,
@@ -105,11 +109,16 @@ const VideoCardComponent = ({
           {title && <Title color={titleColor}>{title}</Title>}
         </span>
         {watchButton && (
-          <a href={videoUrl}>
+          <Link
+          to={{
+            pathname: `/dashboard/${topicName}/${subtopicName}/videos/${videoId}`,
+            state: { subtopicId: subtopicId },
+          }}
+        >
             <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>
               <WatchButtonText>{watchButton}</WatchButtonText>
             </WatchButton>
-          </a>
+          </Link>
         )}
       </Content>
     )}

@@ -14,18 +14,18 @@ import {
   getUserDislikedVideo,
 } from "../../actions/authActions";
 import { getVideoVotes, upvote, downvote } from "../../actions/videoActions";
-import { getAllFolders, addVideoToFolder, deleteVideoFromFolder } from "../../actions/folderActions";
+import {
+  getAllFolders,
+  addVideoToFolder,
+  deleteVideoFromFolder,
+} from "../../actions/folderActions";
 
 class VoteBox extends Component {
   componentDidMount() {
     this.props.getUserLikedVideo(this.props.userId, this.props.videoId);
     this.props.getUserDislikedVideo(this.props.userId, this.props.videoId);
-    this.props.getVideoVotes(
-      this.props.topicName,
-      this.props.subtopicName,
-      this.props.videoId
-    );
-    this.props.getAllFolders({user_id: this.props.userId});
+    this.props.getVideoVotes(this.props.videoId);
+    this.props.getAllFolders({ user_id: this.props.userId });
   }
   like = () => {
     const { liked_video } = this.props.auth;
@@ -37,37 +37,27 @@ class VoteBox extends Component {
         this.props.videoId
       );
       this.props.addToLikedVideos(this.props.userId, this.props.videoId);
-      this.props.upvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.upvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.addVideoToFolder({video_id: this.props.videoId, folder_id: folders[0]._id});
+      this.props.upvote(this.props.videoId);
+      this.props.upvote(this.props.videoId);
+      this.props.addVideoToFolder({
+        video_id: this.props.videoId,
+        folder_id: folders[0]._id,
+      });
     } else if (liked_video && !disliked_video) {
       this.props.removeFromLikedVideos(this.props.userId, this.props.videoId);
-      this.props.downvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.deleteVideoFromFolder({video_id: this.props.videoId, folder_id: folders[0]._id});
+      this.props.downvote(this.props.videoId);
+      this.props.deleteVideoFromFolder({
+        video_id: this.props.videoId,
+        folder_id: folders[0]._id,
+      });
     } else {
       this.props.addToLikedVideos(this.props.userId, this.props.videoId);
-      this.props.upvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.addVideoToFolder({video_id: this.props.videoId, folder_id: folders[0]._id});
-
+      this.props.upvote(this.props.videoId);
+      this.props.addVideoToFolder({
+        video_id: this.props.videoId,
+        folder_id: folders[0]._id,
+      });
     }
-
-
   };
 
   dislike = () => {
@@ -77,37 +67,22 @@ class VoteBox extends Component {
     if (!disliked_video && liked_video) {
       this.props.removeFromLikedVideos(this.props.userId, this.props.videoId);
       this.props.addToDislikedVideos(this.props.userId, this.props.videoId);
-      this.props.downvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.downvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
-      this.props.deleteVideoFromFolder({video_id: this.props.videoId, folder_id: folders[0]._id});
-
+      this.props.downvote(this.props.videoId);
+      this.props.downvote(this.props.videoId);
+      this.props.deleteVideoFromFolder({
+        video_id: this.props.videoId,
+        folder_id: folders[0]._id,
+      });
     } else if (disliked_video && !liked_video) {
       this.props.removeFromDislikedVideos(
         this.props.userId,
         this.props.videoId
       );
-      this.props.upvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
+      this.props.upvote(this.props.videoId);
     } else {
       this.props.addToDislikedVideos(this.props.userId, this.props.videoId);
-      this.props.downvote(
-        this.props.topicName,
-        this.props.subtopicName,
-        this.props.videoId
-      );
+      this.props.downvote(this.props.videoId);
     }
- 
   };
 
   render() {
@@ -134,7 +109,7 @@ VoteBox.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   video: state.video,
-  folders: state.folders
+  folders: state.folders,
 });
 
 export default connect(mapStateToProps, {
@@ -149,5 +124,5 @@ export default connect(mapStateToProps, {
   getVideoVotes,
   addVideoToFolder,
   deleteVideoFromFolder,
-  getAllFolders
+  getAllFolders,
 })(VoteBox);

@@ -14,10 +14,9 @@ import "./VideoGrid.css";
 
 class VideoGrid extends Component {
   componentDidMount() {
-    this.props.getAllVideos(
-      this.props.match.params.topicName,
-      this.props.match.params.subtopicName
-    );
+    this.props.getAllVideos({
+      subtopic_id: this.props.location.state.subtopicId,
+    });
   }
   state = {
     isOpened: false,
@@ -33,19 +32,17 @@ class VideoGrid extends Component {
     } else if (prevProps.errors !== this.props.errors) {
       toast.info(this.props.errors.message);
     }
-    this.props.getAllVideos(
-      this.props.match.params.topicName,
-      this.props.match.params.subtopicName
-    );
+    this.props.getAllVideos({
+      subtopic_id: this.props.location.state.subtopicId,
+    });
   }
 
   submitVideo = (video) => {
     this.props.addVideo(video);
     this.handleAddVideo();
-    this.props.getAllVideos(
-      this.props.match.params.topicName,
-      this.props.match.params.subtopicName
-    );
+    this.props.getAllVideos({
+      subtopic_id: this.props.location.state.subtopicId,
+    });
   };
 
   render() {
@@ -64,6 +61,7 @@ class VideoGrid extends Component {
                 <Container>
                   <VideoCard
                     videoId={video._id}
+                    subtopicId={video.subtopic_id}
                     topicName={this.props.match.params.topicName}
                     subtopicName={this.props.match.params.subtopicName}
                     title={video.title}
@@ -84,6 +82,7 @@ class VideoGrid extends Component {
             user={this.props.auth.user}
             topicName={this.props.match.params.topicName}
             subtopicName={this.props.match.params.subtopicName}
+            subtopicId = {this.props.location.state.subtopicId}
             open={this.state.isOpened}
             metaExists={true}
             onClose={this.handleAddVideo}
@@ -112,6 +111,7 @@ class VideoGrid extends Component {
               subtopicName={this.props.match.params.subtopicName}
               open={this.state.isOpened}
               metaExists={true}
+              subtopicId={this.props.location.state.subtopicId}
               onClose={this.handleAddVideo}
             />
           </div>
@@ -133,6 +133,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   videos: state.videos,
   video: state.video,
-  errors: state.errors
+  errors: state.errors,
 });
 export default connect(mapStateToProps, { getAllVideos, addVideo })(VideoGrid);

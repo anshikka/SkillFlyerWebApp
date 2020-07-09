@@ -56,14 +56,19 @@ class FolderGrid extends Component {
           {folders.map((folder) => (
             <Grid className="folder-card-grid-item" key={folder._id} item xs>
               <Container className="folder-card-container">
-                <Link to={`/dashboard/folders/${folder._id}`}>
+                <Link
+                  to={{
+                    pathname: `/dashboard/folders/${folder.folder_name}`,
+                    state: {folderName: folder.folder_name, folderId: folder._id},
+                  }}
+                >
                   <FolderCard
                     deleteFolder={this.deleteFolder}
                     user={this.props.auth.user}
                     folderId={folder._id}
                     name={folder.folder_name}
-                    length = {folder.videos.length}
-                    isRequired = {folder.is_required}
+                    length={folder.videos.length}
+                    isRequired={folder.is_required}
                   />
                 </Link>
               </Container>
@@ -71,7 +76,7 @@ class FolderGrid extends Component {
           ))}
         </Grid>
         <div className="add-folder-button">
-          <AddButton className = "add-button" onClick={this.handleAddFolder} />
+          <AddButton className="add-button" onClick={this.handleAddFolder} />
         </div>
         <AddFolderModal
           submitFolder={this.submitFolder}

@@ -22,9 +22,10 @@ class VideoPlayer extends Component {
   componentDidMount() {
     this.topicName = this.props.match.params.topicName;
     this.subtopicName = this.props.match.params.subtopicName;
+    this.subtopicId = this.props.location.state.subtopicId;
     const videoId = this.props.match.params.videoId;
-    this.props.getAllVideos(this.topicName, this.subtopicName);
-    this.props.getVideo(this.topicName, this.subtopicName, videoId);
+    this.props.getAllVideos({subtopic_id: this.subtopicId});
+    this.props.getVideo(videoId);
     this.props.getAllFolders({ user_id: this.props.auth.user.id });
   }
 
@@ -66,8 +67,8 @@ class VideoPlayer extends Component {
       <div className="video-player-container">
         <DashboardBreadcrumbs
           pageType="video"
-          topicName={this.topicName}
-          subtopicName={this.subtopicName}
+          topicName={video.topic_name}
+          subtopicName={video.subtopic_name}
         />
         <div>
           <Container className="player">

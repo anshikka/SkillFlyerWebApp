@@ -1,6 +1,5 @@
 const express = require("express");
 const userRouter = express.Router({ mergeParams: true });
-const folderRouter = require("./folders");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -241,6 +240,5 @@ userRouter.delete("/removeFromDislikedVideos", (req, res) => {
   });
 });
 
-userRouter.use("/folders/", folderRouter);
 
 module.exports = userRouter;

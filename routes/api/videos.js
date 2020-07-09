@@ -66,12 +66,10 @@ function validateVideoID(video_id) {
 // @desc add video
 // @access Public
 videoRouter.post("/addVideo", async (req, res) => {
-  s_id = await getSubtopicId(req.body.subtopic_name);
-  t_id = await getTopicId(req.body.topic_name);
+  s_id = req.body.subtopic_id;
   Video.findOne({
     youtube_url: req.body.youtube_url,
     subtopic_id: s_id,
-    topic_id: t_id,
   }).then((video) => {
     if (video) {
       return res
@@ -99,13 +97,14 @@ videoRouter.post("/addVideo", async (req, res) => {
           const newVideo = new Video({
             youtube_url: req.body.youtube_url,
             youtube_id: extractIdFromYouTubeVideo(req.body.youtube_url),
-            topic_id: t_id,
             subtopic_id: s_id,
             votes: 0,
             title: meta.title,
             added_by: req.body.added_by,
             thumbnail_url: meta.thumbnails.medium.url,
             description: meta.description,
+            topic_name: req.body.topic_name,
+            subtopic_name: req.body.subtopic_name
           });
 
           newVideo.save().then(() =>
@@ -139,15 +138,14 @@ videoRouter.get("/:_id", (req, res) => {
   }
 });
 
-videoRouter.get("/", async (req, res) => {
-  const subtopic = await getSubtopicId(req.params.subtopic_name);
-  const topic = await getTopicId(req.params.topic_name);
+videoRouter.post("/", (req, res) => {
+  const subtopic = req.body.subtopic_id;
   // Find Videos by subtopic id
-  Video.find({ topic_id: topic, subtopic_id: subtopic }).then((videos) => {
+  Video.find({ subtopic_id: subtopic }).then((videos) => {
     // Check if videos exists
     if (videos.length == 0) {
       return res
-        .status(404)
+        .status(200)
         .json({ videsonotfound: "There are no videos under this subtopic!" });
     } else {
       return res.status(200).json(videos);
@@ -155,31 +153,31 @@ videoRouter.get("/", async (req, res) => {
   });
 });
 
-videoRouter.post("/:_id/upvote", (req, res) => {
-  const videoId = req.params._id;
+videoRouter.post("/upvote", (req, res) => {
+  const videoId = req.body.video_id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
-    res.json({ message: "Video upvoted!" })
+    res.status(200).json({ message: "Video upvoted!" })
   );
 });
 
-videoRouter.post("/:_id/undoUpvote", (req, res) => {
-  const videoId = req.params._id;
+videoRouter.post("/undoUpvote", (req, res) => {
+  const videoId = req.body.video_id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
-    res.json({ message: "Video upvote removed!" })
+    res.status(200).json({ message: "Video upvote removed!" })
   );
 });
 
-videoRouter.post("/:_id/downvote", (req, res) => {
-  const videoId = req.params._id;
+videoRouter.post("/downvote", (req, res) => {
+  const videoId = req.body.video_id
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: -1 } }).then(
-    res.json({ message: "Video downvoted!" })
+    res.status(200).json({ message: "Video downvoted!" })
   );
 });
 
-videoRouter.post("/:_id/undoDownvote", (req, res) => {
-  const videoId = req.params._id;
+videoRouter.post("/undoDownvote", (req, res) => {
+  const videoId = req.body.video_id;
   Video.findOneAndUpdate({ _id: videoId }, { $inc: { votes: 1 } }).then(
-    res.json({ message: "Video downvote removed!" })
+    res.status(200).json({ message: "Video downvote removed!" })
   );
 });
 

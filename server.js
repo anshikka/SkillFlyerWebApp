@@ -8,7 +8,6 @@ const topics = require("./routes/api/topics");
 const subtopics = require("./routes/api/subtopics");
 const videos = require("./routes/api/videos");
 const folders = require("./routes/api/folders");
-const Video = require("./models/Video");
 // Bodyparser middleware
 app.use(
   bodyParser.urlencoded({

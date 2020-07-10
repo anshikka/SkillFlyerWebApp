@@ -8,6 +8,7 @@ class VideoCard extends Component {
   confirmCopied = () => {
     toast.info("Link copied to clipboard!");
   };
+  
   render() {
     return (
       <VideoCardComponent

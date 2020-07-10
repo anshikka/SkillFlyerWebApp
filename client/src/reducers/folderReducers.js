@@ -7,14 +7,16 @@ import {
   VIDEO_DELETED_FROM_FOLDER,
   VIDEO_ADDED_TO_FOLDER,
   FOLDER_ADDED,
+  FOLDER_LOADED,
 } from "../actions/types";
 
 const initialState = {
-  videos: [],
   folders: [],
+  videos: [],
   loading: false,
   loaded: false,
   status: {},
+  folder: {}
 };
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -31,6 +33,13 @@ export default function (state = initialState, action) {
         loading: true,
         loaded: false,
       };
+    case FOLDER_LOADED: 
+    return {
+      ...state,
+      loading: false,
+      loaded: true,
+      folder: action.payload
+    }
     case FOLDER_CONTENT_LOADED:
       return {
         ...state,

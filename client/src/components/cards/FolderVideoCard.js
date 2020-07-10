@@ -1,46 +1,67 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getVideo } from "../../actions/videoActions"
+import {
+  deleteVideoFromFolder,
+} from "../../actions/folderActions";
 import VideoCardComponent from "./VideoCardComponent";
 import { toast } from "react-toastify";
 import "./VideoCard.css";
+import DeletableFolderVideoCardComponent from "./DeletableFolderVideoCardComponent";
 
 class FolderVideoCard extends Component {
-  componentDidMount() {
-    this.props.getVideo(this.props.videoId);
-  }
-
-
   confirmCopied = () => {
     toast.info("Link copied to clipboard!");
   };
+  remove = (videoId) => {
+    this.props.deleteVideoFromFolder({
+      video_id: videoId,
+      folder_id: this.props.folderId,
+    });
+    this.props.reload();
+  };
   render() {
-    const { video } = this.props.video;
-    return (
- 
-      <VideoCardComponent
-        id={video._id}
-        bgPhoto={video.thumbnail_url}
-        watchButton="&#xF144; Watch Now"
-        topicName={video.topic_name}
-        subtopicName={video.subtopic_name}
-        subtopicId={video.subtopic_id}
-        videoId = {video._id}
-        title={video.title}
-        rank = "&#xF1F8;"
-      />
-    );
+    if (!this.props.required) {
+      return (
+        <DeletableFolderVideoCardComponent
+          bgPhoto={this.props.thumbnailUrl}
+          watchButton="&#xF144; Watch Now"
+          topicName={this.props.topicName}
+          subtopicName={this.props.subtopicName}
+          subtopicId={this.props.subtopicId}
+          videoId={this.props.videoId}
+          title={this.props.title}
+          remove={this.remove}
+          rank={true}
+        />
+      );
+    } else {
+      return (
+        <VideoCardComponent
+          bgPhoto={this.props.thumbnailUrl}
+          rank={"Liked"}
+          watchButton="&#xF144; Watch Now"
+          videoId={this.props.videoId}
+          subtopicId={this.props.subtopicId}
+          topicName={this.props.topicName}
+          subtopicName={this.props.subtopicName}
+          title={this.props.title}
+        />
+      );
+    }
   }
 }
 
 FolderVideoCard.propTypes = {
   videoId: PropTypes.string.isRequired,
-  video: PropTypes.object.isRequired
-  
+  video: PropTypes.object.isRequired,
+  folders: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state, ownProps) => ({
-    video: state.video,
+  video: state.video,
+  folders: state.folders,
 });
 
-export default connect(mapStateToProps, { getVideo })(FolderVideoCard);
+export default connect(mapStateToProps, {
+  deleteVideoFromFolder,
+})(FolderVideoCard);

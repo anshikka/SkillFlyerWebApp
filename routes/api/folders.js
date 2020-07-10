@@ -6,9 +6,6 @@ const profanityChecker = require("leo-profanity");
 const Folder = require("../../models/Folder");
 const Video = require("../../models/Video");
 
-function retrieveVideoDetails(videoId) {
-  
-}
 // @route POST api/
 // @desc add topic
 // @access Public
@@ -54,9 +51,22 @@ folderRouter.post("/getFolder", (req, res) => {
   Folder.findOne({ _id: f_id }).then( (folder) => {
     // Check if folder exists
     if (folder) {
+      return res.status(200).json(folder);
+    } else {
+      return res.status(404).json({ message: "Folder not found" });
+    }
+  });
+});
+
+folderRouter.post("/getVideosInFolder", (req, res) => {
+  const f_id = req.body.folder_id;
+  // Find folder by name and user id -> returns all videos in folder
+  Folder.findOne({ _id: f_id }).then( (folder) => {
+    // Check if folder exists
+    if (folder) {
       videos = [];
       var retrieveVideos = new Promise((resolve, reject) => {
-        folder.videos.forEach((videoId, idx, array) => {
+        folder.videos.forEach((videoId) => {
           return Video.findOne({ _id: videoId }).then((video) => {
             videos.push(video);
             if (videos.length === folder.videos.length) resolve();

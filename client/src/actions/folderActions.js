@@ -8,6 +8,7 @@ import {
   VIDEO_ADDING_TO_FOLDER,
   VIDEO_ADDED_TO_FOLDER,
   FOLDER_ADDED,
+  FOLDER_LOADED,
   FOLDER_ADDING,
   VIDEO_DELETED_FROM_FOLDER,
   VIDEO_DELETING_FROM_FOLDER,
@@ -30,9 +31,21 @@ export const getAllFolders = (user) => (dispatch) => {
     );
 };
 
-export const getFolderContent = (folderDetails) => (dispatch) => {
+export const getFolder = (folderDetails) => (dispatch) => {
+  axios.post("/api/folders/getFolder", folderDetails)
+  .then((res) => {
+    dispatch(dispatchFolder(res.data));
+  })
+  .catch((err) => 
+  dispatch({
+    type: GET_ERRORS,
+    payload: err.response.data
+  }))
+}
+
+export const getFolderVideos = (folderDetails) => (dispatch) => {
   axios
-    .post("/api/folders/getFolder", folderDetails)
+    .post("/api/folders/getVideosInFolder", folderDetails)
     .then((res) => {
       dispatch(dispatchFolderContent(res.data));
     })
@@ -119,6 +132,13 @@ export const dispatchFolderContent = (folder_data) => {
     payload: folder_data,
   };
 };
+
+export const dispatchFolder = (folder) => {
+  return {
+    type: FOLDER_LOADED,
+    payload: folder
+  }
+}
 
 export const setFolderContentLoading = () => {
   return {

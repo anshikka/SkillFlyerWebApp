@@ -1,26 +1,46 @@
-import { getFolderContent } from "../../actions/folderActions";
-import { getVideo } from "../../actions/videoActions";
+import { getFolderVideos, getFolder } from "../../actions/folderActions";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import VideoCard from "../cards/VideoCard";
+import FolderVideoCard from "../cards/FolderVideoCard";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import noVideosPlaceholder from "./assets/no-videos.png";
 import "./VideoGrid.css";
+import { toast } from "react-toastify";
 
 class FolderVideoGrid extends Component {
   componentDidMount() {
-    this.props.getFolderContent({
+    this.props.getFolderVideos({
       folder_id: this.props.location.state.folderId,
     });
+    this.props.getFolder({
+      folder_id: this.props.location.state.folderId
+    });
     
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.folders.status != this.props.folders.status){
+      toast.info(this.props.folders.status.message);
+      this.reload();
+    }
+  }
+
+  reload = () => {
+    this.props.getFolderVideos({
+      folder_id: this.props.location.state.folderId,
+    });
+    this.props.getFolder({
+      folder_id: this.props.location.state.folderId
+    });
   }
 
 
   render() {
     const { videos } = this.props.folders;
-    console.log(videos);
+    const { folder } = this.props.folders;
+    
     if (videos.length > 0) {
       return (
         <div>
@@ -28,7 +48,7 @@ class FolderVideoGrid extends Component {
             {videos.map((video, index) => (
               <Grid className="video-card-grid-item" item xs key={index}>
                 <Container>
-                <VideoCard
+                <FolderVideoCard
                     videoId={video._id}
                     subtopicId={video.subtopic_id}
                     topicName={video.topic_name}
@@ -37,7 +57,9 @@ class FolderVideoGrid extends Component {
                     description={video.description}
                     thumbnailUrl={video.thumbnail_url}
                     addedBy={video.added_by}
-                    rank={index}
+                    required={folder.is_required}
+                    folderId = {folder._id}
+                    reload={this.reload}
                   />
                 </Container>
               </Grid>
@@ -62,15 +84,13 @@ class FolderVideoGrid extends Component {
 }
 
 FolderVideoGrid.propTypes = {
-  getFolderContent: PropTypes.func.isRequired,
+  getFolderVideos: PropTypes.func.isRequired,
   folders: PropTypes.object.isRequired,
   errors: PropTypes.object,
-  video: PropTypes.object
 };
 const mapStateToProps = (state) => ({
   folders: state.folders,
   errors: state.errors,
   auth: state.auth,
-  video: state.video
 });
-export default connect(mapStateToProps, { getFolderContent, getVideo })(FolderVideoGrid);
+export default connect(mapStateToProps, { getFolderVideos, getFolder })(FolderVideoGrid);

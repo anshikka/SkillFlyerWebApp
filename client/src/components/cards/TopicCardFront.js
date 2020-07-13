@@ -16,8 +16,8 @@ import "./TopicCard.css";
 class TopicCardFront extends Component {
   render() {
     return (
-      <div id="card">
-        <Card id="card-root">
+      <div className="topic-card">
+        <Card className="topic-card-root">
           <Link
             to={{
               pathname: `/dashboard/${this.props.name}`,
@@ -26,13 +26,13 @@ class TopicCardFront extends Component {
           >
             <CardActionArea>
               <CardMedia
-                id="card-media"
+                className="topic-card-media"
                 image={this.props.photoUrl}
                 title={this.props.name}
               />
               <CardContent>
                 <Typography
-                  id="topic-name"
+                  className="topic-name"
                   gutterBottom
                   variant="h5"
                   component="h2"

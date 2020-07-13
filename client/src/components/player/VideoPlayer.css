@@ -3,58 +3,56 @@
   overflow-y: hidden;
   height: 92vh;
 }
-.player {
+.video-player-container .player {
   float: left !important;
   width: 65% !important;
   margin-bottom: 0;
 }
-.side-video-player {
+.video-player-container .side-video-player {
   width: 35% !important;
-  margin-left: 2.5%;
   float: right;
   height: 100vh;
   margin-bottom: 0;
 }
-.player .youtube-player {
+.video-player-container .player .youtube-player {
   padding-top: 3em;
   height: 80vh;
   width: 100%;
 }
-.related-videos {
+.video-player-container .side-video-player .meta .related-videos {
   overflow-y: auto;
   height: 45vh;
 }
-.related-videos li {
+.video-player-container .side-video-player .meta .related-videos li {
   padding-bottom: 1em;
 }
-.meta .video-information .title {
+.video-player-container .side-video-player .meta .video-information .title {
   color: black;
 }
-.meta .video-information .rank {
+.video-player-container .side-video-player .meta .video-information .rank {
   font-size: large;
   display: inline-flex;
 }
 
-.vote-icon {
-  margin-right: 2px;
-}
-.player .video-information .added-by {
+
+.video-player-container .side-video-player .meta  .video-information .added-by {
   float: right;
 }
 
-.player .video-information {
+.video-player-container .side-video-player .meta .video-information {
   margin-top: 1vh;
 }
 
-.vote-box .votes {
+.video-player-container .side-video-player .meta .video-information .vote-box .votes {
   font-size: large;
 }
-.meta .video-information p {
+
+.video-player-container .side-video-player .meta .video-information p {
   height: 20vh;
   overflow-y: auto;
 }
 
-.meta .video-information .add-to-folder {
+.video-player-container .side-video-player .meta .video-information .add-to-folder {
   float: right;
   font-size: medium;
 }

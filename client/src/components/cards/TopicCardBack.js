@@ -14,18 +14,18 @@ import "./TopicCard.css";
 class TopicCardBack extends Component {
   render() {
     return (
-      <div id="card">
-        <Card id="card-root">
+      <div className="topic-card">
+        <Card className="topic-card-root">
           <Link
             to={{
               pathname: `/dashboard/${this.props.name}`,
               state: { topicId: this.props.topicId },
             }}
           >
-            <CardActionArea id="topic-card-back-content">
+            <CardActionArea className="topic-card-back-content">
               <CardContent>
                 <Typography
-                  id="topic-description"
+                  className="topic-description"
                   gutterBottom
                   variant="h5"
                   component="h2"

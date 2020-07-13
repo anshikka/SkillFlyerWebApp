@@ -4,68 +4,60 @@
   margin-top: 12.5vh;
 }
 
-.add-video-form {
+.add-video-modal .add-video-modal-root .form-body .add-video-form {
   margin: 2% auto;
   padding: 2% 4%;
   background: #f4f7f8;
   border-radius: 8px;
+  font-size: large;
 }
 
 .add-video-modal .add-video-modal-root .form-body {
   width: 50% !important;
-  float: left;
   height: 75vh !important;
   display: inline-block;
 }
-.add-video-modal-root {
+.add-video-modal .add-video-modal-root {
   width: 80% !important;
   max-width: none !important;
   height: 90% !important;
   background-color: #f4f7f8;
+  max-height: 75vh !important;
+  vertical-align: middle;
 }
-.video-preview {
+.add-video-modal .add-video-modal-root .video-preview {
   width: 50% !important;
   float: right;
   vertical-align: middle;
   margin-top: 13vh;
 }
-.youtube-player {
+.add-video-modal .add-video-modal-root .youtube-player {
   display: inline-flex;
   width: 100%;
   vertical-align: middle;
 }
-.add-video-modal-root {
-  max-height: 75vh !important;
-  vertical-align: middle;
-}
-.add-video-form {
-  font-size: large;
-}
-.submit-video-button {
+
+
+.add-video-modal .add-video-modal-root .submit-video-button {
   width: 100%;
   background-color: #00416a !important;
   color: white !important;
   height: 6vh;
 }
 
-fieldset {
+.add-video-modal .add-video-modal-root .form-body .add-video-form fieldset {
   border-radius: 10px;
   border-color: #00416a;
   padding-bottom: 5%;
   margin-bottom: 5%;
 }
 
-legend {
+.add-video-modal .add-video-modal-root .form-body .add-video-form legend {
   font-size: x-large;
   text-align: center;
 }
 
-label {
+.add-video-modal .add-video-modal-root .form-body .add-video-form label {
   font-size: medium;
   text-align: left;
-}
-
-.add-video-modal .title {
-  text-align: center;
-  color: #00416a;
 }

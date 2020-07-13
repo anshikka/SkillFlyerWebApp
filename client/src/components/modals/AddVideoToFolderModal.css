@@ -3,47 +3,44 @@
   margin-top: 12.5vh;
 }
 
-.add-video-form {
+.add-video-to-folder-modal .add-video-to-folder-modal-root .add-video-form {
   margin: 2% auto;
   padding: 2% 4%;
   background: #f4f7f8;
   border-radius: 8px;
 }
 
-.add-video-modal-root {
+.add-video-to-folder-modal .add-video-to-folder-modal-root {
   background-color: #f4f7f8;
-}
-.add-video-modal-root {
   vertical-align: middle;
 }
-.add-video-form {
+.add-video-to-folder-modal .add-video-modal-to-folder-root .form-body .add-video-form {
   font-size: large;
 }
-.submit-video-button {
+.add-video-to-folder-modal .add-video-to-folder-modal-root .form-body .add-video-form .submit-video-button {
   width: 100%;
   background-color: #00416a !important;
   color: white !important;
   height: 6vh;
 }
 
-fieldset {
+.add-video-to-folder-modal .add-video-modal-to-folder-root .form-body .add-video-form fieldset {
   border-radius: 10px;
   border-color: #00416a;
   padding-bottom: 5%;
   margin-bottom: 5%;
 }
 
-legend {
+.add-video-to-folder-modal .add-video-to-folder-modal-root .form-body .add-video-form legend {
   font-size: x-large;
   text-align: center;
 }
 
-label {
+.add-video-to-folder-modal .add-video-to-folder-modal-root .form-body .add-video-form label {
   font-size: medium;
   text-align: left;
 }
 
-.add-video-modal .title {
-  text-align: center;
-  color: #00416a;
+.add-video-to-folder-modal .add-video-to-folder-modal-root .form-body .add-video-form .submit-video-button {
+  margin-top: 2vh;
 }

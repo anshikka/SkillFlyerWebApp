@@ -14,9 +14,9 @@ class TopicGrid extends Component {
   render() {
     const { topics } = this.props.topics;
     return (
-      <div>
+      <div className = "topic-grid-root">
         <DashboardBreadcrumbs pageType="topics" />
-        <Grid id="topic-grid-container" container spacing={10}>
+        <Grid className="topic-grid-container" container spacing={10}>
           {topics.map((topic) => (
             <Grid className="topic-card-grid-item" item xs key={topic._id}>
               <TopicCard

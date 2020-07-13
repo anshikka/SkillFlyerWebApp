@@ -17,8 +17,8 @@ class FolderCard extends Component {
   render() {
     if (this.props.isRequired) {
       return (
-        <div className="folder-card">
-          <div className="card">
+        <div className="folder-card-root">
+          <div className="folder-card">
             <div className="overlay"></div>
             <div className="content">
               <h4>{this.props.name}</h4>
@@ -31,16 +31,16 @@ class FolderCard extends Component {
       );
     } else {
       return (
-        <div className="folder-card">
-          <div className="card">
+        <div className="folder-card-root">
+          <div className="folder-card">
             <div className="overlay"></div>
             <div className="content">
               <h4>{this.props.name}</h4>
             </div>
-            <div class="video-count">
+            <div className="video-count">
               <VideoCountChip length={this.props.length} />
             </div>
-            <div class="delete" onClick={(e) => this.onDelete(e)}>
+            <div className="delete" onClick={(e) => this.onDelete(e)}>
               <i>
                 <DeleteOutlineIcon />
               </i>

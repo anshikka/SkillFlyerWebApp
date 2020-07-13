@@ -43,8 +43,8 @@ class FolderVideoGrid extends Component {
     
     if (videos.length > 0) {
       return (
-        <div>
-          <Grid id="video-grid-container" container spacing={10}>
+        <div className = "video-grid-root">
+          <Grid className ="video-grid-container" container spacing={10}>
             {videos.map((video, index) => (
               <Grid className="video-card-grid-item" item xs key={index}>
                 <Container>

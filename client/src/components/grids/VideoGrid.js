@@ -49,13 +49,13 @@ class VideoGrid extends Component {
     const { videos } = this.props.videos;
     if (videos.length > 0) {
       return (
-        <div>
+        <div className = "video-grid-root">
           <DashboardBreadcrumbs
             pageType="video"
             topicName={this.props.match.params.topicName}
             subtopicName={this.props.match.params.subtopicName}
           />
-          <Grid id="video-grid-container" container spacing={10}>
+          <Grid className="video-grid-container" container spacing={10}>
             {videos.map((video, index) => (
               <Grid className="video-card-grid-item" item xs key={video._id}>
                 <Container>

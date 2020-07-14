@@ -19,6 +19,8 @@ app.use(
 );
 app.use(bodyParser.json());
 
+app.use(express.static('./client/build'));
+
 // DB Config
 const db = require("./config/keys").mongoURI;
 
@@ -40,6 +42,9 @@ app.use("/api/topics", topics);
 app.use("/api/subtopics", subtopics);
 app.use("/api/videos", videos);
 app.use("/api/folders", folders);
+app.use(function(req, res) {
+	res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 // Port config for deployment
 const port = process.env.PORT || 5000;

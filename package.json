@@ -1,7 +1,6 @@
 {
   "name": "skillflyerwebapp",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -42,5 +41,6 @@
     "jsdoc": "^3.6.4",
     "jsdoc-route-plugin": "^0.1.0",
     "nodemon": "^2.0.4"
-  }
+  },
+  "description": ""
 }

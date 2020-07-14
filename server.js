@@ -20,7 +20,7 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.use(express.static('./client/build'));
+app.use(express.static('client/build'));
 
 // DB Config
 const db = require("./config/keys").mongoURI;

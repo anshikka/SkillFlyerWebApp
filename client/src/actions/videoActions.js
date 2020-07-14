@@ -15,9 +15,11 @@ import {
 } from "./types";
 
 // Topic - get all videos
-export const getAllVideos = (subtopic) => (dispatch) => {
+export const getAllVideos = (subtopicId) => (dispatch) => {
   axios
-    .post("/api/videos", subtopic)
+    .get("/api/videos", {
+      params: { subtopic_id: subtopicId },
+    })
     .then((res) => {
       dispatch(dispatchVideosData(res.data));
     })
@@ -76,11 +78,11 @@ export const addVideo = (video) => (dispatch) => {
       })
     );
 };
-export const upvote = (video) => (dispatch) => {
+export const upvote = (videoId) => (dispatch) => {
   axios
     .post(
       "/api/videos/upvote",
-      video 
+      {video_id: videoId} 
     )
     .then((res) => {
       dispatch(dispatchUpvote(res.data));
@@ -93,11 +95,11 @@ export const upvote = (video) => (dispatch) => {
     );
 };
 
-export const downvote = (video) => (dispatch) => {
+export const downvote = (videoId) => (dispatch) => {
   axios
     .post(
       "/api/videos/downvote",
-      video
+      {video_id: videoId}
     )
     .then((res) => {
       dispatch(dispatchDownvote(res.data));

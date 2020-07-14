@@ -9,7 +9,6 @@ class FolderCard extends Component {
     e.preventDefault();
     const deletedFolder = {
       folder_id: this.props.folderId,
-      user_id: this.props.user.id,
       is_required: this.props.isRequired,
     };
     this.props.deleteFolder(deletedFolder);

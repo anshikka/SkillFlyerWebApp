@@ -25,7 +25,7 @@ class VoteBox extends Component {
     this.props.getUserLikedVideo(this.props.userId, this.props.videoId);
     this.props.getUserDislikedVideo(this.props.userId, this.props.videoId);
     this.props.getVideoVotes(this.props.videoId);
-    this.props.getAllFolders({ user_id: this.props.userId });
+    this.props.getAllFolders(this.props.userId);
   }
   like = () => {
     const { liked_video } = this.props.auth;
@@ -39,24 +39,15 @@ class VoteBox extends Component {
       this.props.addToLikedVideos(this.props.userId, this.props.videoId);
       this.props.upvote(this.props.videoId);
       this.props.upvote(this.props.videoId);
-      this.props.addVideoToFolder({
-        video_id: this.props.videoId,
-        folder_id: folders[0]._id,
-      });
+      this.props.addVideoToFolder(this.props.videoId, folders[0]._id);
     } else if (liked_video && !disliked_video) {
       this.props.removeFromLikedVideos(this.props.userId, this.props.videoId);
       this.props.downvote(this.props.videoId);
-      this.props.deleteVideoFromFolder({
-        video_id: this.props.videoId,
-        folder_id: folders[0]._id,
-      });
+      this.props.deleteVideoFromFolder(this.props.videoId, folders[0]._id);
     } else {
       this.props.addToLikedVideos(this.props.userId, this.props.videoId);
       this.props.upvote(this.props.videoId);
-      this.props.addVideoToFolder({
-        video_id: this.props.videoId,
-        folder_id: folders[0]._id,
-      });
+      this.props.addVideoToFolder(this.props.videoId, folders[0]._id);
     }
   };
 
@@ -69,10 +60,7 @@ class VoteBox extends Component {
       this.props.addToDislikedVideos(this.props.userId, this.props.videoId);
       this.props.downvote(this.props.videoId);
       this.props.downvote(this.props.videoId);
-      this.props.deleteVideoFromFolder({
-        video_id: this.props.videoId,
-        folder_id: folders[0]._id,
-      });
+      this.props.deleteVideoFromFolder(this.props.videoId, folders[0]._id);
     } else if (disliked_video && !liked_video) {
       this.props.removeFromDislikedVideos(
         this.props.userId,

@@ -14,7 +14,7 @@ class SubtopicGrid extends Component {
   componentDidMount() {
     this.topicName = this.props.match.params.topicName;
     this.topicId = this.props.location.state.topicId;
-    this.props.getAllSubtopics({ topic_id: this.topicId });
+    this.props.getAllSubtopics(this.topicId);
   }
   render() {
     const { subtopics } = this.props.subtopics;

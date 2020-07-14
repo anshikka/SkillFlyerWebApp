@@ -16,7 +16,7 @@ import {
   USER_ADDING_TO_DISLIKED_VIDEOS,
   USER_REMOVING_FROM_DISLIKED_VIDEOS,
   USER_REMOVING_FROM_LIKED_VIDEOS,
-  USER_REMOVED_VIDEO_FROM_DISLIKED_VIDEOS
+  USER_REMOVED_VIDEO_FROM_DISLIKED_VIDEOS,
 } from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
@@ -123,6 +123,7 @@ export const dispatchUserDislikedVideo = (res) => {
     payload: res,
   };
 };
+
 export const addToLikedVideos = (userId, videoId) => (dispatch) => {
   axios
     .post("/api/users/addToLikedVideos", { user_id: userId, video_id: videoId })
@@ -146,7 +147,10 @@ export const dispatchAddToLikedVideos = (res) => {
 
 export const removeFromLikedVideos = (userId, videoId) => (dispatch) => {
   axios
-    .delete("/api/users/removeFromLikedVideos", { data: {user_id: userId, video_id: videoId } })
+    .put("/api/users/removeFromLikedVideos", {
+      user_id: userId,
+      video_id: videoId,
+    })
     .then((res) => {
       dispatch(dispatchRemoveFromLikedVideos(res.data));
     })
@@ -168,8 +172,9 @@ export const addToDislikedVideos = (userId, videoId) => (dispatch) => {
     .post("/api/users/addToDislikedVideos", {
       user_id: userId,
       video_id: videoId,
-    }).then((res) => {
-      dispatch(dispatchAddToDislikedVideos(res.data))
+    })
+    .then((res) => {
+      dispatch(dispatchAddToDislikedVideos(res.data));
     })
     .catch((err) =>
       dispatch({
@@ -182,18 +187,18 @@ export const addToDislikedVideos = (userId, videoId) => (dispatch) => {
 export const dispatchAddToDislikedVideos = (res) => {
   return {
     type: USER_ADDED_VIDEO_TO_DISLIKED_VIDEOS,
-    payload: res
-  }
-}
+    payload: res,
+  };
+};
 
 export const removeFromDislikedVideos = (userId, videoId) => (dispatch) => {
   axios
-    .delete("/api/users/removeFromDislikedVideos", { data: {
+    .put("/api/users/removeFromDislikedVideos", {
       user_id: userId,
       video_id: videoId,
-    }
-    }).then((res) => {
-      dispatch(dispatchRemoveFromDislikedVideos(res.data))
+    })
+    .then((res) => {
+      dispatch(dispatchRemoveFromDislikedVideos(res.data));
     })
     .catch((err) =>
       dispatch({
@@ -206,9 +211,9 @@ export const removeFromDislikedVideos = (userId, videoId) => (dispatch) => {
 export const dispatchRemoveFromDislikedVideos = (res) => {
   return {
     type: USER_REMOVED_VIDEO_FROM_DISLIKED_VIDEOS,
-    payload: res
-  }
-}
+    payload: res,
+  };
+};
 
 export const userAddedToLikedVideosLoading = () => {
   return {
@@ -222,7 +227,6 @@ export const userRemovedFromLikedVideosLoading = () => {
   };
 };
 
-
 export const userAddedToDislikedVideosLoading = () => {
   return {
     type: USER_ADDING_TO_DISLIKED_VIDEOS,
@@ -234,7 +238,6 @@ export const userRemovedFromDislikedVideosLoading = () => {
     type: USER_REMOVING_FROM_DISLIKED_VIDEOS,
   };
 };
-
 
 export const userLikedVideoLoading = () => {
   return {

@@ -2,9 +2,11 @@ import axios from "axios";
 import { GET_ERRORS, SUBTOPICS_LOADING, SUBTOPICS_LOADED } from "./types";
 
 // Topic - get all topics
-export const getAllSubtopics = (topic) => (dispatch) => {
+export const getAllSubtopics = (topicId) => (dispatch) => {
   axios
-    .post("/api/subtopics", topic)
+    .get("/api/subtopics", {params: {
+      topic_id: topicId
+    },})
     .then((res) => {
       dispatch(dispatchSubtopicData(res.data));
     })

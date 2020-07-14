@@ -14,8 +14,6 @@ export const getUser = (userId) => (dispatch) => {
     );
 };
 
-
-
 // Dispatch user name
 export const dispatchUser = (user) => {
   return {
@@ -29,4 +27,3 @@ export const userLoading = () => {
     type: USER_LOADING,
   };
 };
-

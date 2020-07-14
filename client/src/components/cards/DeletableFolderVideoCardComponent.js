@@ -36,10 +36,6 @@ const RankContainer = styled.div`
   color: ${(props) => props.tagColor};
 `;
 
-const RankText = styled.span`
-  color: #00416a;
-`;
-
 const Content = styled.div`
   width: 100%;
   display: inline;
@@ -100,7 +96,11 @@ var DeletableVideoCardComponent = ({
 }) => (
   <Container bgPhoto={bgPhoto} bgColor={bgColor} overlayColor={overlayColor}>
     {rank && (
-      <RankContainer onClick={(e) => remove(videoId)} bgColor={rankBg} color={rankColor}>
+      <RankContainer
+        onClick={(e) => remove(videoId)}
+        bgColor={rankBg}
+        color={rankColor}
+      >
         <i>
           <DeleteOutlineIcon />
         </i>

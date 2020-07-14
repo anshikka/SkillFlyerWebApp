@@ -1,13 +1,22 @@
 const express = require("express");
 const topicRouter = express.Router();
 const profanityChecker = require("leo-profanity");
-
-// Load Topic model
 const Topic = require("../../models/Topic");
 
-// @route POST api/
-// @desc add topic
-// @access Public
+/** @module api/topics */
+
+/**
+ * Add a topic.
+ *
+ * @name Topic Add
+ *
+ * @route {POST} /topics/addTopic
+ *
+ * @bodyparam {String} [topic_name] Name of topic.
+ * @bodyparam {String} [added_by] User ID adding topic.
+ * @bodyparam {String} [photo_url] Photo of Topic.
+ * @bodyparam {String} [description] Description of topic.
+ */
 topicRouter.post("/addTopic", (req, res) => {
   Topic.findOne({
     topic_name: req.body.topic_name,
@@ -28,14 +37,19 @@ topicRouter.post("/addTopic", (req, res) => {
     }
   });
 });
-// @route GET api/topics
-// @desc return all topics
-// @access Public
+
+/**
+ * Get all topics.
+ *
+ * @name Topics Get
+ *
+ * @route {GET} /topics/
+ */
 topicRouter.get("/", (req, res) => {
   Topic.find({}).then((topics) => {
     // Check if topics exists
     if (topics.length == 0) {
-      return res.status(404).json({ topicsonotfound: "There are no topics!" });
+      return res.status(404).json({ message: "There are no topics!" });
     } else {
       return res.status(200).json(topics);
     }

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Chip from "@material-ui/core/Chip";
 
 class UserChip extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getUser(this.props.user_id);
   }
   componentDidUpdate(prevProps) {

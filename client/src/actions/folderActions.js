@@ -17,9 +17,9 @@ import {
 } from "./types";
 
 // Topic - get all topics
-export const getAllFolders = (user) => (dispatch) => {
+export const getAllFolders = (userId) => (dispatch) => {
   axios
-    .post("/api/folders/", user)
+    .get("/api/folders/", {params: {user_id: userId}})
     .then((res) => {
       dispatch(dispatchFolderData(res.data));
     })
@@ -31,8 +31,8 @@ export const getAllFolders = (user) => (dispatch) => {
     );
 };
 
-export const getFolder = (folderDetails) => (dispatch) => {
-  axios.post("/api/folders/getFolder", folderDetails)
+export const getFolder = (folderId) => (dispatch) => {
+  axios.get("/api/folders/" + folderId)
   .then((res) => {
     dispatch(dispatchFolder(res.data));
   })
@@ -43,9 +43,9 @@ export const getFolder = (folderDetails) => (dispatch) => {
   }))
 }
 
-export const getFolderVideos = (folderDetails) => (dispatch) => {
+export const getFolderVideos = (folderId) => (dispatch) => {
   axios
-    .post("/api/folders/getVideosInFolder", folderDetails)
+    .get("/api/folders/" + folderId + "/videos")
     .then((res) => {
       dispatch(dispatchFolderContent(res.data));
     })
@@ -71,8 +71,8 @@ export const addFolder = (folderDetails) => (dispatch) => {
     );
 };
 
-export const addVideoToFolder = (videoDetails) => (dispatch) => {
-    axios.post("/api/folders/addVideo", videoDetails).then((res)=> {
+export const addVideoToFolder = (video) => (dispatch) => {
+    axios.post("/api/folders/addVideo", video).then((res)=> {
         dispatch(dispatchAddVideoToFolder(res.data));
     })
     .catch((err) =>
@@ -83,8 +83,8 @@ export const addVideoToFolder = (videoDetails) => (dispatch) => {
     );
 }
 
-export const deleteVideoFromFolder = (videoDetails) => (dispatch) => {
-    axios.put("/api/folders/deleteVideo", videoDetails).then((res)=> {
+export const deleteVideoFromFolder = (video) => (dispatch) => {
+    axios.put("/api/folders/deleteVideo", video).then((res)=> {
         dispatch(dispatchDeleteVideoFromFolder(res.data));
     })
     .catch((err) =>

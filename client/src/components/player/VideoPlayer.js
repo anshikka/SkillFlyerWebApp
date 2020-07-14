@@ -24,9 +24,9 @@ class VideoPlayer extends Component {
     this.subtopicName = this.props.match.params.subtopicName;
     this.subtopicId = this.props.location.state.subtopicId;
     const videoId = this.props.match.params.videoId;
-    this.props.getAllVideos({subtopic_id: this.subtopicId});
+    this.props.getAllVideos(this.subtopicId);
     this.props.getVideo(videoId);
-    this.props.getAllFolders({ user_id: this.props.auth.user.id });
+    this.props.getAllFolders(this.props.auth.user.id);
   }
 
   _onReady(event) {

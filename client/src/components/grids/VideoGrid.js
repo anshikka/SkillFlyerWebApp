@@ -14,9 +14,7 @@ import "./VideoGrid.css";
 
 class VideoGrid extends Component {
   componentDidMount() {
-    this.props.getAllVideos({
-      subtopic_id: this.props.location.state.subtopicId,
-    });
+    this.props.getAllVideos(this.props.location.state.subtopicId);
   }
   state = {
     isOpened: false,
@@ -32,17 +30,13 @@ class VideoGrid extends Component {
     } else if (prevProps.errors !== this.props.errors) {
       toast.info(this.props.errors.message);
     }
-    this.props.getAllVideos({
-      subtopic_id: this.props.location.state.subtopicId,
-    });
+    this.props.getAllVideos(this.props.location.state.subtopicId);
   }
 
   submitVideo = (video) => {
     this.props.addVideo(video);
     this.handleAddVideo();
-    this.props.getAllVideos({
-      subtopic_id: this.props.location.state.subtopicId,
-    });
+    this.props.getAllVideos(this.props.location.state.subtopicId);
   };
 
   render() {

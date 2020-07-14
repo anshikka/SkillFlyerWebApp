@@ -1,29 +1,27 @@
 const express = require("express");
 const subtopicRouter = express.Router({ mergeParams: true });
 const profanityChecker = require("leo-profanity");
-
-// Load Subtopic model
 const Subtopic = require("../../models/Subtopic");
-const Topic = require("../../models/Topic");
 
-function getTopicId(name) {
-  return Topic.findOne({ topic_name: name }).then((topic) => {
-    if (topic) {
-      return topic._id;
-    } else {
-      console.log("No topic found with name: " + name);
-    }
-  });
-}
+/** @module api/subtopics */
 
-// @route POST api/:topic:/
-// @desc add subtopic
-// @access Public
-subtopicRouter.post("/addSubtopic", async (req, res) => {
-  t_id = await getTopicId(req.body.topic_id);
+/**
+ * Add a subtopic.
+ *
+ * @name Subtopic Add
+ *
+ * @route {POST} /subtopics/addSubtopic
+ *
+ * @bodyparam {String} [subtopic_name] Name of subtopic.
+ * @bodyparam {String} [topic_id] Parent topic's ID.
+ * @bodyparam {String} [added_by] User ID adding subtopic.
+ * @bodyparam {String} [photo_url] Photo of subtopic.
+ * @bodyparam {String} [description] Description of subtopic.
+ */
+subtopicRouter.post("/addSubtopic", (req, res) => {
   Subtopic.findOne({
     subtopic_name: req.body.subtopic_name,
-    topic_id: t_id,
+    topic_id: req.body.subtopic_id,
   }).then((subtopic) => {
     if (subtopic) {
       return res.status(400).json({ message: "Subtopic already exists!" });
@@ -35,7 +33,7 @@ subtopicRouter.post("/addSubtopic", async (req, res) => {
       }
       const newSubtopic = new Subtopic({
         subtopic_name: req.body.subtopic_name,
-        topic_id: t_id,
+        topic_id: req.body.topic_id,
         added_by: req.body.user_id,
         description: req.body.description,
         photo_url: req.body.photo_url,
@@ -45,12 +43,17 @@ subtopicRouter.post("/addSubtopic", async (req, res) => {
   });
 });
 
-// @route GET api/subtopics/
-// @desc return all subtopics based on topic
-// @access Public
-subtopicRouter.post("/", async (req, res) => {
-  t_id = req.body.topic_id;
-  Subtopic.find({ topic_id: t_id }).then((subtopics) => {
+/**
+ * Get all subtopics under a topic.
+ *
+ * @name Subtopics Get
+ *
+ * @route {GET} /subtopics/
+ *
+ * @queryparam {String} [topic_id] Parent topic's ID.
+ */
+subtopicRouter.get("/", (req, res) => {
+  Subtopic.find({ topic_id: req.query.topic_id }).then((subtopics) => {
     // Check if topic exists
     if (subtopics.length == 0) {
       return res

@@ -1,5 +1,14 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
+
+/** @module validation/login */
+
+/**
+ * Validate email and password data passed in by user.
+ * @param {object} data - Login data for a user (email and password).
+ *
+ * @returns {object} An error object and validity value (true or false).
+ */
 module.exports = function validateLoginInput(data) {
   let errors = {};
   // Convert empty fields to an empty string so we can use validator functions

@@ -1,5 +1,14 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
+
+/** @module validation/register */
+
+/**
+ * Validate registration data passed in by user.
+ * @param {object} data - Registration data for a new user (name, email, password, and education).
+ *
+ * @returns {object} An error object and validity value (true or false).
+ */
 module.exports = function validateRegisterInput(data) {
   let errors = {};
   // Convert empty fields to an empty string so we can use validator functions

@@ -3,16 +3,25 @@ const userRouter = express.Router({ mergeParams: true });
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-// Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
-// Load User model
 const User = require("../../models/User");
 const Folder = require("../../models/Folder");
 
-// @route POST api/users/register
-// @desc Register user
-// @access Public
+/** @module api/users */
+
+/**
+ * Create a user.
+ *
+ * @name User Add
+ *
+ * @route {POST} /users/register
+ *
+ * @bodyparam {String} [name] User's full name.
+ * @bodyparam {String} [email] User's email.
+ * @bodyparam {String} [password] User's password.
+ * @bodyparam {String} [education_institution] User's school.
+ */
 userRouter.post("/register", (req, res) => {
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -52,13 +61,27 @@ userRouter.post("/register", (req, res) => {
   });
 });
 
+/**
+ * Get all users.
+ *
+ * @name User Get
+ *
+ * @route {GET} /users/
+ */
 userRouter.get("/", (req, res) => {
   return res.status(403).json({ message: "Forbidden" });
 });
 
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
+/**
+ * Log a user into SkillFlyer.
+ *
+ * @name User Login
+ *
+ * @route {POST} /users/login
+ *
+ * @bodyparam {String} [email] User's email.
+ * @bodyparam {String} [password] User's password.
+ */
 userRouter.post("/login", (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
@@ -106,9 +129,17 @@ userRouter.post("/login", (req, res) => {
   });
 });
 
+/**
+ * Get a user by ID.
+ *
+ * @name User Get
+ *
+ * @route {GET} /users/:_id
+ *
+ * @routeparam {String} :_id is the User's ID
+ */
 userRouter.post("/getUser", (req, res) => {
-  const userId = req.body.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+  User.findById(req.body.user_id).then((user) => {
     // Check if user exists
     if (user) {
       const payload = {
@@ -117,128 +148,181 @@ userRouter.post("/getUser", (req, res) => {
       };
       res.status(200).json(payload);
     } else {
-      const payload = {
-        name: "Deleted User",
-      };
-      res.status(404).json(payload);
+      res.status(404).json({ error: "User Deleted" });
     }
   });
 });
 
+/**
+ * Get weather a user liked a video.
+ *
+ * @name User Liked
+ *
+ * @route {GET} /users/inLikedVideos
+ *
+ * @queryparam {String} :_id is the User's ID.
+ * @queryparam {String} [video_id] Video ID.
+ */
 userRouter.get("/inLikedVideos", (req, res) => {
-  const videoId = req.query.video_id;
-  const userId = req.query.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+  User.findOne({ _id: req.query.user_id }).then((user) => {
     // Check if user exists
     if (user) {
-      if (user.liked_videos.includes(videoId)) {
+      if (user.liked_videos.includes(req.query.video_id)) {
         res.status(200).json({ video_liked: true });
       } else {
         res.status(200).json({ video_liked: false });
       }
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res.status(500).json({
+        error: "Server Error: Cannot check if video is in liked videos.",
+      });
     }
   });
 });
 
+/**
+ * Get weather a user disliked a video.
+ *
+ * @name User Disliked
+ *
+ * @route {GET} /users/inDislikedVideos
+ *
+ * @queryparam {String} [user_id] User's ID.
+ * @queryparam {String} [video_id] Video ID.
+ */
 userRouter.get("/inDislikedVideos", (req, res) => {
-  const videoId = req.query.video_id;
-  const userId = req.query.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+  User.findOne({ _id: req.query.user_id }).then((user) => {
     // Check if user exists
     if (user) {
-      if (user.disliked_videos.includes(videoId)) {
+      if (user.disliked_videos.includes(req.query.video_id)) {
         res.status(200).json({ video_disliked: true });
       } else {
         res.status(200).json({ video_disliked: false });
       }
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res.status(500).json({
+        error: "Server Error: Cannot check if video is in disliked videos.",
+      });
     }
   });
 });
 
+/**
+ * Add a video to user's liked videos.
+ *
+ * @name User Like
+ *
+ * @route {POST} /users/addToLikedVideos
+ *
+ * @bodyparam {String} [user_id] User's ID.
+ * @bodyparam {String} [video_id] Video ID.
+ */
 userRouter.post("/addToLikedVideos", (req, res) => {
-  const videoId = req.body.video_id;
-  const userId = req.body.user_id;
-
-  User.findOne({ _id: userId }).then((user) => {
+  User.findOne({ _id: req.body.user_id }).then((user) => {
     // Check if user exists
     if (user) {
       User.updateOne(
-        { _id: userId },
+        { _id: req.body.user_id },
         {
           $push: {
-            liked_videos: videoId,
+            liked_videos: req.body.video_id,
           },
         }
       ).then(res.json({ message: "Video added to liked videos!" }));
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res
+        .status(500)
+        .json({ error: "Server Error: Cannot add video to liked videos." });
     }
   });
 });
 
-userRouter.delete("/removeFromLikedVideos", (req, res) => {
-  const videoId = req.body.video_id;
-  const userId = req.body.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+/**
+ * Remove a video from user's liked videos.
+ *
+ * @name User Unlike
+ *
+ * @route {PUT} /users/removeFromLikedVideos
+ *
+ * @bodyparam {String} [user_id] User's ID.
+ * @bodyparam {String} [video_id] Video ID.
+ */
+userRouter.put("/removeFromLikedVideos", (req, res) => {
+  User.findOne({ _id: req.body.user_id }).then((user) => {
     // Check if user exists
     if (user) {
       User.updateOne(
-        { _id: userId },
+        { _id: req.body.user_id },
         {
           $pull: {
-            liked_videos: videoId,
+            liked_videos: req.body.video_id,
           },
         }
       ).then(res.json({ message: "Video removed from liked videos!" }));
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res
+        .status(500)
+        .json({ error: "Server Error: Cannot remove from liked videos." });
     }
   });
 });
 
+/**
+ * Add a video to user's disliked videos.
+ *
+ * @name User Dislike
+ *
+ * @route {POST} /users/addToDislikedVideos
+ *
+ * @bodyparam {String} [user_id] User's ID.
+ * @bodyparam {String} [video_id] Video ID.
+ */
 userRouter.post("/addToDislikedVideos", (req, res) => {
-  const videoId = req.body.video_id;
-  const userId = req.body.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+  User.findOne({ _id: req.body.user_id }).then((user) => {
     // Check if user exists
     if (user) {
       User.updateOne(
-        { _id: userId },
+        { _id: req.body.user_id },
         {
           $push: {
-            disliked_videos: videoId,
+            disliked_videos: req.body.video_id,
           },
         }
       ).then(res.json({ message: "Video added to disliked videos!" }));
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res.status(500).json({ error: "Server Error: Cannot dislike video." });
     }
   });
 });
 
-userRouter.delete("/removeFromDislikedVideos", (req, res) => {
-  const videoId = req.body.video_id;
-  const userId = req.body.user_id;
-  User.findOne({ _id: userId }).then((user) => {
+/**
+ * Remove a video from user's disliked videos.
+ *
+ * @name User Undislike
+ *
+ * @route {PUT} /users/removeFromDislikedVideos
+ *
+ * @bodyparam {String} [user_id] User's ID.
+ * @bodyparam {String} [video_id] Video ID.
+ */
+userRouter.put("/removeFromDislikedVideos", (req, res) => {
+  User.findOne({ _id: req.body.user_id }).then((user) => {
     // Check if user exists
     if (user) {
       User.updateOne(
-        { _id: userId },
+        { _id: req.body.user_id },
         {
           $pull: {
-            disliked_videos: videoId,
+            disliked_videos: req.body.video_id,
           },
         }
       ).then(res.json({ message: "Video removed from disliked videos!" }));
     } else {
-      res.status(500).json({ error: "Server Error" });
+      res
+        .status(500)
+        .json({ error: "Server Error: Cannot remove from disliked videos." });
     }
   });
 });
-
 
 module.exports = userRouter;

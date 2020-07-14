@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 
 class FolderGrid extends Component {
   componentDidMount() {
-    this.props.getAllFolders({ user_id: this.props.auth.user.id });
+    this.props.getAllFolders(this.props.auth.user.id);
   }
   state = {
     isOpened: false,
@@ -34,18 +34,18 @@ class FolderGrid extends Component {
       toast.info(this.props.errors.message);
       this.handleAddFolder();
     }
-    this.props.getAllFolders({ user_id: this.props.auth.user.id });
+    this.props.getAllFolders(this.props.auth.user.id);
   }
 
   submitFolder = (folder) => {
     this.props.addFolder(folder);
     this.handleAddFolder();
-    this.props.getAllFolders({ user_id: this.props.auth.user.id });
+    this.props.getAllFolders(this.props.auth.user.id);  
   };
 
   deleteFolder = (folder) => {
     this.props.deleteFolder(folder);
-    this.props.getAllFolders({ user_id: this.props.auth.user.id });
+    this.props.getAllFolders(this.props.auth.user.id);
   };
 
   render() {

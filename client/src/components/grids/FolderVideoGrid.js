@@ -11,29 +11,20 @@ import { toast } from "react-toastify";
 
 class FolderVideoGrid extends Component {
   componentDidMount() {
-    this.props.getFolderVideos({
-      folder_id: this.props.location.state.folderId,
-    });
-    this.props.getFolder({
-      folder_id: this.props.location.state.folderId
-    });
-    
+    this.props.getFolderVideos(this.props.location.state.folderId);
+    this.props.getFolder(this.props.location.state.folderId);
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.folders.status != this.props.folders.status){
+    if (prevProps.folders.status !== this.props.folders.status){
       toast.info(this.props.folders.status.message);
       this.reload();
     }
   }
 
   reload = () => {
-    this.props.getFolderVideos({
-      folder_id: this.props.location.state.folderId,
-    });
-    this.props.getFolder({
-      folder_id: this.props.location.state.folderId
-    });
+    this.props.getFolderVideos(this.props.location.state.folderId);
+    this.props.getFolder(this.props.location.state.folderId);
   }
 
 

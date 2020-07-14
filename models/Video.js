@@ -44,7 +44,7 @@ const VideoSchema = new Schema({
   },
   subtopic_name: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 module.exports = Video = mongoose.model("videos", VideoSchema);

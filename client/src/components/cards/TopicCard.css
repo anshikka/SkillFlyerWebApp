@@ -1,37 +1,37 @@
-#card-root {
+.topic-card .topic-card-root {
   border-radius: 0px !important;
 }
-#card-media {
+.topic-card .topic-card-root .topic-card-media {
   height: 8.75em;
 }
 
-#card h2 {
+.topic-card h2 {
   color: #00416a !important;
   text-align: center;
 }
-#card {
+.topic-card {
   max-width: 21.6em;
   margin: 0 auto;
   height: 19em;
 }
-#card button {
+.topic-card .topic-card-root button {
   background-color: white !important;
 }
-#topic-name {
+.topic-card .topic-card-root .topic-name{
   height: 3em;
   overflow-y: auto;
   line-height: 100%;
   text-align: center;
 }
 
-.topic-card-button-left {
+.topic-card .topic-card-root .topic-card-button-left {
   margin: 0 0 !important;
   min-width: 20px !important;
 }
-.topic-card-button-right {
+.topic-card .topic-card-root .topic-card-button-right {
   margin-left: 80% !important;
   min-width: 20px !important;
 }
-#topic-card-back-content {
+.topic-card .topic-card-root .topic-card-back-content {
   height: 85% !important;
 }

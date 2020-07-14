@@ -1,13 +1,10 @@
-#topic-grid-container {
+.topic-grid-root .topic-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
   margin: 0 auto;
 }
-#topic-grid-root {
-  width: 100%;
-}
-#topic-card-grid-item {
+.topic-grid-root .topic-grid-container .topic-card-grid-item {
   display: "flex";
 }
 /* width */

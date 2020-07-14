@@ -6,7 +6,6 @@ import {
 } from "../../actions/folderActions";
 import VideoCardComponent from "./VideoCardComponent";
 import { toast } from "react-toastify";
-import "./VideoCard.css";
 import DeletableFolderVideoCardComponent from "./DeletableFolderVideoCardComponent";
 
 class FolderVideoCard extends Component {

@@ -20,12 +20,12 @@ class SubtopicGrid extends Component {
     const { subtopics } = this.props.subtopics;
     if (subtopics.length > 0) {
       return (
-        <div id="subtopic-grid-body">
+        <div className="subtopic-grid-body">
           <DashboardBreadcrumbs
             pageType="subtopics"
             topicName={this.topicName}
           />
-          <Grid id="subtopic-grid-container" container spacing={10}>
+          <Grid className="subtopic-grid-container" container spacing={10}>
             {subtopics.map((subtopic) => (
               <Grid
                 className="subtopic-card-grid-item"

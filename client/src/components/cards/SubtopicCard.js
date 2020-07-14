@@ -6,11 +6,11 @@ class SubtopicCard extends Component {
   render() {
     return (
       <div>
-        <div class="col-md-4 subtopic">
-          <div class="card card-1">
+        <div class="col-md-4 subtopic-root">
+          <div class="subtopic-card card-1">
             <img
               alt={this.props.name + "-icon"}
-              className="logo"
+              className="icon"
               src={this.props.photoUrl}
             />
             <div id="title-and-desc">

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoCardComponent from "./VideoCardComponent";
 import { toast } from "react-toastify";
-import "./VideoCard.css";
 
 class VideoCard extends Component {
   confirmCopied = () => {

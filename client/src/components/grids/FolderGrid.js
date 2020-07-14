@@ -51,8 +51,8 @@ class FolderGrid extends Component {
   render() {
     const { folders } = this.props.folders;
     return (
-      <div id="folder-grid-body">
-        <Grid id="folder-grid-container" container spacing={10}>
+      <div className="folder-grid-body">
+        <Grid className="folder-grid-container" container spacing={10}>
           {folders.map((folder) => (
             <Grid className="folder-card-grid-item" key={folder._id} item xs>
               <Container className="folder-card-container">

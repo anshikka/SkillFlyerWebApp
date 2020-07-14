@@ -1,8 +1,8 @@
-.subtopic {
+.subtopic-root {
   width: 20em;
   color: #00416a;
 }
-.card {
+.subtopic-root .subtopic-card {
   border-radius: 4px;
   background: #fff;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
@@ -15,30 +15,30 @@
   text-align: center;
 }
 
-.card:hover {
+.subtopic-root .subtopic-card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
-.subtopic-card-name {
+.subtopic-root .subtopic-card .title-and-desc .subtopic-card-name {
   margin: 1rem 0 1rem 0;
   font-weight: 600;
   font-size: 2vw;
   overflow-x: auto;
   line-height: 140%;
 }
-.subtopic-card-description {
+.subtopic-root .subtopic-card .title-and-desc .subtopic-card-description {
   height: 45px;
   overflow: auto;
 }
-.title-and-desc {
+.subtopic-root .subtopic-card .title-and-desc {
   width: 100%;
 }
 
-.subtopic {
+.subtopic-root {
   width: 100%;
 }
-.logo {
+.subtopic-root .subtopic-card .icon {
   height: 3rem;
   width: 3rem;
 }

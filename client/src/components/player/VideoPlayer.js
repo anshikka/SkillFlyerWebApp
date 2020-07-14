@@ -86,7 +86,7 @@ class VideoPlayer extends Component {
                 label="11th October 2019"
                 size="medium"
               />
-              <UserChip user_id={video.added_by} />
+              <UserChip className="added-by" user_id={video.added_by} />
             </div>
           </Container>
           <Container className="side-video-player">

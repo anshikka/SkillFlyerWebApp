@@ -43,7 +43,7 @@ class AddVideoModal extends Component {
 
   loadYoutubeVideo = (e) => {
     const youtube_url = e.target.value;
-    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|v=|\?v=)([^#]*).*/;
     var match = youtube_url.match(regExp);
     if (match && match[2].length === 11) {
       this.setState(() => ({

@@ -35,11 +35,11 @@
 }
 
 
-.video-player-container .side-video-player .meta  .video-information .added-by {
+.video-player-container .player .video-information .added-by {
   float: right;
 }
 
-.video-player-container .side-video-player .meta .video-information {
+.video-player-container .side-video-player .video-information {
   margin-top: 1vh;
 }
 

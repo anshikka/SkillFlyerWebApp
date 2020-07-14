@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
+const router = require('express').Router();
 const passport = require("passport");
 const users = require("./routes/api/users");
 const topics = require("./routes/api/topics");
@@ -42,7 +43,7 @@ app.use("/api/topics", topics);
 app.use("/api/subtopics", subtopics);
 app.use("/api/videos", videos);
 app.use("/api/folders", folders);
-app.use(function(req, res) {
+router.use(function(req, res) {
 	res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 

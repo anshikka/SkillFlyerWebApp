@@ -6,6 +6,23 @@ const Subtopic = require("../../models/Subtopic");
 /** @module api/subtopics */
 
 /**
+ * Returns the ID of a topic from the topic name.
+ *
+ * @param {String} - Topic Name
+ *
+ * @returns {String} Topic ID retrieved by name from database.
+ */
+function getTopicId(name) {
+  return Topic.findOne({ topic_name: name }).then((topic) => {
+    if (topic) {
+      return topic._id;
+    } else {
+      return false;
+    }
+  });
+}
+
+/**
  * Add a subtopic.
  *
  * @name Subtopic Add
@@ -52,17 +69,22 @@ subtopicRouter.post("/addSubtopic", (req, res) => {
  *
  * @queryparam {String} [topic_id] Parent topic's ID.
  */
-subtopicRouter.get("/", (req, res) => {
-  Subtopic.find({ topic_id: req.query.topic_id }).then((subtopics) => {
-    // Check if topic exists
-    if (subtopics.length == 0) {
-      return res
-        .status(404)
-        .json({ message: "No subtopics exist under this topic!" });
-    } else {
-      return res.status(200).json(subtopics);
-    }
-  });
+subtopicRouter.get("/", async (req, res) => {
+  const topicId = await getTopicId(req.query.topic_name);
+  if (topicId === false) {
+    return res.status(404).json({ message: "This topic does not exist." });
+  } else {
+    Subtopic.find({ topic_id: topicId }).then((subtopics) => {
+      // Check if topic exists
+      if (subtopics.length == 0) {
+        return res
+          .status(404)
+          .json({ message: "No subtopics exist under this topic!" });
+      } else {
+        return res.status(200).json(subtopics);
+      }
+    });
+  }
 });
 
 module.exports = subtopicRouter;

@@ -85,6 +85,7 @@ const VideoCardComponent = ({
   subtopicName,
   videoId,
   subtopicId,
+  topicId,
   titleColor = "white",
   overlayColor = "rgba(46, 49, 49, 0.8)",
   watchButton,
@@ -112,7 +113,7 @@ const VideoCardComponent = ({
             <Link
               to={{
                 pathname: `/dashboard/${topicName}/${subtopicName}/videos/${videoId}`,
-                state: { subtopicId: subtopicId },
+                state: { subtopicId: subtopicId, topicId: topicId },
               }}
             >
               <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>

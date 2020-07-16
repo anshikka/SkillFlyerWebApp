@@ -14,7 +14,7 @@ import "./VideoGrid.css";
 
 class VideoGrid extends Component {
   componentDidMount() {
-    this.props.getAllVideos(this.props.location.state.subtopicId);
+    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
   }
   state = {
     isOpened: false,
@@ -30,13 +30,13 @@ class VideoGrid extends Component {
     } else if (prevProps.errors !== this.props.errors) {
       toast.info(this.props.errors.message);
     }
-    this.props.getAllVideos(this.props.location.state.subtopicId);
+    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
   }
 
   submitVideo = (video) => {
     this.props.addVideo(video);
     this.handleAddVideo();
-    this.props.getAllVideos(this.props.location.state.subtopicId);
+    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
   };
 
   render() {
@@ -48,6 +48,8 @@ class VideoGrid extends Component {
             pageType="video"
             topicName={this.props.match.params.topicName}
             subtopicName={this.props.match.params.subtopicName}
+            topicId={this.props.location.state.topicId}
+            subtopicId={this.props.location.state.subtopicId}
           />
           <Grid className="video-grid-container" container spacing={10}>
             {videos.map((video, index) => (
@@ -56,6 +58,7 @@ class VideoGrid extends Component {
                   <VideoCard
                     videoId={video._id}
                     subtopicId={video.subtopic_id}
+                    topicId={this.props.location.state.topicId}
                     topicName={this.props.match.params.topicName}
                     subtopicName={this.props.match.params.subtopicName}
                     title={video.title}

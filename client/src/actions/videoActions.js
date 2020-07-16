@@ -15,10 +15,10 @@ import {
 } from "./types";
 
 // Topic - get all videos
-export const getAllVideos = (subtopicId) => (dispatch) => {
+export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
   axios
     .get("/api/videos", {
-      params: { subtopic_id: subtopicId },
+      params: { topic_name: topicName, subtopic_name: subtopicName },
     })
     .then((res) => {
       dispatch(dispatchVideosData(res.data));

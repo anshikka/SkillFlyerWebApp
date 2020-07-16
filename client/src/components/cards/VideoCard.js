@@ -16,6 +16,7 @@ class VideoCard extends Component {
         watchButton="&#xF144; Watch Now"
         videoId = {this.props.videoId}
         subtopicId = {this.props.subtopicId}
+        topicId = {this.props.topicId}
         topicName = {this.props.topicName}
         subtopicName = {this.props.subtopicName}
         title={this.props.title}

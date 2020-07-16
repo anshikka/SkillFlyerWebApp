@@ -158,11 +158,12 @@ videoRouter.get("/:_id", (req, res) => {
  *
  * @route {GET} /videos/
  *
- * @queryparam {String} [subtopic_id] is the unique identifier of each subtopic on SkillFlyer.
+ * @queryparam {String} [topic_name] is the unique identifier of a topic on SkillFlyer.
+ * @queryparam {String} [subtopic_name] is the identifier of a subtopic on SkillFlyer.
  */
 videoRouter.get("/", (req, res) => {
   // Find Videos by subtopic id
-  Video.find({ subtopic_id: req.query.subtopic_id }).then((videos) => {
+  Video.find({ topic_name: req.query.topic_name, subtopic_name: req.query.subtopic_name }).then((videos) => {
     // Check if videos exists
     if (videos.length == 0) {
       return res

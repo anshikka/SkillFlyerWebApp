@@ -20,11 +20,8 @@ import "./VideoPlayer.css";
 
 class VideoPlayer extends Component {
   componentDidMount() {
-    this.topicName = this.props.match.params.topicName;
-    this.subtopicName = this.props.match.params.subtopicName;
-    this.subtopicId = this.props.location.state.subtopicId;
     const videoId = this.props.match.params.videoId;
-    this.props.getAllVideos(this.subtopicId);
+    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
     this.props.getVideo(videoId);
     this.props.getAllFolders(this.props.auth.user.id);
   }

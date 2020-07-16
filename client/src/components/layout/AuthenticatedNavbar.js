@@ -20,11 +20,9 @@ class AuthenticatedNavbar extends Component {
 
   handleClick = () => {
     this.setState(() => ({ anchorEl: true }));
-    console.log("opened")
   };
   handleClose = () => {
     this.setState(() => ({ anchorEl: false }));
-    console.log("close")
   };
 
 

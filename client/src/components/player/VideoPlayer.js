@@ -124,8 +124,8 @@ class VideoPlayer extends Component {
               </Container>
               {
                 <Container>
-                  <h5>Related Videos</h5>
-                  <hr />
+                  <h5 className = "related-videos-title">Related Videos</h5>
+                
                   <ul className="related-videos">
                     {videos.map((video, index) => (
                       <li>

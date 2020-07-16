@@ -14,7 +14,7 @@ class SubtopicCard extends Component {
               src={this.props.photoUrl}
             />
             <div id="title-and-desc">
-              <h3 className="subtopic-card-name">{this.props.name}</h3>
+              <b><text className="subtopic-card-name">{this.props.name}</text></b>
               <p className="subtopic-card-description">
                 {this.props.description}
               </p>

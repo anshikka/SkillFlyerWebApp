@@ -35,7 +35,7 @@ class VideoPlayer extends Component {
   };
 
   submitVideoToFolder = (video) => {
-    this.props.addVideoToFolder(video);
+    this.props.addVideoToFolder(video.video_id, video.folder_id);
     this.handleAddVideoToFolder();
   }
 

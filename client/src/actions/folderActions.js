@@ -71,8 +71,8 @@ export const addFolder = (folderDetails) => (dispatch) => {
     );
 };
 
-export const addVideoToFolder = (video) => (dispatch) => {
-    axios.post("/api/folders/addVideo", video).then((res)=> {
+export const addVideoToFolder = (videoId, folderId) => (dispatch) => {
+    axios.post("/api/folders/addVideo", {video_id: videoId, folder_id: folderId}).then((res)=> {
         dispatch(dispatchAddVideoToFolder(res.data));
     })
     .catch((err) =>
@@ -83,8 +83,8 @@ export const addVideoToFolder = (video) => (dispatch) => {
     );
 }
 
-export const deleteVideoFromFolder = (video) => (dispatch) => {
-    axios.put("/api/folders/deleteVideo", video).then((res)=> {
+export const deleteVideoFromFolder = (videoId, folderId) => (dispatch) => {
+    axios.put("/api/folders/deleteVideo", {video_id: videoId, folder_id: folderId}).then((res)=> {
         dispatch(dispatchDeleteVideoFromFolder(res.data));
     })
     .catch((err) =>

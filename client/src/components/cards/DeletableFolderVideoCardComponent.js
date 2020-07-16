@@ -15,10 +15,11 @@ const Container = styled.div`
     `linear-gradient(${props.overlayColor}, ${props.overlayColor}), url(${props.bgPhoto})`};
   background-repeat: no-repeat;
   background-size: 100%;
-  padding-bottom: 40px;
-  padding-left: 40px;
-  padding-top: 20px;
-  padding-right: 20px;
+  padding-bottom: 2vh;
+  margin-bottom: 1vh;
+  padding-left: 1vw;
+  padding-top: 0.75vh;
+  padding-right: 0.5vw;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -27,7 +28,7 @@ const Container = styled.div`
 
 const RankContainer = styled.div`
   background-color: ${(props) => props.bgColor};
-  font-size: large;
+  font-size: 0.75vw;
   font-weight: 500;
   text-transform: uppercase;
   width: 20%;
@@ -45,7 +46,7 @@ const Content = styled.div`
 
 const WatchButton = styled.span`
   cursor: pointer;
-  padding: 10px 30px;
+  padding: 1vh 1vw;
   border-radius: 25px;
   width: 25%;
   z-index: 9;
@@ -55,15 +56,15 @@ const WatchButton = styled.span`
 
 const WatchButtonText = styled.span`
   font-weight: 500;
-  font-size: medium;
+  font-size: 1vw;
 `;
 
 const Title = styled.span`
   display: block;
-  font-size: x-large;
+  font-size: 1.3vw;
   font-weight: 700;
-  margin-top: 8px;
-  padding-bottom: 10px;
+  margin-bottom: 1.5vh;
+  padding-bottom: 2.5vh;
   color: ${(props) => props.color};
   height: 12vh;
   overflow-y: auto;

@@ -21,19 +21,27 @@
 }
 .video-player-container .side-video-player .meta .related-videos {
   overflow-y: auto;
-  height: 45vh;
+  height: 24vh;
 }
 .video-player-container .side-video-player .meta .related-videos li {
   padding-bottom: 1em;
 }
 .video-player-container .side-video-player .meta .video-information .title {
   color: black;
+  font-size: 2vw;
+  font-weight: 600;
+  height: 12.3vh;
+  overflow-y: auto;
 }
 .video-player-container .side-video-player .meta .video-information .rank {
-  font-size: large;
+  font-size: 1.25vw;
   display: inline-flex;
 }
 
+.video-player-container .side-video-player .meta .related-videos-title {
+  font-size: 1.3vw;
+  text-align: center;
+}
 
 .video-player-container .player .video-information .added-by {
   float: right;
@@ -49,6 +57,7 @@
 
 .video-player-container .side-video-player .meta .video-information p {
   height: 20vh;
+  font-size: 1vw;
   overflow-y: auto;
 }
 

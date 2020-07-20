@@ -7,6 +7,41 @@ const Video = require("../../models/Video");
 /** @module api/videos */
 
 /**
+ * Returns the ID of a topic from the topic name.
+ *
+ * @param {String} - Topic Name
+ *
+ * @returns {String} Topic ID retrieved by name from database.
+ */
+
+function getTopicId(name) {
+  return Topic.findOne({ topic_name: name }).then((topic) => {
+    if (topic) {
+      return topic._id;
+    } else {
+      return false;
+    }
+  });
+}
+/**
+ * Returns the ID of a subtopic from the topic ID and subtopoic name.
+ *
+ * @param {String} - Topic Name
+ * @param {String} - Subtopic Name
+ *
+ * @returns {String} Subtopic ID retrieved by name from database.
+ */
+function getSubtopicId(topicId, subtopicName) {
+  return Subtopic.findOne({ topic_id: topicId, subtopic_name: subtopicName }).then(subtopic => {
+    if (subtopic) {
+      return subtopic._id;
+    } else {
+      console.log("No such subtopic with name!");
+    }
+  });
+}
+
+/**
  * Returns the ID of a YouTube video from the YouTube video URL.
  *
  * @param {String} - YouTube URL
@@ -74,13 +109,16 @@ function validateVideoID(video_id) {
  * @route {POST} /videos/addVideo
  *
  * @bodyparam {String} [youtube_url] URL for YouTube Video.
- * @bodyparam {String} [subtopic_id] Subtopic ID to include YouTube video in.
+ * @bodyparam {String} [topic_name] Overarching topic name for YouTube video.
+ * @bodyparam {String} [subtopic_name] Subtopic name to include YouTube video in.
  */
 videoRouter.post("/addVideo", async (req, res) => {
   const youtubeId = extractIdFromYouTubeVideo(req.body.youtube_url);
+  const topicId = getTopicId(req.body.topic_name)
+  const subtopicId = getSubtopicId(topicId, req.body.subtopic_name)
   Video.findOne({
     youtube_id: youtubeId,
-    subtopic_id: req.body.subtopic_id,
+    subtopic_id: subtopicId,
   }).then((video) => {
     if (video) {
       return res
@@ -105,7 +143,7 @@ videoRouter.post("/addVideo", async (req, res) => {
           const newVideo = new Video({
             youtube_url: req.body.youtube_url,
             youtube_id: youtubeId,
-            subtopic_id: req.body.subtopic_id,
+            subtopic_id: subtopicId,
             votes: 0,
             title: meta.title,
             added_by: req.body.added_by,

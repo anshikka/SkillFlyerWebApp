@@ -48,8 +48,6 @@ class VideoGrid extends Component {
             pageType="video"
             topicName={this.props.match.params.topicName}
             subtopicName={this.props.match.params.subtopicName}
-            topicId={this.props.location.state.topicId}
-            subtopicId={this.props.location.state.subtopicId}
           />
           <Grid className="video-grid-container" container spacing={10}>
             {videos.map((video, index) => (
@@ -58,7 +56,6 @@ class VideoGrid extends Component {
                   <VideoCard
                     videoId={video._id}
                     subtopicId={video.subtopic_id}
-                    topicId={this.props.location.state.topicId}
                     topicName={this.props.match.params.topicName}
                     subtopicName={this.props.match.params.subtopicName}
                     title={video.title}
@@ -79,7 +76,6 @@ class VideoGrid extends Component {
             user={this.props.auth.user}
             topicName={this.props.match.params.topicName}
             subtopicName={this.props.match.params.subtopicName}
-            subtopicId = {this.props.location.state.subtopicId}
             open={this.state.isOpened}
             metaExists={true}
             onClose={this.handleAddVideo}
@@ -108,7 +104,6 @@ class VideoGrid extends Component {
               subtopicName={this.props.match.params.subtopicName}
               open={this.state.isOpened}
               metaExists={true}
-              subtopicId={this.props.location.state.subtopicId}
               onClose={this.handleAddVideo}
             />
           </div>

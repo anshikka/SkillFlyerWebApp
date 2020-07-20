@@ -11,7 +11,6 @@ import { Container } from "@material-ui/core";
 class AddVideoModal extends Component {
   state = {
     youtube_id: "",
-    subtopicId: this.props.subtopicId,
     topicName: this.props.topicName,
     subtopicName: this.props.subtopicName,
     youtube_link: "",
@@ -20,7 +19,6 @@ class AddVideoModal extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const newVideo = {
-      subtopic_id: this.state.subtopicId,
       youtube_url: this.state.youtube_link,
       added_by: this.props.user.id,
       topic_name: this.state.topicName,

@@ -66,6 +66,7 @@ class VideoPlayer extends Component {
           pageType="video"
           topicName={video.topic_name}
           subtopicName={video.subtopic_name}
+          subtopicId={video.subtopic_id}
         />
         <div>
           <Container className="player">

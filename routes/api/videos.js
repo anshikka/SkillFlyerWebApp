@@ -32,7 +32,10 @@ function getTopicId(name) {
  * @returns {String} Subtopic ID retrieved by name from database.
  */
 function getSubtopicId(topicId, subtopicName) {
-  return Subtopic.findOne({ topic_id: topicId, subtopic_name: subtopicName }).then(subtopic => {
+  return Subtopic.findOne({
+    topic_id: topicId,
+    subtopic_name: subtopicName,
+  }).then((subtopic) => {
     if (subtopic) {
       return subtopic._id;
     } else {
@@ -114,8 +117,8 @@ function validateVideoID(video_id) {
  */
 videoRouter.post("/addVideo", async (req, res) => {
   const youtubeId = extractIdFromYouTubeVideo(req.body.youtube_url);
-  const topicId = getTopicId(req.body.topic_name)
-  const subtopicId = getSubtopicId(topicId, req.body.subtopic_name)
+  const topicId = await getTopicId(req.body.topic_name);
+  const subtopicId = await getSubtopicId(topicId, req.body.subtopic_name);
   Video.findOne({
     youtube_id: youtubeId,
     subtopic_id: subtopicId,
@@ -173,7 +176,7 @@ videoRouter.post("/addVideo", async (req, res) => {
  *
  * @routeparam {String} :_id is the unique identifier of a video object on SkillFlyer.
  */
-videoRouter.get("/:_id", (req, res) => {
+videoRouter.get("/video/:_id", (req, res) => {
   if (!validateVideoID(req.params._id)) {
     return res.status(400).json({ message: "Invalid Video Link" });
   } else {
@@ -201,7 +204,10 @@ videoRouter.get("/:_id", (req, res) => {
  */
 videoRouter.get("/", (req, res) => {
   // Find Videos by subtopic id
-  Video.find({ topic_name: req.query.topic_name, subtopic_name: req.query.subtopic_name }).then((videos) => {
+  Video.find({
+    topic_name: req.query.topic_name,
+    subtopic_name: req.query.subtopic_name,
+  }).then((videos) => {
     // Check if videos exists
     if (videos.length == 0) {
       return res
@@ -211,6 +217,34 @@ videoRouter.get("/", (req, res) => {
       return res.status(200).json(videos);
     }
   });
+});
+
+/**
+ * Search all videos by a query
+ *
+ * @name Videos Search
+ *
+ * @route {GET} /videos/search/
+ *
+ * @queryparam {String} [q] is the search query to find a certain video.
+ */
+videoRouter.get("/search", (req, res) => {
+  var query = new RegExp('.*' + req.query.q + '.*');
+  Video.find({ title:  {$regex: query, $options: "i"} }).then(
+    (videos) => {
+      // Check if videos exists
+      if (videos.length == 0) {
+        return res
+          .status(404)
+          .json({
+            message:
+              "There were no videos found that matched the search query!",
+          });
+      } else {
+        return res.status(200).json(videos);
+      }
+    }
+  );
 });
 
 /**

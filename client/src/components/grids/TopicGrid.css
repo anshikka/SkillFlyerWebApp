@@ -7,6 +7,15 @@
 .topic-grid-root .topic-grid-container .topic-card-grid-item {
   display: "flex";
 }
+
+.topic-grid-root .title {
+  color: black;
+  margin-left: 3vw;
+}
+
+.no-topics-message {
+  text-align: center;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

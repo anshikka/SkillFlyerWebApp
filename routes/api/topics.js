@@ -56,4 +56,25 @@ topicRouter.get("/", (req, res) => {
   });
 });
 
+/**
+ * Search for a topic.
+ *
+ * @name Topics Search
+ *
+ * @route {GET} /topics/search/
+ * 
+ * @queryparam {String} [q] is the search query to find a certain topic
+ */
+topicRouter.get("/search", (req, res) => {
+  var query = new RegExp('.*' + req.query.q + '.*');
+  Topic.find({topic_name: {$regex: query, $options: "i"} }).then((topics) => {
+    // Check if topics exists
+    if (topics.length == 0) {
+      return res.status(404).json({ message: "There were no topics found that matched the search query!" });
+    } else {
+      return res.status(200).json(topics);
+    }
+  });
+});
+
 module.exports = topicRouter;

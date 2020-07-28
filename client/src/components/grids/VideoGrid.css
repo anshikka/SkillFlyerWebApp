@@ -9,6 +9,13 @@
   display: "flex";
 }
 
+.video-search-grid .title {
+  color: black;
+}
+
+.video-grid-root .title {
+  margin-left: 3vw;
+}
 
 .no-videos-message {
   padding-top: 5%;

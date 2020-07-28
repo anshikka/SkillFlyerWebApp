@@ -6,6 +6,7 @@ import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicGrid from "../grids/TopicGrid";
 import VideoGrid from "../grids/VideoGrid";
 import FolderGrid from "../grids/FolderGrid";
+import SearchGrid from "../grids/search/SearchGrid";
 import { Route, Switch } from "react-router-dom";
 import SubtopicGrid from "../grids/SubtopicGrid";
 import "./Dashboard.css";
@@ -27,11 +28,8 @@ class Dashboard extends Component {
           <AuthenticatedNavbar color={"white"} />
           <Switch>
             <Route exact path="/dashboard" component={TopicGrid} />
-            <Route
-              exact
-              path="/dashboard/folders"
-              component={FolderGrid}
-            />
+            <Route exact path="/dashboard/folders" component={FolderGrid} />
+            <Route exact path="/dashboard/search" component={SearchGrid} />
             <Route
               exact
               path="/dashboard/folders/:folderId"

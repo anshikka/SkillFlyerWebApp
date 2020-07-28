@@ -1,12 +1,32 @@
 import axios from "axios";
 import { GET_ERRORS, SUBTOPICS_LOADING, SUBTOPICS_LOADED } from "./types";
 
-// Topic - get all topics
+// Subtopic - get all subtopics under topic
 export const getAllSubtopics = (topicName) => (dispatch) => {
   axios
-    .get("/api/subtopics", {params: {
-      topic_name: topicName
-    },})
+    .get("/api/subtopics", {
+      params: {
+        topic_name: topicName,
+      },
+    })
+    .then((res) => {
+      dispatch(dispatchSubtopicData(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const searchSubtopic = (query) => (dispatch) => {
+  axios
+    .get("/api/subtopics/search", {
+      params: {
+        q: query,
+      },
+    })
     .then((res) => {
       dispatch(dispatchSubtopicData(res.data));
     })

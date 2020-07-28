@@ -33,7 +33,7 @@ export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
 
 export const getVideo = (video_id) => (dispatch) => {
   axios
-    .get("/api/videos/" + video_id)
+    .get("/api/videos/video/" + video_id)
     .then((res) => {
       dispatch(dispatchVideoData(res.data));
     })
@@ -45,11 +45,24 @@ export const getVideo = (video_id) => (dispatch) => {
     );
 };
 
-export const getVideoVotes = (video_id) => (
-  dispatch
-) => {
+export const searchVideo = (query) => (dispatch) => {
   axios
-    .get("/api/videos/" + video_id)
+    .get("/api/videos/search", {params: {q: query}})
+    .then((res) => {
+      dispatch(dispatchVideosData(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+
+export const getVideoVotes = (video_id) => (dispatch) => {
+  axios
+    .get("/api/videos/video/" + video_id)
     .then((res) => {
       dispatch(dispatchVideoVotesData(res.data));
     })
@@ -63,15 +76,11 @@ export const getVideoVotes = (video_id) => (
 
 export const addVideo = (video) => (dispatch) => {
   axios
-    .post(
-      "/api/videos/addVideo",
-      video
-    )
+    .post("/api/videos/addVideo", video)
     .then((res) => {
       dispatch(dispatchAddVideo(res.data));
     })
     .catch((err) =>
-  
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
@@ -80,10 +89,7 @@ export const addVideo = (video) => (dispatch) => {
 };
 export const upvote = (videoId) => (dispatch) => {
   axios
-    .post(
-      "/api/videos/upvote",
-      {video_id: videoId} 
-    )
+    .post("/api/videos/upvote", { video_id: videoId })
     .then((res) => {
       dispatch(dispatchUpvote(res.data));
     })
@@ -97,10 +103,7 @@ export const upvote = (videoId) => (dispatch) => {
 
 export const downvote = (videoId) => (dispatch) => {
   axios
-    .post(
-      "/api/videos/downvote",
-      {video_id: videoId}
-    )
+    .post("/api/videos/downvote", { video_id: videoId })
     .then((res) => {
       dispatch(dispatchDownvote(res.data));
     })

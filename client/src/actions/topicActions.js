@@ -15,6 +15,22 @@ export const getAllTopics = () => (dispatch) => {
       })
     );
 };
+
+// Topic - search all topics
+export const searchTopic = (query) => (dispatch) => {
+  axios
+    .get("/api/topics/search", {params: {q: query}})
+    .then((res) => {
+      dispatch(dispatchTopicData(res.data));
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 // Get all topic data
 export const dispatchTopicData = (topics) => {
   return {

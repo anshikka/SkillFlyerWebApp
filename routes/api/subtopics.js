@@ -87,4 +87,29 @@ subtopicRouter.get("/", async (req, res) => {
   }
 });
 
+/**
+ * Search for a subtopic.
+ *
+ * @name Subtopics Search
+ *
+ * @route {GET} /subtopics/search/
+ *
+ * @queryparam {String} [q] is the search query to find a certain video.
+ */
+subtopicRouter.get("/search", (req, res) => {
+  var query = new RegExp(".*" + req.query.q + ".*");
+  Subtopic.find({ subtopic_name:  {$regex: query, $options: "i"} }).then((subtopics) => {
+    // Check if topic exists
+    if (subtopics.length == 0) {
+      return res
+        .status(404)
+        .json({
+          message: "There were no subtopics found that matched the search query!",
+        });
+    } else {
+      return res.status(200).json(subtopics);
+    }
+  });
+});
+
 module.exports = subtopicRouter;

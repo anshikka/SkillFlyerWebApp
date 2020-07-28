@@ -16,6 +16,14 @@ class Login extends Component {
       errors: {},
     };
   }
+
+  /**
+   * After successful authentication, send user to dashboard.
+   *
+   * @name componentWillReceiveProps Wait
+   *
+   * @param {Object} [nextProps] is the response from the server after authentication.
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard"); // push user to dashboard when they login
@@ -26,16 +34,38 @@ class Login extends Component {
       });
     }
   }
+
+  /**
+   * After successful authentication, send user to dashboard.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
   }
-  onChange = (e) => {
+
+  /**
+   * Track changes to the login form.
+   *
+   * @name Login Update
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = (e) => {
+
+  /**
+   * Submit login data from the form to the server.
+   *
+   * @name Login Submit
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  submitLogin = (e) => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
@@ -43,6 +73,12 @@ class Login extends Component {
     };
     this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
+
+  /**
+   * Renders the login form.
+   *
+   * @name Login Render
+   */
   render() {
     const { errors } = this.state;
     return (
@@ -66,10 +102,14 @@ class Login extends Component {
                   Don't have an account? <Link to="/register">Register</Link>
                 </p>
               </div>
-              <form className="auth-form" noValidate onSubmit={this.onSubmit}>
+              <form
+                className="auth-form"
+                noValidate
+                onSubmit={this.submitLogin}
+              >
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.email}
                     error={errors.email}
                     id="email"
@@ -86,7 +126,7 @@ class Login extends Component {
                 </div>
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.password}
                     error={errors.password}
                     id="password"
@@ -123,13 +163,16 @@ class Login extends Component {
     );
   }
 }
+
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
+
 export default connect(mapStateToProps, { loginUser })(Login);

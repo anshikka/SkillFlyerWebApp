@@ -14,6 +14,11 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import "./TopicCard.css";
 
 class TopicCardFront extends Component {
+  /**
+   * Renders the front of the topic card with the name and picture.
+   *
+   * @name TopicCardBack Render
+   */
   render() {
     return (
       <div className="topic-card">
@@ -77,4 +82,5 @@ TopicCardFront.propTypes = {
   flipFunction: PropTypes.func.isRequired,
   confirmCopied: PropTypes.func.isRequired,
 };
+
 export default TopicCardFront;

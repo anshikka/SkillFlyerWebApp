@@ -7,18 +7,23 @@ class VideoCard extends Component {
   confirmCopied = () => {
     toast.info("Link copied to clipboard!");
   };
-  
+
   render() {
+    /**
+     * Renders the Video Card with basic video information.
+     *
+     * @name VideoCard Render
+     */
     return (
       <VideoCardComponent
         bgPhoto={this.props.thumbnailUrl}
         rank={"#" + (this.props.rank + 1)}
         watchButton="&#xF144; Watch Now"
-        videoId = {this.props.videoId}
-        subtopicId = {this.props.subtopicId}
-        topicId = {this.props.topicId}
-        topicName = {this.props.topicName}
-        subtopicName = {this.props.subtopicName}
+        videoId={this.props.videoId}
+        subtopicId={this.props.subtopicId}
+        topicId={this.props.topicId}
+        topicName={this.props.topicName}
+        subtopicName={this.props.subtopicName}
         title={this.props.title}
       />
     );
@@ -26,13 +31,13 @@ class VideoCard extends Component {
 }
 
 VideoCard.propTypes = {
-  videoId: PropTypes.string,
-  topicName: PropTypes.string,
-  subtopicName: PropTypes.string,
-  addedBy: PropTypes.string,
-  title: PropTypes.string,
-  thumbnailUrl: PropTypes.string,
-  description: PropTypes.string,
+  videoId: PropTypes.string.isRequired,
+  subtopicId: PropTypes.string.isRequired,
+  topicId: PropTypes.string.isRequired,
+  topicName: PropTypes.string.isRequired,
+  subtopicName: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  thumbnailUrl: PropTypes.string.isRequired,
   rank: PropTypes.number,
 };
 

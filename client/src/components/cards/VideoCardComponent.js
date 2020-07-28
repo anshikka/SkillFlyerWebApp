@@ -99,34 +99,34 @@ const VideoCardComponent = ({
   bgPhoto,
   bgColor = "#DBE0E6",
 }) => (
-    <Container bgPhoto={bgPhoto} bgColor={bgColor} overlayColor={overlayColor}>
-      {rank && (
-        <RankContainer bgColor={rankBg} color={rankColor}>
-          <RankText>{rank}</RankText>
-        </RankContainer>
-      )}
-      {(preTitle || title) && (
-        <Content>
-          <span>
-            {preTitle && <PreTitle color={preTitleColor}>{preTitle}</PreTitle>}
-            {title && <Title color={titleColor}>{title}</Title>}
-          </span>
-          {watchButton && (
-            <Link
-              to={{
-                pathname: `/dashboard/${topicName}/${subtopicName}/videos/${videoId}`,
-                state: { subtopicId: subtopicId, topicId: topicId },
-              }}
-            >
-              <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>
-                <WatchButtonText>{watchButton}</WatchButtonText>
-              </WatchButton>
-            </Link>
-          )}
-        </Content>
-      )}
-    </Container>
-  );
+  <Container bgPhoto={bgPhoto} bgColor={bgColor} overlayColor={overlayColor}>
+    {rank && (
+      <RankContainer bgColor={rankBg} color={rankColor}>
+        <RankText>{rank}</RankText>
+      </RankContainer>
+    )}
+    {(preTitle || title) && (
+      <Content>
+        <span>
+          {preTitle && <PreTitle color={preTitleColor}>{preTitle}</PreTitle>}
+          {title && <Title color={titleColor}>{title}</Title>}
+        </span>
+        {watchButton && (
+          <Link
+            to={{
+              pathname: `/dashboard/${topicName}/${subtopicName}/videos/${videoId}`,
+              state: { subtopicId: subtopicId, topicId: topicId },
+            }}
+          >
+            <WatchButton bgColor={watchButtonBg} color={watchButtonColor}>
+              <WatchButtonText>{watchButton}</WatchButtonText>
+            </WatchButton>
+          </Link>
+        )}
+      </Content>
+    )}
+  </Container>
+);
 
 VideoCardComponent.propTypes = {
   preTitle: PropTypes.string,

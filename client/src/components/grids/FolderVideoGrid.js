@@ -48,7 +48,7 @@ class FolderVideoGrid extends Component {
                     description={video.description}
                     thumbnailUrl={video.thumbnail_url}
                     addedBy={video.added_by}
-                    required={folder.is_required}
+                    isRequired={folder.is_required}
                     folderId = {folder._id}
                     reload={this.reload}
                   />

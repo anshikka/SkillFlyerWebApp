@@ -11,6 +11,7 @@
 .topic-grid-root .title {
   color: black;
   margin-left: 3vw;
+  font-size: 2vw;
 }
 
 .no-topics-message {

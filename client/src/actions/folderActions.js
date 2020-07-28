@@ -16,7 +16,15 @@ import {
   FOLDER_DELETING
 } from "./types";
 
-// Topic - get all topics
+/**
+ * gets all of the User's folders
+ *
+ * @name Folder getAll
+ *
+ *
+ * @param {String} [userId] finds User by userId and will return all the folders in the User Object. 
+ * 
+ */
 export const getAllFolders = (userId) => (dispatch) => {
   axios
     .get("/api/folders/", {params: {user_id: userId}})
@@ -31,6 +39,15 @@ export const getAllFolders = (userId) => (dispatch) => {
     );
 };
 
+/**
+ * gets all of content of the folder such as name and number of videos
+ *
+ * @name Folder getDetails
+ *
+ *
+ * @param {String} [folderId] finds folder by folderId and all the details of the folder. 
+ * 
+ */
 export const getFolder = (folderId) => (dispatch) => {
   axios.get("/api/folders/" + folderId)
   .then((res) => {
@@ -43,6 +60,15 @@ export const getFolder = (folderId) => (dispatch) => {
   }))
 }
 
+/**
+ * gets all of the videos inside a selected folder
+ *
+ * @name Folder getContent
+ *
+ *
+ * @param {String} [folderId] finds folder by folderId and retrieves all the videoId's in the folder.  
+ * 
+ */
 export const getFolderVideos = (folderId) => (dispatch) => {
   axios
     .get("/api/folders/" + folderId + "/videos")
@@ -57,6 +83,15 @@ export const getFolderVideos = (folderId) => (dispatch) => {
     );
 };
 
+/**
+ * Create a New Folder
+ *
+ * @name Folder add
+ *
+ *
+ * @param {String} [folderDetails] retrieves folderDetails and creates a new Folder.  
+ * 
+ */
 export const addFolder = (folderDetails) => (dispatch) => {
   axios
     .post("/api/folders/addFolder", folderDetails)
@@ -71,6 +106,15 @@ export const addFolder = (folderDetails) => (dispatch) => {
     );
 };
 
+/**
+ * gives User ability to add Video to a given Folder
+ *
+ * @name Folder addVideo
+ *
+ *
+ * @param {String, String} [videoId, folderId] finds folder by folderId and adds the videoId into folder by folderId. 
+ * 
+ */
 export const addVideoToFolder = (videoId, folderId) => (dispatch) => {
     axios.post("/api/folders/addVideo", {video_id: videoId, folder_id: folderId}).then((res)=> {
         dispatch(dispatchAddVideoToFolder(res.data));
@@ -83,6 +127,16 @@ export const addVideoToFolder = (videoId, folderId) => (dispatch) => {
     );
 }
 
+
+/**
+ * gives User ability to delete Video from a given Folder
+ *
+ * @name Folder deleteVideo
+ *
+ *
+ * @param {String, String} [videoId, folderId] finds folder by folderId and deletes the videoId from the folder. 
+ * 
+ */
 export const deleteVideoFromFolder = (videoId, folderId) => (dispatch) => {
     axios.put("/api/folders/deleteVideo", {video_id: videoId, folder_id: folderId}).then((res)=> {
         dispatch(dispatchDeleteVideoFromFolder(res.data));
@@ -94,6 +148,16 @@ export const deleteVideoFromFolder = (videoId, folderId) => (dispatch) => {
       })
     );
 }
+
+/**
+ * allows user to Delete Folder
+ *
+ * @name Folder delete
+ *
+ *
+ * @param {String} [folderDetails] finds folder by folderDetails and then remove selected Folder. 
+ * 
+ */
 
 export const deleteFolder = (folderDetails) => (dispatch) => {
     axios

@@ -14,7 +14,15 @@ import {
   VIDEO_SUBMITTING,
 } from "./types";
 
-// Topic - get all videos
+/**
+ * retrieves all videos
+ *
+ * @name Video getAll
+ *
+ *
+ * @param {String, String} [topicName, subtopicName] uses topicName and subtopicName to find all the videos under given subtopic. 
+ * 
+ */
 export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
   axios
     .get("/api/videos", {
@@ -31,6 +39,15 @@ export const getAllVideos = (topicName, subtopicName) => (dispatch) => {
     );
 };
 
+/**
+ * retrieves a single video and its data
+ *
+ * @name Video get
+ *
+ *
+ * @param {String} [video_id] uses video_id to find all video details to display video. 
+ * 
+ */
 export const getVideo = (video_id) => (dispatch) => {
   axios
     .get("/api/videos/video/" + video_id)
@@ -44,6 +61,16 @@ export const getVideo = (video_id) => (dispatch) => {
       })
     );
 };
+
+/**
+ * Search for Video
+ *
+ * @name Video search
+ *
+ *
+ * @param {String} [query] search videos for given query. 
+ * 
+ */
 
 export const searchVideo = (query) => (dispatch) => {
   axios
@@ -59,7 +86,15 @@ export const searchVideo = (query) => (dispatch) => {
     );
 };
 
-
+/**
+ * retrieves the amount of votes a given Video has
+ *
+ * @name Video getVotes
+ *
+ *
+ * @param {String} [video_id] uses video_id to find the number of votes in the given video. 
+ * 
+ */
 export const getVideoVotes = (video_id) => (dispatch) => {
   axios
     .get("/api/videos/video/" + video_id)
@@ -74,6 +109,15 @@ export const getVideoVotes = (video_id) => (dispatch) => {
     );
 };
 
+/**
+ * allows user to add a Video on SkillFlyer
+ *
+ * @name Video add
+ *
+ *
+ * @param {Object} [video] takes video object and sends it to server (includes url, topicName, and subtopicName). 
+ * 
+ */
 export const addVideo = (video) => (dispatch) => {
   axios
     .post("/api/videos/addVideo", video)
@@ -87,6 +131,16 @@ export const addVideo = (video) => (dispatch) => {
       })
     );
 };
+
+/**
+ * Upvotes a given video
+ *
+ * @name Video upVote
+ *
+ *
+ * @param {String} [videoId] takes videoId and increments the given video found by videoId. 
+ * 
+ */
 export const upvote = (videoId) => (dispatch) => {
   axios
     .post("/api/videos/upvote", { video_id: videoId })
@@ -101,6 +155,15 @@ export const upvote = (videoId) => (dispatch) => {
     );
 };
 
+/**
+ * Downvotes a given video
+ *
+ * @name Video downVote
+ *
+ *
+ * @param {String} [videoId] takes videoId and decrements the given video found by videoId. 
+ * 
+ */
 export const downvote = (videoId) => (dispatch) => {
   axios
     .post("/api/videos/downvote", { video_id: videoId })

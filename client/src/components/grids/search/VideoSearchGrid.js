@@ -6,7 +6,6 @@ import VideoCard from "../../cards/VideoCard";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import "../VideoGrid.css";
-import { Typography } from "@material-ui/core";
 
 class VideoSearchGrid extends Component {
   componentDidMount() {

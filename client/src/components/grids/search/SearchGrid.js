@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import TopicSearchGrid from "./TopicSearchGrid";
 import SubtopicSearchGrid from "./SubtopicSearchGrid";
 import VideoSearchGrid from "./VideoSearchGrid";
-import { Typography } from "@material-ui/core";
 
 class SearchGrid extends Component {
   getParams = () => {

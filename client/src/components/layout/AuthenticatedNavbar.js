@@ -9,7 +9,6 @@ import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import PropTypes from "prop-types";
 import darkLogo from "./assets/logo-dark.svg";
 import whiteLogo from "./assets/logo-white.svg";
 import "./AuthenticatedNavbar.css";

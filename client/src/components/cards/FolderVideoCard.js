@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteVideoFromFolder } from "../../actions/folderActions";
 import VideoCardComponent from "./VideoCardComponent";
-import { toast } from "react-toastify";
 import DeletableFolderVideoCardComponent from "./DeletableFolderVideoCardComponent";
 
 class FolderVideoCard extends Component {
@@ -65,6 +64,10 @@ class FolderVideoCard extends Component {
 FolderVideoCard.propTypes = {
   videoId: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+
+})
 
 export default connect(mapStateToProps, {
   deleteVideoFromFolder,

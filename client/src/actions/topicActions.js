@@ -1,7 +1,12 @@
 import axios from "axios";
 import { GET_ERRORS, TOPIC_LOADING, TOPIC_LOADED } from "./types";
 
-// Topic - get all topics
+/**
+ * retrieves all the topics
+ *
+ * @name Topics getAll
+ *
+ */
 export const getAllTopics = () => (dispatch) => {
   axios
     .get("/api/topics")
@@ -16,7 +21,15 @@ export const getAllTopics = () => (dispatch) => {
     );
 };
 
-// Topic - search all topics
+/**
+ * Search for Topic
+ *
+ * @name Topic search
+ *
+ *
+ * @param {String} [query] search topics for given query. 
+ * 
+ */
 export const searchTopic = (query) => (dispatch) => {
   axios
     .get("/api/topics/search", {params: {q: query}})

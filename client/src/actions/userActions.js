@@ -1,5 +1,15 @@
 import axios from "axios";
 import { GET_ERRORS, USER_LOADED, USER_LOADING } from "./types";
+
+/**
+ * retrieves User data
+ *
+ * @name User get
+ *
+ *
+ * @param {String} [userId] retrieves user data through userId. 
+ * 
+ */
 export const getUser = (userId) => (dispatch) => {
   axios
     .post("/api/users/getUser", { user_id: userId })

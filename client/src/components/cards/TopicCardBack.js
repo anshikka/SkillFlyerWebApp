@@ -12,6 +12,11 @@ import LinkIcon from "@material-ui/icons/Link";
 import "./TopicCard.css";
 
 class TopicCardBack extends Component {
+  /**
+   * Renders the back of the topic card with the description.
+   *
+   * @name TopicCardBack Render
+   */
   render() {
     return (
       <div className="topic-card">
@@ -66,4 +71,5 @@ TopicCardBack.propTypes = {
   description: PropTypes.string.isRequired,
   confirmCopied: PropTypes.func.isRequired,
 };
+
 export default TopicCardBack;

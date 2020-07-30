@@ -5,11 +5,16 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import "./VideoCountChip.css";
 
 class VideoCountChip extends Component {
+  /**
+   * Renders a chip showing the video count.
+   *
+   * @name VideoCountChip Render
+   */
   render() {
     return (
       <Chip
         className="video-count"
-        icon = {<VideoLibraryIcon className="video-library-icon" />}
+        icon={<VideoLibraryIcon className="video-library-icon" />}
         label={this.props.length}
         size="medium"
       />
@@ -20,4 +25,5 @@ class VideoCountChip extends Component {
 VideoCountChip.propTypes = {
   length: PropTypes.number.isRequired,
 };
+
 export default VideoCountChip;

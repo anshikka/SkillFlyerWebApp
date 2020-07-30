@@ -19,12 +19,14 @@ class Register extends Component {
       errors: {},
     };
   }
-  componentDidMount() {
-    // If logged in and user navigates to Register page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
+
+  /**
+   * Tracks for any errors that come up
+   *
+   * @name componentWillReceiveProps Wait
+   *
+   * @param {Object} [nextProps] is the response from the server after registration.
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -32,10 +34,38 @@ class Register extends Component {
       });
     }
   }
-  onChange = (e) => {
+
+  /**
+   * After successful registration and authentication, send user to dashboard.
+   *
+   * @name componentDidMount Wait
+   */
+  componentDidMount() {
+    // If logged in and user navigates to Register page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
+  /**
+   * Track changes to the registration form.
+   *
+   * @name Registration Update
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = (e) => {
+
+  /**
+   * Submit registration data from the form to the server.
+   *
+   * @name Registration Submit
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  submitRegistration = (e) => {
     e.preventDefault();
     const newUser = {
       name: this.state.name,
@@ -46,6 +76,12 @@ class Register extends Component {
     };
     this.props.registerUser(newUser, this.props.history);
   };
+
+  /**
+   * Renders the registration form.
+   *
+   * @name Registration Render
+   */
   render() {
     const { errors } = this.state;
     return (
@@ -69,10 +105,14 @@ class Register extends Component {
                   Already have an account? <Link to="/login">Log in</Link>
                 </p>
               </div>
-              <form className="auth-form" noValidate onSubmit={this.onSubmit}>
+              <form
+                className="auth-form"
+                noValidate
+                onSubmit={this.submitRegistration}
+              >
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.name}
                     error={errors.name}
                     id="name"
@@ -86,7 +126,7 @@ class Register extends Component {
                 </div>
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.email}
                     error={errors.email}
                     id="email"
@@ -100,7 +140,7 @@ class Register extends Component {
                 </div>
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.password}
                     error={errors.password}
                     id="password"
@@ -114,7 +154,7 @@ class Register extends Component {
                 </div>
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.password2}
                     error={errors.password2}
                     id="password2"
@@ -128,7 +168,7 @@ class Register extends Component {
                 </div>
                 <div className="input-field col s12">
                   <input
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.education_institution}
                     error={errors.education_institution}
                     id="education_institution"
@@ -166,13 +206,16 @@ class Register extends Component {
     );
   }
 }
+
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
+
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

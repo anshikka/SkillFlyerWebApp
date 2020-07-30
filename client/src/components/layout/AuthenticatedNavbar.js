@@ -1,28 +1,44 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core";
-import "./AuthenticatedNavbar.css";
-import darkLogo from "./assets/logo-dark.svg";
-import whiteLogo from "./assets/logo-white.svg";
-import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import InputBase from "@material-ui/core/InputBase";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
+import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import PropTypes from "prop-types";
+import darkLogo from "./assets/logo-dark.svg";
+import whiteLogo from "./assets/logo-white.svg";
+import "./AuthenticatedNavbar.css";
 
 class AuthenticatedNavbar extends Component {
-  state = { anchorEl: false, searchQuery: '' };
+  state = { anchorEl: false, searchQuery: "" };
 
-  handleClick = () => {
+  /**
+   * Open the Navbar menu
+   *
+   * @name Menu Open
+   */
+  openMenu = () => {
     this.setState(() => ({ anchorEl: true }));
   };
-  handleClose = () => {
+
+  /**
+   * Close the Navbar menu
+   *
+   * @name Menu Close
+   */
+  closeMenu = () => {
     this.setState(() => ({ anchorEl: false }));
   };
 
+  /**
+   * Track the button in the menu
+   *
+   * @name Menu Select
+   */
   handleChange = (e) => {
     const query = e.target.value;
     this.setState(() => ({
@@ -30,13 +46,22 @@ class AuthenticatedNavbar extends Component {
     }));
   };
 
+  /**
+   * Send data from searchbar to route and redirect.
+   *
+   * @name Search Execute
+   */
   fulfillSearch = (e) => {
     e.preventDefault();
     const search = "/dashboard/search?q=" + this.state.searchQuery;
-    console.log(search)
     window.location = search;
   };
 
+  /**
+   * Renders the navbar when the user is authenticated. Shows search bar and options.
+   *
+   * @name AuthenticatedNavbar Render
+   */
   render() {
     var logo;
     if (this.props.color === "white") {
@@ -54,12 +79,12 @@ class AuthenticatedNavbar extends Component {
           </a>
           <div id="navbar-search">
             <form onSubmit={(e) => this.fulfillSearch(e)}>
-            <InputBase
-              id="search-input"
-              placeholder="&#xF002; Search for topics, subtopics, or videos..."
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e)=> this.handleChange(e)}
-            ></InputBase>
+              <InputBase
+                id="search-input"
+                placeholder="&#xF002; Search for topics, subtopics, or videos..."
+                inputProps={{ "aria-label": "search" }}
+                onChange={(e) => this.handleChange(e)}
+              ></InputBase>
             </form>
           </div>
           <div className="user-menu-root">
@@ -67,7 +92,7 @@ class AuthenticatedNavbar extends Component {
               className="user-menu-button"
               aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={this.handleClick}
+              onClick={this.openMenu}
             >
               <PersonRoundedIcon className="navbar-icon" />
               <figcaption>{user.name.split(" ")[0]}</figcaption>
@@ -77,7 +102,7 @@ class AuthenticatedNavbar extends Component {
               id="simple-menu"
               anchorEl={this.state.anchorEl}
               open={this.state.anchorEl}
-              onClose={this.handleClose}
+              onClose={this.closeMenu}
             >
               <MenuItem>
                 <Link to={`/dashboard/folders`}>My Folders</Link>
@@ -94,6 +119,7 @@ class AuthenticatedNavbar extends Component {
 AuthenticatedNavbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

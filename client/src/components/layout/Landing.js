@@ -4,6 +4,12 @@ import "./Landing.css";
 import Navbar from "./Navbar";
 
 class Landing extends Component {
+  
+  /**
+   * Renders the landing page to login or register.
+   *
+   * @name Landing Render
+   */
   render() {
     return (
       <div className="background">

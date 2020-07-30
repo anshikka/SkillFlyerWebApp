@@ -5,7 +5,14 @@ import VideoCountChip from "../chips/VideoCountChip";
 import "./FolderCard.css";
 
 class FolderCard extends Component {
-  onDelete = (e) => {
+  /**
+   * Send a request to delete a specific folder.
+   *
+   * @name FolderCard Delete
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  deleteFolder = (e) => {
     e.preventDefault();
     const deletedFolder = {
       folder_id: this.props.folderId,
@@ -13,6 +20,12 @@ class FolderCard extends Component {
     };
     this.props.deleteFolder(deletedFolder);
   };
+
+  /**
+   * Renders a folder card with basic folder information.
+   *
+   * @name FolderCard Render
+   */
   render() {
     if (this.props.isRequired) {
       return (
@@ -39,7 +52,7 @@ class FolderCard extends Component {
             <div className="video-count">
               <VideoCountChip length={this.props.length} />
             </div>
-            <div className="delete" onClick={(e) => this.onDelete(e)}>
+            <div className="delete" onClick={(e) => this.deleteFolder(e)}>
               <i>
                 <DeleteOutlineIcon />
               </i>
@@ -52,11 +65,12 @@ class FolderCard extends Component {
 }
 
 FolderCard.propTypes = {
-  name: PropTypes.string,
-  length: PropTypes.number,
-  isRequired: PropTypes.bool,
-  deleteFolder: PropTypes.func,
-  user: PropTypes.object,
-  folderId: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  length: PropTypes.number.isRequired,
+  isRequired: PropTypes.bool.isRequired,
+  deleteFolder: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  folderId: PropTypes.string.isRequired,
 };
+
 export default FolderCard;

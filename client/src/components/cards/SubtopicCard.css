@@ -3,6 +3,7 @@
   color: #00416a;
   width: 100%;
 }
+
 .subtopic-root .subtopic-card {
   border-radius: 4px;
   background: #fff;
@@ -16,6 +17,7 @@
   height: 22.5vh;
   text-align: center;
 }
+
 .subtopic-root .subtopic-card .subtopic-card-name {
   font-size: 1.5vw !important;
 }
@@ -27,12 +29,14 @@
 
 .subtopic-root .subtopic-card .title-and-desc .subtopic-card-name {
   margin: 1rem 0 1rem 0;
-  font-weight: 600;;
+  font-weight: 600;
   overflow-x: auto;
 }
+
 .subtopic-root .subtopic-card .title-and-desc .subtopic-card-description {
   overflow: auto;
 }
+
 .subtopic-root .subtopic-card .title-and-desc {
   width: 100%;
 }

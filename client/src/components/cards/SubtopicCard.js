@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import "./SubtopicCard.css";
 
 class SubtopicCard extends Component {
+  /**
+   * Renders the Subtopic Card with basic subtopic information.
+   *
+   * @name SubtopicCard Render
+   */
   render() {
     return (
       <div>
@@ -27,10 +32,9 @@ class SubtopicCard extends Component {
 }
 
 SubtopicCard.propTypes = {
-  name: PropTypes.string,
-  photoUrl: PropTypes.string,
-  subtopicId: PropTypes.string,
-  topicId: PropTypes.string,
-  description: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  photoUrl: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
+
 export default SubtopicCard;

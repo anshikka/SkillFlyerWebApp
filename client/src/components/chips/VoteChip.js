@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import Chip from "@material-ui/core/Chip";
 
 class VoteChip extends Component {
+  /**
+   * Renders a chip showing the video votes.
+   *
+   * @name VoteChip Render
+   */
   render() {
     return (
       <Chip
@@ -18,4 +23,5 @@ class VoteChip extends Component {
 VoteChip.propTypes = {
   votes: PropTypes.number.isRequired,
 };
+
 export default VoteChip;

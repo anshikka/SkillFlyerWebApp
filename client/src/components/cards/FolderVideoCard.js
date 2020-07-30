@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  deleteVideoFromFolder,
-} from "../../actions/folderActions";
+import { deleteVideoFromFolder } from "../../actions/folderActions";
 import VideoCardComponent from "./VideoCardComponent";
-import { toast } from "react-toastify";
 import DeletableFolderVideoCardComponent from "./DeletableFolderVideoCardComponent";
 
 class FolderVideoCard extends Component {
-  confirmCopied = () => {
-    toast.info("Link copied to clipboard!");
-  };
+  /**
+   * Send a request to the server to remove a video from a specific folder.
+   *
+   * @name FolderVideoCard Remove
+   *
+   * @param {String} [videoId] is the ID of the specific video needing to be removed.
+   */
   remove = (videoId) => {
     this.props.deleteVideoFromFolder({
       video_id: videoId,
@@ -19,8 +20,16 @@ class FolderVideoCard extends Component {
     });
     this.props.reload();
   };
+
+  /**
+   * Renders the Folder Video Card with basic video information within a folder.
+   * Deletablity depends on whether the folder is required.
+   *
+   * @name FolderVideoCard Render
+   */
   render() {
-    if (!this.props.required) {
+    if (!this.props.isRequired) {
+      // folder is required: cannot delete videos from here
       return (
         <DeletableFolderVideoCardComponent
           bgPhoto={this.props.thumbnailUrl}
@@ -35,6 +44,7 @@ class FolderVideoCard extends Component {
         />
       );
     } else {
+      // folder is not required: videos are deletable
       return (
         <VideoCardComponent
           bgPhoto={this.props.thumbnailUrl}
@@ -53,13 +63,11 @@ class FolderVideoCard extends Component {
 
 FolderVideoCard.propTypes = {
   videoId: PropTypes.string.isRequired,
-  video: PropTypes.object.isRequired,
-  folders: PropTypes.object.isRequired,
 };
-const mapStateToProps = (state, ownProps) => ({
-  video: state.video,
-  folders: state.folders,
-});
+
+const mapStateToProps = (state) => ({
+
+})
 
 export default connect(mapStateToProps, {
   deleteVideoFromFolder,

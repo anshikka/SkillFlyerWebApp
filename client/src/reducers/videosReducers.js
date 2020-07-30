@@ -7,6 +7,7 @@ const initialState = {
 };
 export default function (state = initialState, action) {
   switch (action.type) {
+    //loads all videos 
     case VIDEOS_LOADED:
       return {
         ...state,
@@ -14,12 +15,14 @@ export default function (state = initialState, action) {
         loaded: true,
         loading: false,
       };
+    //all videos are loading
     case VIDEOS_LOADING:
       return {
         ...state,
         loading: true,
         loaded: false,
       };
+    //videos is being added to platform
     case VIDEO_SUBMITTING: {
       return {
         ...state,
@@ -27,13 +30,14 @@ export default function (state = initialState, action) {
         loaded: false
       }
     }
-    case VIDEO_SUBMITTED: 
+    //video has successfully been added
+    case VIDEO_SUBMITTED:
       return {
         ...state,
         loaded: true,
         loading: false,
       }
-
+    //returns default state
     default:
       return state;
   }

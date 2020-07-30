@@ -7,6 +7,7 @@ const initialState = {
 };
 export default function (state = initialState, action) {
   switch (action.type) {
+    //returns all topics
     case TOPIC_LOADED:
       return {
         ...state,
@@ -14,12 +15,14 @@ export default function (state = initialState, action) {
         loaded: true,
         loading: false,
       };
+    //loading all topics
     case TOPIC_LOADING:
       return {
         ...state,
         loading: true,
         loaded: false,
       };
+    //returns default state
     default:
       return state;
   }

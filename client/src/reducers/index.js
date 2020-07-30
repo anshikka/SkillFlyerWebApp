@@ -7,6 +7,7 @@ import subtopicReducer from "./subtopicReducers";
 import videoReducer from "./videoReducers";
 import videosReducer from "./videosReducers";
 import folderReducer from "./folderReducers";
+//combines all reducers into one for easy access
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,

@@ -33,6 +33,7 @@
     "mongoose": "^5.9.23",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-adsense": "^0.1.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "uuidv4": "^6.1.1",

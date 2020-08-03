@@ -13,37 +13,73 @@ import { toast } from "react-toastify";
 import "./VideoGrid.css";
 
 class VideoGrid extends Component {
+  /**
+   * After successful render, send a request to server to get all videos under a subtopic and topic.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
-    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   }
+
   state = {
     isOpened: false,
   };
 
+  /**
+   * Open the 'Add Video' modal after click.
+   *
+   * @name VideoGrid Open Modal
+   */
   handleAddVideo = () => {
     this.setState((prevState) => ({ isOpened: !prevState.isOpened }));
   };
 
+  /**
+   * Check if state has updated for videos. Refresh and show error messages as needed.
+   *
+   * @name componentDidUpdate Wait
+   */
   componentDidUpdate(prevProps) {
     if (prevProps.video.status !== this.props.video.status) {
       toast.info(this.props.video.status.message);
     } else if (prevProps.errors !== this.props.errors) {
       toast.info(this.props.errors.message);
     }
-    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   }
 
+  /**
+   * Add a video to the current topic and subtopic and refresh.
+   *
+   * @name VideoGrid Submit
+   */
   submitVideo = (video) => {
     this.props.addVideo(video);
     this.handleAddVideo();
-    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
   };
 
+  /**
+   * Renders the videos under a subtopic and topic in a grid format.
+   *
+   * @name VideoGrid Render
+   */
   render() {
     const { videos } = this.props.videos;
     if (videos.length > 0) {
+      // videos exist under subtopic
       return (
-        <div className = "video-grid-root">
+        <div className="video-grid-root">
           <DashboardBreadcrumbs
             pageType="video"
             topicName={this.props.match.params.topicName}
@@ -83,6 +119,7 @@ class VideoGrid extends Component {
         </div>
       );
     } else {
+      // no videos under subtopic
       return (
         <div class="empty-page">
           <DashboardBreadcrumbs
@@ -121,10 +158,12 @@ VideoGrid.propTypes = {
   errors: PropTypes.object,
   video: PropTypes.object,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   videos: state.videos,
   video: state.video,
   errors: state.errors,
 });
+
 export default connect(mapStateToProps, { getAllVideos, addVideo })(VideoGrid);

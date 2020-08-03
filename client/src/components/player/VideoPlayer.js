@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { getVideo, getAllVideos } from "../../actions/videoActions";
 import { addVideoToFolder, getAllFolders } from "../../actions/folderActions";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import YouTube from "react-youtube";
 import VideoCard from "../cards/VideoCard";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
@@ -14,34 +15,67 @@ import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
 import UserChip from "../chips/UserChip";
 import VoteBox from "../box/VoteBox";
 import AddVideoToFolderModal from "../modals/AddVideoToFolderModal";
-import { toast } from "react-toastify";
 import "./VideoPlayer.css";
 
-
 class VideoPlayer extends Component {
+  /**
+   * After successful render, send a request to server to get all videos, get the current video's details and get all the current user's folders.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
-    const videoId = this.props.match.params.videoId;
-    this.props.getAllVideos(this.props.match.params.topicName, this.props.match.params.subtopicName);
-    this.props.getVideo(videoId);
+    this.props.getAllVideos(
+      this.props.match.params.topicName,
+      this.props.match.params.subtopicName
+    );
+    this.props.getVideo(this.props.match.params.videoId);
     this.props.getAllFolders(this.props.auth.user.id);
   }
 
-  _onReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+  /**
+   * Don't start the video right after page is loaded.
+   *
+   * @name VideoPlayer Ready
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  _onReady(e) {
+    // access to player in all event handlers via e.target
+    e.target.pauseVideo();
   }
+
   state = {
     isOpened: false,
   };
 
-  submitVideoToFolder = (video) => {
+  /**
+   * Submit video and folder data data from the form to the server.
+   *
+   * @name VideoPlayer Submit
+   *
+   * @param {object} [video] is the video ID and the video's folder ID.
+   */
+  handleAddVideoToFolder = (video) => {
     this.props.addVideoToFolder(video.video_id, video.folder_id);
-    this.handleAddVideoToFolder();
-  }
+    this.handleVideoAddedToFolder();
+  };
 
-  handleAddVideoToFolder = () => {
+  /**
+   * Update modal state to open/closed.
+   *
+   * @name VideoPlayer Open/Close
+   *
+   * @param {object} [video] is the video ID and the video's folder ID.
+   */
+  handleVideoAddedToFolder = () => {
     this.setState((prevState) => ({ isOpened: !prevState.isOpened }));
   };
+
+  /**
+   * After any update to state, check for error messages and update accordingly.
+   *
+   * @name componentDidUpdate Wait
+   */
   componentDidUpdate(prevProps) {
     if (prevProps.folders.status !== this.props.folders.status) {
       toast.info(this.props.folders.status.message);
@@ -50,6 +84,11 @@ class VideoPlayer extends Component {
     }
   }
 
+  /**
+   * Renders a video player with ability to vote, check related videos, and view other metadata.
+   *
+   * @name VideoPlayer Render
+   */
   render() {
     const { videos } = this.props.videos;
     const { video } = this.props.video;
@@ -110,20 +149,20 @@ class VideoPlayer extends Component {
                   icon={<CreateNewFolderIcon />}
                   label={"Add to Folder"}
                   size="medium"
-                  onClick={this.handleAddVideoToFolder}
+                  onClick={this.handleVideoAddedToFolder}
                 />
                 <AddVideoToFolderModal
-                  submitVideoToFolder={this.submitVideoToFolder}
+                  submitVideoToFolder={this.handleAddVideoToFolder}
                   open={this.state.isOpened}
-                  onClose={this.handleAddVideoToFolder}
+                  onClose={this.handleVideoAddedToFolder}
                   folders={folders}
-                  videoId = {video._id}
+                  videoId={video._id}
                 />
               </Container>
               {
                 <Container>
-                  <h5 className = "related-videos-title">Related Videos</h5>
-                
+                  <h5 className="related-videos-title">Related Videos</h5>
+
                   <ul className="related-videos">
                     {videos.map((video, index) => (
                       <li>

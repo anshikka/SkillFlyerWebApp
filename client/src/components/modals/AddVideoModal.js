@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Modal from "@material-ui/core/Modal";
 import PropTypes from "prop-types";
+import { Container } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Select from "react-select";
 import YouTube from "react-youtube";
 import "./AddVideoModal.css";
-import { Container } from "@material-ui/core";
 
 class AddVideoModal extends Component {
   state = {
@@ -16,16 +16,29 @@ class AddVideoModal extends Component {
     youtube_link: "",
   };
 
-  onSubmit = (e) => {
+  /**
+   * Submit video data from the form to the server.
+   *
+   * @name AddFolderModal Submit
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  handleAddVideo = (e) => {
     e.preventDefault();
     const newVideo = {
       youtube_url: this.state.youtube_link,
       added_by: this.props.user.id,
       topic_name: this.state.topicName,
-      subtopic_name: this.state.subtopicName
+      subtopic_name: this.state.subtopicName,
     };
     this.props.submitVideo(newVideo);
   };
+
+  /**
+   * After successful render, send a request to server to fill in current topic and subtopic.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
     if (!this.props.subtopicName || !this.props.topicName) {
       // get all topic names and subtopic names
@@ -39,6 +52,13 @@ class AddVideoModal extends Component {
     }
   }
 
+  /**
+   * Update current state with YouTube video URL.
+   *
+   * @name AddVideoModal Update
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
   loadYoutubeVideo = (e) => {
     const youtube_url = e.target.value;
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|v=|\?v=)([^#]*).*/;
@@ -50,6 +70,12 @@ class AddVideoModal extends Component {
       }));
     }
   };
+
+  /**
+   * Renders the modal with the form to submit the video and a preview box for the video.
+   *
+   * @name AddVideoModal Render
+   */
   render() {
     return (
       <Modal
@@ -59,7 +85,7 @@ class AddVideoModal extends Component {
       >
         <Container className="add-video-modal-root">
           <Container className="form-body">
-            <form className="add-video-form" onSubmit={this.onSubmit}>
+            <form className="add-video-form" onSubmit={this.handleAddVideo}>
               <fieldset>
                 <legend>Choose Topic and Subtopic</legend>
 

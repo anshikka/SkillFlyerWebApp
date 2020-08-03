@@ -16,6 +16,7 @@
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
+    "react-adsense": "^0.1.0",
     "react-bootstrap": "^1.2.0",
     "react-card-flip": "^1.0.10",
     "react-copy-to-clipboard": "^5.0.2",

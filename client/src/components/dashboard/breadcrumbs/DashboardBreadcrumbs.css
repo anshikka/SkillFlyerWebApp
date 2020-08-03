@@ -1,16 +1,16 @@
 .MuiBreadcrumbs-root {
-    background-color: white !important;
-    box-shadow: none !important;
-    margin-bottom: 0px !important;
-    width: 100%;
-    height: auto;
+  background-color: white !important;
+  box-shadow: none !important;
+  margin-bottom: 0px !important;
+  width: 100%;
+  height: auto;
 }
 .breadcrumb-container {
-    padding: 0px !important;
-    margin: 4vh 0vw 0vh 2vw !important;
+  padding: 0px !important;
+  margin: 4vh 0vw 0vh 2vw !important;
 }
 .breadcrumb-icon {
-    display: inline-flex;
-    vertical-align: middle;
-    padding-right: 2px;
+  display: inline-flex;
+  vertical-align: middle;
+  padding-right: 2px;
 }

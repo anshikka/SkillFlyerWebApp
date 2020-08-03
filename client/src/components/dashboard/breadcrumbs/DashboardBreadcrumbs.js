@@ -10,8 +10,14 @@ import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 
 class DashboardBreadcrumbs extends Component {
+  /**
+   * Renders the breadcrumbs based on page.
+   *
+   * @name DashboardBreadcrumbs Render
+   */
   render() {
     if (this.props.pageType === "subtopics") {
+      // when the page shows subtopics
       return (
         <Container className="breadcrumb-container">
           <Breadcrumbs className="breadcrumb-root" aria-label="breadcrumb">
@@ -42,6 +48,7 @@ class DashboardBreadcrumbs extends Component {
         </Container>
       );
     } else if (this.props.pageType === "video") {
+      // when the video player is displayed or video cards are displayed
       return (
         <Container className="breadcrumb-container">
           <Breadcrumbs className="breadcrumbs-root" aria-label="breadcrumb">
@@ -89,6 +96,7 @@ class DashboardBreadcrumbs extends Component {
         </Container>
       );
     } else {
+      // when topics are displayed
       return (
         <Container className="breadcrumb-container">
           <Breadcrumbs className="breadcrumb-root" aria-label="breadcrumb">
@@ -107,9 +115,11 @@ class DashboardBreadcrumbs extends Component {
     }
   }
 }
+
 DashboardBreadcrumbs.propTypes = {
   pageType: PropTypes.string.isRequired,
   topicName: PropTypes.string,
   subtopicName: PropTypes.string,
 };
+
 export default DashboardBreadcrumbs;

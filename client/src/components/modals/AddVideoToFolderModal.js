@@ -12,14 +12,28 @@ class AddVideoToFolderModal extends Component {
     folderId: "",
   };
 
-  handleChange = (e) => {
+  /**
+   * Update state with new folder ID that is selected.
+   *
+   * @name AddVideoToFolderModal Submit
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  handleFolderChange = (e) => {
     const folderId = e.value;
     this.setState(() => ({
       folderId: folderId,
     }));
   };
 
-  onSubmit = (e) => {
+  /**
+   * Submit video and folder data data from the form to the server.
+   *
+   * @name AddVideoToFolderModal Submit
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
+  handleAddVideoToFolder = (e) => {
     e.preventDefault();
     const videoToBeAdded = {
       video_id: this.props.videoId,
@@ -28,6 +42,11 @@ class AddVideoToFolderModal extends Component {
     this.props.submitVideoToFolder(videoToBeAdded);
   };
 
+  /**
+   * Iteratievely build a JSON that holds name and ID data for each folder for selection.
+   *
+   * @name AddVideoToFolderModal Extract
+   */
   extractFolderIdsAndNames = () => {
     var folders = [];
     this.props.folders.forEach((folder) => {
@@ -37,6 +56,11 @@ class AddVideoToFolderModal extends Component {
     return folders;
   };
 
+  /**
+   * Renders the modal with a dropdown form to select a certain folder.
+   *
+   * @name AddVideoToFolderModal Render
+   */
   render() {
     return (
       <Modal
@@ -46,16 +70,18 @@ class AddVideoToFolderModal extends Component {
       >
         <Container className="add-video-to-folder-modal-root">
           <Container className="form-body">
-            <form className="add-video-form" onSubmit={this.onSubmit}>
+            <form
+              className="add-video-form"
+              onSubmit={this.handleAddVideoToFolder}
+            >
               <fieldset>
                 <legend>Choose Folder</legend>
-
                 <label for="folder-name">Folder:</label>
                 <Select
                   name="topicName"
                   id="topic-name-selector"
                   options={this.extractFolderIdsAndNames()}
-                  onChange={(e) => this.handleChange(e)}
+                  onChange={(e) => this.handleFolderChange(e)}
                 />
               </fieldset>
               <Button
@@ -77,7 +103,7 @@ class AddVideoToFolderModal extends Component {
 AddVideoToFolderModal.propTypes = {
   videoId: PropTypes.string.isRequired,
   submitVideoToFolder: PropTypes.func.isRequired,
-  folders: PropTypes.array.isRequired
+  folders: PropTypes.array.isRequired,
 };
 
 export default AddVideoToFolderModal;

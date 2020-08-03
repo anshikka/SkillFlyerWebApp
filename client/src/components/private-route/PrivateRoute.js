@@ -2,6 +2,10 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+/* This combines all of the state objects that will be updated when a user is logged into SkillFlyer.
+ * If the user isn't authenticated, it pushes the user back to the login page.
+ */
 const PrivateRoute = ({
   component: Component,
   auth,
@@ -26,9 +30,11 @@ const PrivateRoute = ({
     }
   />
 );
+
 PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   topics: state.topics,
@@ -36,6 +42,7 @@ const mapStateToProps = (state) => ({
   videos: state.videos,
   video: state.video,
   user: state.user,
-  folders: state.folders
+  folders: state.folders,
 });
+
 export default connect(mapStateToProps)(PrivateRoute);

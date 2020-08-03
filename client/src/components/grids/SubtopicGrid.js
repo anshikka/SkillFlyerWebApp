@@ -11,10 +11,21 @@ import Container from "@material-ui/core/Container";
 import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs";
 
 class SubtopicGrid extends Component {
+  /**
+   * After successful render, send a request to server to get all subtopics by a certain topic name.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
     this.topicName = this.props.match.params.topicName;
     this.props.getAllSubtopics(this.topicName);
   }
+
+  /**
+   * Renders the subtopics under a certain topic in a grid format.
+   *
+   * @name SubtopicGrid Render
+   */
   render() {
     const { subtopics } = this.props.subtopics;
     if (subtopics.length > 0) {
@@ -37,7 +48,10 @@ class SubtopicGrid extends Component {
                   <Link
                     to={{
                       pathname: `/dashboard/${this.props.match.params.topicName}/${subtopic.subtopic_name}`,
-                      state: { subtopicId: subtopic._id, topicId: subtopic.topic_id },
+                      state: {
+                        subtopicId: subtopic._id,
+                        topicId: subtopic.topic_id,
+                      },
                     }}
                   >
                     <SubtopicCard
@@ -69,8 +83,10 @@ SubtopicGrid.propTypes = {
   getAllSubtopics: PropTypes.func.isRequired,
   subtopics: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   subtopics: state.subtopics,
 });
+
 export default connect(mapStateToProps, { getAllSubtopics })(SubtopicGrid);

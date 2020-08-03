@@ -8,9 +8,20 @@ import DashboardBreadcrumbs from "../dashboard/breadcrumbs/DashboardBreadcrumbs"
 import "./TopicGrid.css";
 
 class TopicGrid extends Component {
+  /**
+   * After successful render, send a request to server to get all topics on SkillFlyer.
+   *
+   * @name componentDidMount Wait
+   */
   componentDidMount() {
     this.props.getAllTopics();
   }
+
+  /**
+   * Renders all topics in a grid format.
+   *
+   * @name TopicGrid Render
+   */
   render() {
     const { topics } = this.props.topics;
     return (

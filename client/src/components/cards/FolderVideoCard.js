@@ -13,11 +13,8 @@ class FolderVideoCard extends Component {
    *
    * @param {String} [videoId] is the ID of the specific video needing to be removed.
    */
-  remove = (videoId) => {
-    this.props.deleteVideoFromFolder({
-      video_id: videoId,
-      folder_id: this.props.folderId,
-    });
+  remove = (videoId, folderId) => {
+    this.props.deleteVideoFromFolder(videoId, folderId);
     this.props.reload();
   };
 
@@ -37,6 +34,7 @@ class FolderVideoCard extends Component {
           topicName={this.props.topicName}
           subtopicName={this.props.subtopicName}
           subtopicId={this.props.subtopicId}
+          folderId={this.props.folderId}
           videoId={this.props.videoId}
           title={this.props.title}
           remove={this.remove}
@@ -65,9 +63,7 @@ FolderVideoCard.propTypes = {
   videoId: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-
-})
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
   deleteVideoFromFolder,

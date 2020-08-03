@@ -82,6 +82,7 @@ var DeletableVideoCardComponent = ({
   topicName,
   subtopicName,
   videoId,
+  folderId,
   subtopicId,
   titleColor = "white",
   overlayColor = "rgba(46, 49, 49, 0.8)",
@@ -98,7 +99,7 @@ var DeletableVideoCardComponent = ({
   <Container bgPhoto={bgPhoto} bgColor={bgColor} overlayColor={overlayColor}>
     {rank && (
       <RankContainer
-        onClick={(e) => remove(videoId)}
+        onClick={(e) => remove(videoId, folderId)}
         bgColor={rankBg}
         color={rankColor}
       >

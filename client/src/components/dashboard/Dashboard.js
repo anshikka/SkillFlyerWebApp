@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import AdSense from 'react-adsense';
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
@@ -16,13 +17,27 @@ import VideoPlayer from "../player/VideoPlayer";
 import FolderVideoGrid from "../grids/FolderVideoGrid";
 
 class Dashboard extends Component {
+  /**
+   * Log the user out after function is called.
+   *
+   * @name Dashbord Logout
+   *
+   * @param {object} [e] is the event target being tracked.
+   */
   onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
+
+  /**
+   * Renders the base dashboard and displays the correct component according to the link.
+   *
+   * @name Dashboard Render
+   */
   render() {
     const { user } = this.props.auth;
     if (user) {
+      // user is authenticated
       return (
         <div>
           <AuthenticatedNavbar color={"white"} />
@@ -61,16 +76,27 @@ class Dashboard extends Component {
             draggable={false}
             pauseOnHover={false}
           />
+          <AdSense.Google
+            client="pub-4986329421006402"
+            slot="9439697200"
+            style={{ display: "block" }}
+            format="auto"
+            responsive="true"
+            layoutKey="-gw-1+2a-9x+5c"
+          />
         </div>
       );
     }
   }
 }
+
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
+
 export default connect(mapStateToProps, { logoutUser })(Dashboard);

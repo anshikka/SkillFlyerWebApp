@@ -5,7 +5,7 @@ import { addVideoToFolder, getAllFolders } from "../../actions/folderActions";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import YouTube from "react-youtube";
-import moment from 'moment';
+import moment from "moment";
 import VideoCard from "../cards/VideoCard";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
@@ -121,7 +121,7 @@ class VideoPlayer extends Component {
                 variant="outlined"
                 className="date-added"
                 icon={<ScheduleIcon />}
-                label={moment(video.date).format('LL')}
+                label={moment(video.date).format("LL")}
                 size="medium"
               />
               <UserChip className="added-by" user_id={video.added_by} />
@@ -131,12 +131,6 @@ class VideoPlayer extends Component {
             <div className="meta">
               <Container className="video-information">
                 <h2 className="title"> {video.title}</h2>
-                <Chip
-                  className="rank"
-                  icon={<EmojiEventsIcon />}
-                  label={"#1 in " + this.props.match.params.subtopicName}
-                  size="medium"
-                />
                 <p> {video.description}</p>
                 <VoteBox
                   votes={video.votes}
@@ -163,22 +157,23 @@ class VideoPlayer extends Component {
               {
                 <Container>
                   <h5 className="related-videos-title">Related Videos</h5>
-
                   <ul className="related-videos">
-                    {videos.map((video, index) => (
-                      <li>
-                        <VideoCard
-                          videoId={video._id}
-                          topicName={this.props.match.params.topicName}
-                          subtopicName={this.props.match.params.subtopicName}
-                          title={video.title}
-                          description={video.description}
-                          thumbnailUrl={video.thumbnail_url}
-                          addedBy={video.added_by}
-                          rank={index}
-                        />
-                      </li>
-                    ))}
+                    {videos
+                      .sort((first, second) => second.votes - first.votes)
+                      .map((video, index) => (
+                        <li>
+                          <VideoCard
+                            videoId={video._id}
+                            topicName={this.props.match.params.topicName}
+                            subtopicName={this.props.match.params.subtopicName}
+                            title={video.title}
+                            description={video.description}
+                            thumbnailUrl={video.thumbnail_url}
+                            addedBy={video.added_by}
+                            rank={index}
+                          />
+                        </li>
+                      ))}
                   </ul>
                 </Container>
               }

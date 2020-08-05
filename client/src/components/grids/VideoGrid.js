@@ -86,23 +86,25 @@ class VideoGrid extends Component {
             subtopicName={this.props.match.params.subtopicName}
           />
           <Grid className="video-grid-container" container spacing={10}>
-            {videos.map((video, index) => (
-              <Grid className="video-card-grid-item" item xs key={video._id}>
-                <Container>
-                  <VideoCard
-                    videoId={video._id}
-                    subtopicId={video.subtopic_id}
-                    topicName={this.props.match.params.topicName}
-                    subtopicName={this.props.match.params.subtopicName}
-                    title={video.title}
-                    description={video.description}
-                    thumbnailUrl={video.thumbnail_url}
-                    addedBy={video.added_by}
-                    rank={index}
-                  />
-                </Container>
-              </Grid>
-            ))}
+            {videos
+              .sort((first, second) => second.votes - first.votes)
+              .map((video, index) => (
+                <Grid className="video-card-grid-item" item xs key={video._id}>
+                  <Container>
+                    <VideoCard
+                      videoId={video._id}
+                      subtopicId={video.subtopic_id}
+                      topicName={this.props.match.params.topicName}
+                      subtopicName={this.props.match.params.subtopicName}
+                      title={video.title}
+                      description={video.description}
+                      thumbnailUrl={video.thumbnail_url}
+                      addedBy={video.added_by}
+                      rank={index}
+                    />
+                  </Container>
+                </Grid>
+              ))}
           </Grid>
           <div className="add-video-button">
             <AddButton onClick={this.handleAddVideo} />

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import AdSense from 'react-adsense';
 import { connect } from "react-redux";
+import AdSense from 'react-adsense';
 import { logoutUser } from "../../actions/authActions";
 import AuthenticatedNavbar from "../layout/AuthenticatedNavbar";
 import TopicGrid from "../grids/TopicGrid";
@@ -76,14 +76,14 @@ class Dashboard extends Component {
             draggable={false}
             pauseOnHover={false}
           />
-          <AdSense.Google
-            client="pub-4986329421006402"
-            slot="9439697200"
-            style={{ display: "block" }}
-            format="auto"
-            responsive="true"
-            layoutKey="-gw-1+2a-9x+5c"
-          />
+        <AdSense.Google
+          client="pub-4986329421006402"
+          slot="9439697200"
+          style={{ display: 'block' }}
+          format="auto"
+          responsive="true"
+          layoutKey='-gw-1+2a-9x+5c'
+        />
         </div>
       );
     }

@@ -5,6 +5,7 @@ import { addVideoToFolder, getAllFolders } from "../../actions/folderActions";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import YouTube from "react-youtube";
+import moment from 'moment';
 import VideoCard from "../cards/VideoCard";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import ScheduleIcon from "@material-ui/icons/Schedule";
@@ -120,7 +121,7 @@ class VideoPlayer extends Component {
                 variant="outlined"
                 className="date-added"
                 icon={<ScheduleIcon />}
-                label="11th October 2019"
+                label={moment(video.date).format('LL')}
                 size="medium"
               />
               <UserChip className="added-by" user_id={video.added_by} />

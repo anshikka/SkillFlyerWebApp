@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
     "react-bootstrap": "^1.2.0",

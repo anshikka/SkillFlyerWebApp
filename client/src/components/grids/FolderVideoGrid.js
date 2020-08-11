@@ -16,6 +16,7 @@ class FolderVideoGrid extends Component {
    * @name componentDidMount Wait
    */
   componentDidMount() {
+    console.log(this.props.location.state);
     this.props.getFolderVideos(this.props.location.state.folderId);
     this.props.getFolder(this.props.location.state.folderId);
   }

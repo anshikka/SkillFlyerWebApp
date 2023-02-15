@@ -1,0 +1,67 @@
+.video-player-container {
+  width: 100% !important;
+  overflow-y: hidden;
+  height: 92vh;
+}
+.video-player-container .player {
+  float: left !important;
+  width: 65% !important;
+  margin-bottom: 0;
+}
+.video-player-container .side-video-player {
+  width: 35% !important;
+  float: right;
+  height: 100vh;
+  margin-bottom: 0;
+}
+.video-player-container .player .youtube-player {
+  padding-top: 3em;
+  height: 80vh;
+  width: 100%;
+}
+.video-player-container .side-video-player .meta .related-videos {
+  overflow-y: auto;
+  height: 24vh;
+}
+.video-player-container .side-video-player .meta .related-videos li {
+  padding-bottom: 1em;
+}
+.video-player-container .side-video-player .meta .video-information .title {
+  color: black;
+  font-size: 2vw;
+  font-weight: 600;
+  height: 12.3vh;
+  overflow-y: auto;
+}
+.video-player-container .side-video-player .meta .video-information .rank {
+  font-size: 1.25vw;
+  display: inline-flex;
+}
+
+.video-player-container .side-video-player .meta .related-videos-title {
+  font-size: 1.3vw;
+  text-align: center;
+}
+
+.video-player-container .player .video-information .added-by {
+  float: right;
+}
+
+.video-player-container .side-video-player .video-information {
+  margin-top: 1vh;
+}
+
+.video-player-container .side-video-player .meta .video-information .vote-box .votes {
+  font-size: large;
+}
+
+.video-player-container .side-video-player .meta .video-information p {
+  height: 20vh;
+  font-size: 1vw;
+  overflow-y: auto;
+}
+
+.video-player-container .side-video-player .meta .video-information .add-to-folder {
+  float: right;
+  font-size: medium;
+}

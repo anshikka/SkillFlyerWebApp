@@ -1,0 +1,38 @@
+.topic-grid-root .topic-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  margin: 0 auto;
+}
+.topic-grid-root .topic-grid-container .topic-card-grid-item {
+  display: "flex";
+}
+
+.topic-grid-root .title {
+  color: black;
+  margin-left: 3vw;
+  font-size: 2vw;
+}
+
+.no-topics-message {
+  text-align: center;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

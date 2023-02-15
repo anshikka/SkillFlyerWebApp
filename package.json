@@ -1,0 +1,48 @@
+{
+  "name": "skillflyerwebapp",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js --ignore client",
+    "client": "npm start --prefix client",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkillFlyer/SkillFlyerWebApp.git"
+  },
+  "author": "Sikka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkillFlyer/SkillFlyerWebApp/issues"
+  },
+  "homepage": "https://github.com/SkillFlyer/SkillFlyerWebApp#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "leo-profanity": "^1.2.6",
+    "mongoose": "^5.9.23",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "react-adsense": "^0.1.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "uuidv4": "^6.1.1",
+    "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.4",
+    "jsdoc-route-plugin": "^0.1.0",
+    "nodemon": "^2.0.4"
+  },
+  "description": ""
+}

@@ -1,0 +1,11 @@
+.vote-button{
+    vertical-align: middle;
+    margin: 0.5vw;
+}
+
+.vote-button.vote-selected {
+    background-color: goldenrod;
+    font-weight: bold;
+    color: white;
+    border-radius: 100px;
+}

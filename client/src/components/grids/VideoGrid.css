@@ -1,0 +1,53 @@
+.video-grid-root .video-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.video-grid-container .video-card-grid-item {
+  display: "flex";
+}
+
+.video-search-grid .title {
+  color: black;
+}
+
+.video-grid-root .title {
+  margin-left: 3vw;
+  font-size: 2vw;
+}
+
+.no-videos-message {
+  padding-top: 5%;
+  text-align: center;
+}
+.no-videos-message img {
+  width: 5%;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.video-grid-root .add-video-button{
+    position: fixed;
+    bottom: 30px;
+    right: 30px; 
+
+}
